@@ -5,7 +5,7 @@ The agricultural industry is facing enormous development as a result of populati
 
 The aim of the project is to design and develop a modular smart greenhouse that is capable of detecting and responding to a number of changes in environmental conditions in real time. A number of sensors will be used to measure soil moisture, humidity, temperature, amount of sunlight, CO2 and even plant growth. The system will also incorporate automated light and temperature control in addition to an automated watering system, thus ensuring that plants can thrive without any human intervention. Moreover, the real-time measurements will be displayed on an online web portal enabling the user to view the real-time and historic growth of the plant.
 
-![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/SYSTEM.png?raw=true) 
+![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/SYSTEM.jpg?raw=true) 
 
 ## Team Members
 Anton Saikia,
