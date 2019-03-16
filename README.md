@@ -12,6 +12,8 @@ Anton Saikia,
 Isla Mitchell,
 Jaime Robb
 
+![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/Meet The Team.png?raw=true) 
+
 ## Contents
 * Getting Started
 * Setting up the SmartGreenhouse
