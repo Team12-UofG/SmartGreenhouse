@@ -12,7 +12,7 @@ Anton Saikia,
 Isla Mitchell,
 Jaime Robb
 
-![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/SmartGreenhouse/Meet The Team.png?raw=true)       
+![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/MeetTheTeam.png?raw=true)       
 
 ## Contents
 * Getting Started
