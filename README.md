@@ -14,8 +14,17 @@ Jaime Robb
 
 ![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/MeetTheTeam.png?raw=true)       
 
+## Hardware 
+
+## Required Packages 
+
+## Documentation
+
+## Social Media
+
 ## Contents
 * Getting Started
 * Setting up the SmartGreenhouse
 * Installation
 * FAQs
+
