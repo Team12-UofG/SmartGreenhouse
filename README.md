@@ -21,6 +21,13 @@ Jaime Robb
 ## Documentation
 
 ## Social Media
+[Instagram](https://www.instagram.com/uofg_smartgreenhouse/?hl=en "Instagram")
+
+[Twitter](https://twitter.com/UofG_SmartGreen "Twitter")
+
+[Facebook](https://www.facebook.com/SmartGreenhouse-2309795909300843/?modal=admin_todo_tour "Facebook")
+
+[Youtube](https://www.youtube.com/channel/UCLjnLePXFhfWH4YzIdtP1aw "Youtube")
 
 ## Contents
 * Getting Started
