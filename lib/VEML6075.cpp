@@ -7,48 +7,23 @@
  * Author: Isla Mitchell
  *
  */
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <sys/ioctl.h>
+#include <linux/i2c.h>
+#include <linux/i2c-dev.h>
+#include <math.h>
+#include "VEML6075.h"
+#include <stdio.h>
 
-# include <math.h>
-# include <VEML6075.h>
-# include <stdio.h>
-
-void main(void)
-{
-    WORD VEML6075_conf;
-    WORD uva_data;
-    WORD uvb_data;
-    WORD uvcomp1_data;
-
-    /* Shut down VEML6075 */
-    VEML6075_conf = VEML6075_CONF_DEFAULT | VEML6075_CONF_SD;
-    VEML6075_write_word(VEML6075_ADDR, VEML6075_CONF_REG, VEML6075_conf);
-
-    /* Enable VEML6075 */
-    VEML6075_conf = VEML6075_CONF_DEFAULT;
-    VEML6075_write_word(VEML6075_ADDR, VEML6075_CONF_REG, VEML6075_conf);
-
-    /* Loop for polling VEML6075 data */
-    while (1)
-    {
-      delay(150);
-
-      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVA_DATA_REG, &uva_data
-      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVB_DATA_REG, &uvb_data
-      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVCOMP1_DATA_REG,
-        &uvcomp1_data);
-      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVCOMP2_DATA_REG,
-        &uvcomp2_data);
-
-        float uva_
-    }
-}
-
-int VEML6075_read_word(WORD addr, BYTE reg, WORD *val)
+int VEML6075_read_word(int addr, short reg, int *val)
 {
     int err = 0;
     int retry = 3;
     struct i2c_msg msg[2];
-    BYTE data[2];
+    short data[2];
     while (retry--)
     {
         /* Send slave address & register */
@@ -65,7 +40,7 @@ int VEML6075_read_word(WORD addr, BYTE reg, WORD *val)
         err = i2c_transfer(msg, 2);
 
         if (err >= 0) {
-          *val = ((WORD)data[1] << 8) | (WORD)data[0];
+          *val = ((int)data[1] << 8) | (int)data[0];
           return err;
           }
         }
@@ -73,17 +48,17 @@ int VEML6075_read_word(WORD addr, BYTE reg, WORD *val)
       }
 
 
-      int VEML6075_write_word(WORD addr, BYTE reg, WORD val) {
+int VEML6075_write_word(int addr, short reg, int val) {
           int err = 0;
           int retry = 3;
           struct i2c_msg msg;
-          BYTE data[3];
+          short data[3];
 
           while (retry--)
           {
             data[0] = reg;
-            data[1] = (BYTE)(val & 0xFF);
-            data[2] = (BYTE)((val & 0xFF00) >> 8);
+            data[1] = (short)(val & 0xFF);
+            data[2] = (short)((val & 0xFF00) >> 8);
 
             /* Send slave address, register and word data */
             msg.addr = addr >> 1;
@@ -98,3 +73,36 @@ int VEML6075_read_word(WORD addr, BYTE reg, WORD *val)
       }
       return err;
     }
+
+int main(void)
+{
+    int VEML6075_conf;
+    int uva_data;
+    int uvb_data;
+    int uvcomp1_data;
+    int uvcomp2_data;
+
+
+    /* Shut down VEML6075 */
+    VEML6075_conf = (VEML6075_CONF_DEFAULT | VEML6075_CONF_SD_ON);
+    VEML6075_write_word(VEML6075_ADDR, VEML6075_CONF_REG, VEML6075_conf);
+
+    /* Enable VEML6075 */
+    VEML6075_conf = VEML6075_CONF_DEFAULT;
+    VEML6075_write_word(VEML6075_ADDR, VEML6075_CONF_REG, VEML6075_conf);
+
+    /* Loop for polling VEML6075 data */
+    while (1)
+    {
+      //delay(150);
+
+      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVA_DATA_REG, &uva_data);
+      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVB_DATA_REG, &uvb_data);
+      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVCOMP1_DATA_REG,
+        &uvcomp1_data);
+      VEML6075_read_word(VEML6075_ADDR, VEML6075_UVCOMP2_DATA_REG,
+        &uvcomp2_data);
+
+        float uva_;
+    }
+}

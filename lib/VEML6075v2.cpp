@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <wiringPi/wiringPi.h>
-#include <wiringPi/wiringPiI2C.h>
 #include <cstdlib>
 #include "VEML6075v2.h"
 
