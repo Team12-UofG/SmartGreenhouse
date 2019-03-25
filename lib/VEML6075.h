@@ -17,7 +17,6 @@
 #else
 #include <stdint.h>
 #include <stddef.h>
-#include <wiringPiI2C.h>
 #include <math.h>
 #endif
 
@@ -49,9 +48,7 @@
 #define VEML6075_CONF_UV_IT_200MS       (0x20) // Integration time = 200ms
 #define VEML6075_CONF_UV_IT_400MS       (0x30) // Integration time = 400ms
 #define VEML6075_CONF_UV_IT_800MS       (0x40) // Integration time = 800ms
-#define VEML6075_CONF_DEFAULT           (VEML6075_CONF_UV_AF_AUTO | ;
-                                          VEML6075_CONF_UV_TRIG_NO | ;
-                                          VEML6075_CONF_UV_IT_100MS)
+#define VEML6075_CONF_DEFAULT           (VEML6075_CONF_UV_AF_AUTO | VEML6075_CONF_UV_TRIG_NO | VEML6075_CONF_UV_IT_100MS)
 
 /* Definition of coefficients used to calculate UV Index */
 #define VEML6075_DEFAULT_UVA_A_COEFF      2.22 // Default for no coverglass: "A"
@@ -63,8 +60,8 @@
 
 /* I2C message, used for I2C transaction */
 struct i2c_msg {
-  WORD addr;
-  WORD flags;
+  int addr;
+  int flags;
 #define I2C_M_TEN                       0x0010
 #define I2C_M_RD                        0x0001
 #define I2C_M_NOSTART                   0x4000
@@ -72,9 +69,10 @@ struct i2c_msg {
 #define I2C_M_IGNORE_NAK                0x1000
 #define I2C_M_NO_RD_ACK                 0x0800
 #define I2C_M_RECV_LEN                  0x0400
-  WORD len;
-  BYTE *buf;
+  int len;
+  short *buf;
 };
+
 extern int i2c_transfer(struct i2c_msg *msgs, int num);
 
 #endif
