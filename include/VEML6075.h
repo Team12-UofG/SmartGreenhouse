@@ -2,9 +2,26 @@
  * VEML6075.h
  *
  * Header for the Vishay VEML6075 UVA/UVB i2c sensor using the Vishay
- * VEML6075 application notes
+ * VEML6075 application notes and Adafruit_VEML6075.h
  *
  * Author: Isla Mitchell
+ *
+ * @file Adafruit_VEML6075.h
+ *
+ * Designed specifically to work with the VEML6075 sensor from Adafruit
+ * ----> https://www.adafruit.com/products/3964
+ *
+ * These sensors use I2C to communicate, 2 pins (SCL+SDA) are required
+ * to interface with the breakout.
+ *
+ * Adafruit invests time and resources providing this open source code,
+ * please support Adafruit and open-source hardware by purchasing
+ * products from Adafruit!
+ *
+ * Written by Limor Fried/Ladyada for Adafruit Industries.
+ *
+ * MIT license, all text here must be included in any redistribution.
+ *
  */
 
 #ifndef _VEML6075_H
@@ -59,24 +76,10 @@
 #define VEML6075_DEFAULT_UVA_RESPONSE     0.001461 // Default for no coverglass
 #define VEML6075_DEFAULT_UVB_RESPONSE     0.002591 // Default for no coverglass
 
-
-/**************************************************************************/
-/*!
-    @brief  CMSIS style register bitfield for commands
-*/
-/**************************************************************************/
-typedef union {
-  struct {
-    uint8_t SD:1;              ///< Shut Down
-    uint8_t UV_AF:1;           ///< Auto or forced
-    uint8_t UV_TRIG:1;         ///< Trigger forced mode
-    uint8_t UV_HD:1;           ///< High dynamic
-    uint8_t UV_IT:3;           ///< Integration Time
-    uint8_t high_byte;         ///< unused
-  } bit;                       ///< Bitfield of 16 bits
-  uint16_t reg;                ///< The raw 16 bit register data
-} veml6075_commandRegister;
-
+enum veml6075_integrationtime {
+  VEML6075_50MS, VEML6075_100MS, VEML6075_200MS, VEML6075_400MS,
+  VEML6075_800MS
+}
 
 /**************************************************************************/
 /*!
@@ -87,22 +90,17 @@ class UV_sensor {
  public:
   UV_sensor(); // VEML6075 becomes UV_sensor
 
-void setIntegrationTime();
-  void setHighDynamic(bool hd);
-  bool getHighDynamic(void);
-  void setForcedMode(bool flag);
-  bool getForcedMode(void);
-
   void setCoefficients(float UVA_A, float UVA_B, float UVA_C, float UVA_D,
 		       float UVA_response, float UVB_response);
+
+  void uvConfigure(void);
 
   float readUVA(void);
   float readUVB(void);
   float readUVI(void);
 
-
  private:
-  void takeReading(void);
+  float takeReading();
 
   uint16_t _read_delay;
 
