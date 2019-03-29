@@ -15,6 +15,15 @@ Jaime Robb
 ![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/master/MeetTheTeam.png?raw=true)       
 
 ## Hardware 
+* Raspberry Pi 3 Model B 
+* Vishay VEML6075 UVA & UVB sensor
+* Bosch Sensortec BME 680 sensor 
+* SmartGreenhouse Soil Moisture Sensor
+* Decdeal brushless DC motor & 12V power supply 
+* Water resevoir tank & piping
+* SmartGreenhouse LED panels
+* Wire Kinetics stainless steel heat mat
+* Greenhouse & planter 
 
 ## Required Packages 
 
@@ -29,9 +38,10 @@ Jaime Robb
 
 [Youtube](https://www.youtube.com/channel/UCLjnLePXFhfWH4YzIdtP1aw "Youtube")
 
-## Contents
+## User Manual
+* Before You Start
 * Getting Started
-* Setting up the SmartGreenhouse
-* Installation
+* Setting Up The SmartGreenhouse
+* Installation of Software
 * FAQs
 
