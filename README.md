@@ -18,7 +18,7 @@ Jaime Robb
 * Raspberry Pi 3 Model B 
 * Vishay VEML6075 UVA & UVB sensor
 * Bosch Sensortec BME 680 sensor 
-* SmartGreenhouse Soil Moisture Sensor
+* SmartGreenhouse soil moisture sensor
 * Decdeal brushless DC motor & 12V power supply 
 * Water resevoir tank & piping
 * SmartGreenhouse LED panels
