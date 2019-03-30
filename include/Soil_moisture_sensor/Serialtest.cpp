@@ -1,7 +1,7 @@
 // Include libraries this sketch will use
-#include  <wiringPi.h>
-#include  <MCP342X.h>
+#include <wiringPi.h>
 #include <stdio.h>
+#include "MCP342X.h"
 
 // Instantiate objects used in this project
 MCP342X myADC;
