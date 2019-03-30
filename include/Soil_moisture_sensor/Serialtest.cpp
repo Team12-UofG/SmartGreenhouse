@@ -9,7 +9,7 @@ MCP342X myADC;
 
 int main() {
   printf("Starting up\n\n");
-
+  int configData = 0;
   configData = myADC.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
 
   while(1){

@@ -91,7 +91,7 @@ bool MCP342X::testConnection() {
  *!
  * @brief Set the configuration shadow register
  */
-uint8_t MCP342X::configure(uint8_t mode, uint8_t channel, uint8_t size, uint8_t gain) {
+uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint16_t gain) {
 	wiringPiI2CWrite(fd, mode);
   wiringPiI2CWrite(fd, channel);
   wiringPiI2CWrite(fd, size);
