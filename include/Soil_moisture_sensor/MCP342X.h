@@ -101,12 +101,9 @@ class MCP342X {
         MCP342X();
         MCP342X(uint8_t address);
 
-        /* bool testConnection(void); */
-
         // Set/Get the configuration bits for the ADC
-        void configure(uint8_t config);
+        void configure(uint8_t mode, uint8_t channel, uint8_t size, uint8_t gain);
         uint8_t getConfigRegShdw(void);
-	   //float getStepSize(); // returns step size based on configRegShdw
 
         // Start a conversion
         bool startConversion(void);
@@ -114,11 +111,9 @@ class MCP342X {
 
         // Read the ADC result
         uint8_t getResult(int16_t *data);
-        uint8_t getResult(int32_t *data);
 
         // Non-blocking Read the ADC result
         uint8_t checkforResult(int16_t *data);
-        uint8_t checkforResult(int32_t *data);
 
     private:
         uint8_t devAddr;

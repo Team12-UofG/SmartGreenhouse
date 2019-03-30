@@ -91,7 +91,12 @@ bool MCP342X::testConnection() {
  *!
  * @brief Set the configuration shadow register
  */
-void MCP342X::configure(uint8_t configData) {
+void MCP342X::configure(uint8_t mode, uint8_t channel, uint8_t size, uint8_t gain) {
+	wiringPiI2CWrite(fd, mode);
+  wiringPiI2CWrite(fd, channel);
+  wiringPiI2CWrite(fd, size);
+  wiringPiI2CWrite(fd, gain);
+	uint8_t configData = (mode | channel | size | gain);
   configRegShdw = configData;
 }
 
@@ -100,7 +105,7 @@ void MCP342X::configure(uint8_t configData) {
 * @brief Get the configuration shadow register
 */
 uint8_t MCP342X::getConfigRegShdw(void) {
-  return configRegShdw;
+  return configData;
 }
 
 /******************************************
@@ -117,22 +122,8 @@ uint8_t MCP342X::getConfigRegShdw(void) {
  *   the shadow configuration register
  */
 bool MCP342X::startConversion(void) {
-  wiringPiI2CWriteReg8(fd, configRegShdw, MCP342X_RDY);
+  wiringPiI2CWriteReg8(fd, configData, MCP342X_RDY);
 }
-
-
-/******************************************
-*!
-* @brief Start a conversion using configuration settings from
- *   the shadow configuration register substituting the
- *   supplied channel
- */
-bool MCP342X::startConversion(uint8_t channel) {
-  configRegShdw = ((configRegShdw & ~MCP342X_CHANNEL_MASK) |
-			   (channel & MCP342X_CHANNEL_MASK));
-	wiringPiI2CWriteReg8(fd, configRegShdw, MCP342X_RDY);
-}
-
 
 /******************************************
 *!
@@ -143,7 +134,9 @@ bool MCP342X::startConversion(uint8_t channel) {
  *  Note: status of -1 "0xFF' implies read error
  */
 uint8_t MCP342X::getResult(int16_t *dataPtr) {
-  uint8_t adcStatus;
+	uint8_t adcStatus;
+	adcStatus = wiringPiI2CRead(fd);
+	/*
   if((configRegShdw & MCP342X_SIZE_MASK) == MCP342X_SIZE_18BIT) {
     return 0xFF;
   }
@@ -154,6 +147,7 @@ uint8_t MCP342X::getResult(int16_t *dataPtr) {
        adcStatus = wiringPiI2CRead(fd);
      }
   while((adcStatus & MCP342X_RDY) != 0x00);
+	*/
   return adcStatus;
 }
 
@@ -168,65 +162,15 @@ uint8_t MCP342X::getResult(int16_t *dataPtr) {
  */
 uint8_t MCP342X::checkforResult(int16_t *dataPtr) {
   uint8_t adcStatus;
-  if((configRegShdw & MCP342X_SIZE_MASK) == MCP342X_SIZE_18BIT) {
+
+	/*if((configRegShdw & MCP342X_SIZE_MASK) == MCP342X_SIZE_18BIT) {
     return 0xFF;
   }
 
 	((char*)dataPtr)[1] = wiringPiI2CRead(fd);
 	((char*)dataPtr)[0] = wiringPiI2CRead(fd);
+	*/
 	adcStatus = wiringPiI2CRead(fd);
 
-  return adcStatus;
-}
-
-
-/******************************************
-*!
-* @brief Read the conversion value (18 bit)
- *  Spins reading status until ready then
- *  fills in the supplied location (32 bit) with
- *  the 24-bit (three byte) conversion value
- *  and returns the status byte
- *  Note: status of -1 "0xFF' implies read error
- */
-uint8_t MCP342X::getResult(int32_t *dataPtr) {
-  uint8_t adcStatus;
-  if((configRegShdw & MCP342X_SIZE_MASK) != MCP342X_SIZE_18BIT) {
-    return 0xFF;
-  }
-
-  do {
-       ((char*)dataPtr)[3] = wiringPiI2CRead(fd);
-       ((char*)dataPtr)[2] = wiringPiI2CRead(fd);
-       ((char*)dataPtr)[1] = wiringPiI2CRead(fd);
-       adcStatus = wiringPiI2CRead(fd);
-     }
-  while((adcStatus & MCP342X_RDY) != 0x00);
-  *dataPtr = (*dataPtr)>>8;
-  return adcStatus;
-}
-
-
-/******************************************
-*!
-* @brief Check to see if the conversion value (18 bit)
- *  is available.  If so, then
- *  fill in the supplied location (32 bit) with
- *  the 24-bit (three byte) conversion value
- *  and return the status byte
- *  Note: status of -1 "0xFF' implies read error
- */
-uint8_t MCP342X::checkforResult(int32_t *dataPtr) {
-  uint8_t adcStatus;
-  if((configRegShdw & MCP342X_SIZE_MASK) != MCP342X_SIZE_18BIT) {
-    return 0xFF;
-  }
-
-    ((char*)dataPtr)[3] = wiringPiI2CRead(fd);
-    ((char*)dataPtr)[2] = wiringPiI2CRead(fd);
-    ((char*)dataPtr)[1] = wiringPiI2CRead(fd);
-    adcStatus = wiringPiI2CRead(fd);
-
-  *dataPtr = (*dataPtr)>>8;
   return adcStatus;
 }
