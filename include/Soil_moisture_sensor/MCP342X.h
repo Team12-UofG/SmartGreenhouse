@@ -104,11 +104,9 @@ class MCP342X {
 
         // Set/Get the configuration bits for the ADC
         void configure(uint8_t mode, uint8_t channel, uint8_t size, uint8_t gain);
-        uint8_t getConfigRegShdw(void);
 
         // Start a conversion
-        bool startConversion(void);
-        bool startConversion(uint8_t channel);
+        bool startConversion(uint8_t configData);
 
         // Read the ADC result
         uint8_t getResult(int16_t *data);

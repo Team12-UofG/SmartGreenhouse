@@ -91,20 +91,12 @@ bool MCP342X::testConnection() {
  *!
  * @brief Set the configuration shadow register
  */
-void MCP342X::configure(uint8_t mode, uint8_t channel, uint8_t size, uint8_t gain) {
+uint8_t MCP342X::configure(uint8_t mode, uint8_t channel, uint8_t size, uint8_t gain) {
 	wiringPiI2CWrite(fd, mode);
   wiringPiI2CWrite(fd, channel);
   wiringPiI2CWrite(fd, size);
   wiringPiI2CWrite(fd, gain);
 	uint8_t configData = (mode | channel | size | gain);
-  configRegShdw = configData;
-}
-
-/******************************************
-*!
-* @brief Get the configuration shadow register
-*/
-uint8_t MCP342X::getConfigRegShdw(void) {
   return configData;
 }
 
@@ -121,7 +113,7 @@ uint8_t MCP342X::getConfigRegShdw(void) {
 * @brief Start a conversion using configuration settings from
  *   the shadow configuration register
  */
-bool MCP342X::startConversion(void) {
+bool MCP342X::startConversion(uint8_t configData) {
   wiringPiI2CWriteReg8(fd, configData, MCP342X_RDY);
 }
 
