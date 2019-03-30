@@ -7,13 +7,12 @@
 MCP342X myADC;
 
 int main() {
-  printf("Starting up");
+  printf("Starting up\n\n");
 
   myADC.configure( MCP342X_MODE_CONTINUOUS |
                    MCP342X_CHANNEL_1 |
                    MCP342X_SIZE_16BIT |
-                   MCP342X_GAIN_1X
-                 );
+                   MCP342X_GAIN_1X);
   while(1){
   static int16_t  result;
   myADC.startConversion();
