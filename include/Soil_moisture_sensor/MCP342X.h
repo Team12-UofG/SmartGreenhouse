@@ -27,6 +27,7 @@
 #define _MCP342X_H_
 
 #include <wiringPi.h>
+#include <wiringPiI2C.h>
 #include <stdio.h>
 
 #ifdef __KERNEL__
