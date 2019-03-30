@@ -1,5 +1,6 @@
 // Include libraries this sketch will use
 #include <wiringPi.h>
+#include <wiringPiI2C.h>
 #include <stdio.h>
 
 // Instantiate objects used in this project
