@@ -3,12 +3,12 @@
 #include <stdio.h>
 
 // Instantiate objects used in this project
+static int intial_setup = wiringPiSetup();
+static int fd = wiringPiI2CSetup(0x68);
 
 int main() {
   printf("Starting up\n\n");
   while(1){
-  static int intial_setup = wiringPiSetup();
-  static int fd = wiringPiI2CSetup(0x68);
 
   int result;
   result = wiringPiI2CRead(fd);
