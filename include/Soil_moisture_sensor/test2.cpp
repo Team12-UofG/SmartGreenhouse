@@ -13,6 +13,8 @@
 static int intial_setup = wiringPiSetup();
 static int fd = wiringPiI2CSetup(0x68);
 
+int configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
+
 using namespace std;
 
 int readData();
@@ -26,7 +28,6 @@ int main(int argc, char** argv) {
   wiringPiI2CWrite(fd,MCP342X_SIZE_16BIT);
   wiringPiI2CWrite(fd,MCP342X_GAIN_1X);
 
-  int configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
   int counter = 0;
 
   // decode arguments
@@ -53,7 +54,6 @@ int main(int argc, char** argv) {
 }
 
   int readData() {
-
       // add the sensor stuff here
       int result;
       wiringPiI2CWriteReg8(fd, configData, MCP342X_RDY);
