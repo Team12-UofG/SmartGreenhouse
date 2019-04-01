@@ -2,6 +2,9 @@
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 #include <stdio.h>
+#include <iostream>
+#include <unistd.h>
+
 #include "MCP342X.h"
 #include "MCP342X.cpp"
 
