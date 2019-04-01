@@ -1,8 +1,8 @@
 // Include libraries this sketch will use
 #include <wiringPi.h>
-#include <wiringPiI2C.h>
+#include <wiringPiI2C.h> // add "-lwiringPi" to compile
 #include <stdio.h>
-#include <iostream>
+#include <iostream> // add "-lstdc++" to compile
 #include <unistd.h>
 
 #include "MCP342X.h"
@@ -10,17 +10,14 @@
 
 // Instantiate objects used in this project
 MCP342X myADC;
-static int intial_setup = wiringPiSetup();
-static int fd = wiringPiI2CSetup(0x68);
-
+static int configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
 using namespace std;
 
 int readData();
 
 int main(int argc, char** argv) {
   printf("Starting up\n\n");
-  int configData = 0;
-  configData = myADC.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
+  myADC.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
 
   int counter = 0;
 
