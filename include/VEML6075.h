@@ -34,8 +34,20 @@
 #else
 #include <stdint.h>
 #include <stddef.h>
+#include <wiringPi.h>
 #include <wiringPiI2C.h>
 #include <math.h>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <linux/i2c-dev.h>
+#include <fcntl.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <wiringPi.h>
 #endif
 
 /* VEML6075 slave address */
