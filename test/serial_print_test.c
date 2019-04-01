@@ -1,25 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <linux/i2c-dev.h>
-#include <fcntl.h>
-#include <string.h>
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <wiringPi.h>
-
 #include "VEML6075.h"
+#include "VEML6075.cpp"
 
-static int intial_setup = wiringPiSetup();
-static int fd = wiringPiI2CSetup(VEML6075_DEVID);
+UV_sensor lightSensor
 
 int main (){
-  fprintf("VEML6075 Simple Test \n");
 
-	float UV_calc = UV_sensor::readUVI();
+  printf("VEML6075 Simple Test \n");
+  printf("Configuring... \n");
+  lightSensor.uvConfigure(); // configure
 
-  fprintf("UV Index reading: ");
-  fprintf(uv.readUVI());
-  wait(1);
+  for(i=1; i<10; i++){
+    float UVA_calc = lightSensor.readUVA();
+    float UVB_calc = lightSensor.readUVB();
+	  float UV_calc = lightSensor.readUVI();
+    printf("UVA Index reading: %f \n", UVA_calc);
+    printf("UVB Index reading: %f \n", UVB_calc);
+    printf("UV Index reading: %f \n", UV_calc);
+    wait(1);
+  }
 }
