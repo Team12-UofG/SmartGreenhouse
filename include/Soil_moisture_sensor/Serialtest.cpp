@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 
 int readData() {
     // add the sensor stuff here
-    int result;
+    int16_t result;
     myADC.startConversion(configData);
     printf("Result:");
     myADC.getResult(&result); // conversion takes 63568us
