@@ -73,5 +73,4 @@ float takeReading(){
   printf("UVA Index reading: %f \n", _uva_calc);
   printf("UVB Index reading: %f \n", _uvb_calc);
   printf("UV Index reading: %f \n", _uvi_calc);
-
 }
