@@ -152,7 +152,7 @@ uint8_t MCP342X::getResult(uint8_t *dataPtr) {
  *  conversion value and status the config byte
  *  Note: status of -1 "0xFF' implies read error
  */
-uint8_t MCP342X::checkforResult(int16_t *dataPtr) {
+uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
   uint8_t adcStatus;
 
 	/*if((configRegShdw & MCP342X_SIZE_MASK) == MCP342X_SIZE_18BIT) {

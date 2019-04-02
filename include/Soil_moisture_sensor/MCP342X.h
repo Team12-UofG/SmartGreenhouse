@@ -109,10 +109,10 @@ class MCP342X {
         bool startConversion(uint8_t configData);
 
         // Read the ADC result
-        uint8_t getResult(int16_t *data);
+        uint8_t getResult(uint8_t *data);
 
         // Non-blocking Read the ADC result
-        uint8_t checkforResult(int16_t *data);
+        uint8_t checkforResult(uint8_t *data);
 
     private:
         uint8_t devAddr;
