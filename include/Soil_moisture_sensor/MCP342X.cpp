@@ -125,7 +125,7 @@ bool MCP342X::startConversion(uint8_t configData) {
  *  conversion value and returns the status byte
  *  Note: status of -1 "0xFF' implies read error
  */
-uint8_t MCP342X::getResult(int16_t *dataPtr) {
+uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 	uint8_t adcStatus;
 	adcStatus = wiringPiI2CRead(fd);
 	/*
