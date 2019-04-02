@@ -96,7 +96,7 @@ uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint1
   wiringPiI2CWrite(fd, channel);
   wiringPiI2CWrite(fd, size);
   wiringPiI2CWrite(fd, gain);
-	uint8_t configData = (mode | channel | size | gain);
+	configData = (mode | channel | size | gain);
   return configData;
 }
 

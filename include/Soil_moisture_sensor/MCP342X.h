@@ -116,7 +116,7 @@ class MCP342X {
 
     private:
         uint8_t devAddr;
-        uint8_t configRegShdw;
+        uint8_t configData;
 	//float	stepSizeTbl[];
 };
 
