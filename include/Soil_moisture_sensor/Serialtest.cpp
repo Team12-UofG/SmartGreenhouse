@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
   for (int i = 1; i < c; ++i)
   {
         // read the data. . .
-        int result = readData();
+        uint8_t result = readData();
         usleep(sleep_delay);
     }
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 
 int readData() {
     // add the sensor stuff here
-    int result;
+    uint8_t result;
     myADC.startConversion(configData);
     printf("Result:");
     result = myADC.getResult(&result); // conversion takes 63568us
