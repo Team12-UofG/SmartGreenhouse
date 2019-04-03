@@ -17,6 +17,10 @@
 
 #define VEML6075_ADDR                   (0x10) // I2C address
 #define VEML6075_DEVID                  (0x26) // Manufacture ID
+#define VEML6075_CONF_REG               (0x00) // Configuration register
+#define VEML6075_CONF_SD_OFF            0x00 // Power up
+#define VEML6075_CONF_SD_ON             0x01 // Power down
+
 #define VEML6075_CONF_UV_AF_AUTO        (0x00)
 #define VEML6075_CONF_UV_TRIG_NO        (0x00) // No trigger
 #define VEML6075_CONF_UV_IT_100MS       (0x10) // Integration time = 100ms (default)
@@ -42,11 +46,12 @@ int takeReading();
 
 int main() {
   printf("Starting up\n\n");
+  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON)
 
   printf("Configuring...\n\n");
-  wiringPiI2CWrite(fd,VEML6075_CONF_UV_AF_AUTO);
-  wiringPiI2CWrite(fd,VEML6075_CONF_UV_TRIG_NO);
-  wiringPiI2CWrite(fd,VEML6075_CONF_UV_IT_100MS);
+  wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG, VEML6075_CONF_UV_AF_AUTO);
+  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_UV_TRIG_NO);
+  wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG, VEML6075_CONF_UV_IT_100MS);
   int configData = VEML6075_CONF_DEFAULT;
 
   printf("Get result \n");
@@ -54,10 +59,10 @@ int main() {
 }
 
 int takeReading(){
-  float uva = wiringPiI2CReadReg8(fd, VEML6075_UVA_DATA_REG, &uva);
-  float uvb = wiringPiI2CReadReg8(fd, VEML6075_UVB_DATA_REG, &uvb);
-  float uvcomp1 = wiringPiI2CReadReg8(fd, VEML6075_UVCOMP1_DATA_REG, &uvcomp1);
-  float uvcomp2 = wiringPiI2CReadReg8(fd, VEML6075_UVCOMP2_DATA_REG, &uvcomp2);
+  float uva = wiringPiI2CReadReg16(fd, VEML6075_UVA_DATA_REG);
+  float uvb = wiringPiI2CReadReg16(fd, VEML6075_UVB_DATA_REG);
+  float uvcomp1 = wiringPiI2CReadReg16(fd, VEML6075_UVCOMP1_DATA_REG);
+  float uvcomp2 = wiringPiI2CReadReg16(fd, VEML6075_UVCOMP2_DATA_REG);
 
   printf("UVA: %f ", uva);
   printf("UVB: %f ", uvb);
