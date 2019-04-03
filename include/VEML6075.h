@@ -88,11 +88,6 @@
 #define VEML6075_DEFAULT_UVA_RESPONSE     0.001461 // Default for no coverglass
 #define VEML6075_DEFAULT_UVB_RESPONSE     0.002591 // Default for no coverglass
 
-enum veml6075_integrationtime {
-  VEML6075_50MS, VEML6075_100MS, VEML6075_200MS, VEML6075_400MS,
-  VEML6075_800MS
-}
-
 /**************************************************************************/
 /*!
     @brief  Class that stores state and functions for interacting with VEML6075 sensor IC

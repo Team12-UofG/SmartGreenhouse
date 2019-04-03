@@ -12,6 +12,8 @@
 static int intial_setup = wiringPiSetup();
 static int fd = wiringPiI2CSetup(VEML6075_ADDR);
 
+UV_sensor::UV_sensor();
+
 void UV_sensor::uvConfigure(void) {
   wiringPiI2CWrite(fd,VEML6075_CONF_DEFAULT);
 }
