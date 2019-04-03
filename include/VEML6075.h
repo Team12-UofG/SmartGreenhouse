@@ -97,8 +97,7 @@ class UV_sensor {
  public:
   UV_sensor(); // VEML6075 becomes UV_sensor
 
-  void setCoefficients(float UVA_A, float UVA_B, float UVA_C, float UVA_D,
-		       float UVA_response, float UVB_response);
+  void setCoefficients(void);
 
   void uvConfigure(void);
 
