@@ -46,13 +46,14 @@ int takeReading();
 
 int main() {
   printf("Starting up\n\n");
-  //wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON);
 
   printf("Configuring...\n\n");
   wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG, VEML6075_CONF_UV_AF_AUTO);
   wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_UV_TRIG_NO);
   wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG, VEML6075_CONF_UV_IT_100MS);
-  int configData = VEML6075_CONF_DEFAULT;
+
+  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON); //shutdown to save
+  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_OFF); //power up
 
   printf("Get result \n");
   int result = takeReading();
