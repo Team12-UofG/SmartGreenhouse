@@ -50,7 +50,7 @@ void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB
 
 /**************************************************************************/
 /*!
-    @brief Perform a reading and calculated UV value
+    @brief Perform a reading and calculate UV value
 */
 /**************************************************************************/
 void UV_sensor::takeReading() {

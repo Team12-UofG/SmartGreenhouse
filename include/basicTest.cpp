@@ -28,19 +28,17 @@
 #define VEML6075_UVCOMP2_DATA_REG       (0x0B) // IR noisecompensation register
 
 /* Definition of coefficients used to calculate UV Index */
-float _uva_a      2.22; // Default for no coverglass: "A"
-float _uva_b      1.33; // Default for no coverglass: "B"
-float _uva_c      2.95; // Default for no coverglass: "C"
-float _uva_d      1.74; // Default for no coverglass: "D"
-float _uva_resp     0.001461; // Default for no coverglass
-float _uvb_resp     0.002591; // Default for no coverglass
-
-
+float _uva_a = 2.22; // Default for no coverglass: "A"
+float _uva_b = 1.33; // Default for no coverglass: "B"
+float _uva_c = 2.95; // Default for no coverglass: "C"
+float _uva_d = 1.74; // Default for no coverglass: "D"
+float _uva_resp = 0.001461; // Default for no coverglass
+float _uvb_resp = 0.002591; // Default for no coverglass
 
 static int intial_setup = wiringPiSetup();
 static int fd = wiringPiI2CSetup(VEML6075_ADDR);
 
-float takeReading()
+float takeReading();
 
 int main() {
   printf("Starting up\n\n");
@@ -49,28 +47,25 @@ int main() {
   wiringPiI2CWrite(fd,VEML6075_CONF_UV_AF_AUTO);
   wiringPiI2CWrite(fd,VEML6075_CONF_UV_TRIG_NO);
   wiringPiI2CWrite(fd,VEML6075_CONF_UV_IT_100MS);
-
-  int result;
-  printf("Start conversion \n");
-  wiringPiI2CWriteReg8(fd, configData, MCP342X_RDY);
+  int configData = VEML6075_CONF_DEFAULT;
 
   printf("Get result \n");
-  result = wiringPiI2CRead(fd);
-  }
+  int result = takeReading();
 }
 
-float takeReading(){
-  float uva = wiringPiI2CRead(fd, VEML6075_UVA_DATA_REG);
-  float uvb = wiringPiI2CRead(fd, VEML6075_UVB_DATA_REG);
-  float uvcomp1 = wiringPiI2CRead(fd, VEML6075_UVCOMP1_DATA_REG);
-  float uvcomp2 = wiringPiI2CRead(fd, VEML6075_UVCOMP2_DATA_REG);
+int takeReading(){
+  float uva = wiringPiI2CReadReg8(fd, VEML6075_UVA_DATA_REG);
+  float uvb = wiringPiI2CReadReg8(fd, VEML6075_UVB_DATA_REG);
+  float uvcomp1 = wiringPiI2CReadReg8(fd, VEML6075_UVCOMP1_DATA_REG);
+  float uvcomp2 = wiringPiI2CReadReg8(fd, VEML6075_UVCOMP2_DATA_REG);
 
 // Equation 1 & 2 in App note, without 'golden sample' calibration
   float _uva_calc = uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2);
-  float _uvb_calc = uvb - (_uvb_c * uvcomp1) - (_uvb_d * uvcomp2);
+  float _uvb_calc = uvb - (_uva_c * uvcomp1) - (_uva_d * uvcomp2);
   float _uvi_calc = ((_uva_calc * _uva_resp) + (_uvb_calc * _uvb_resp)) / 2;
 
   printf("UVA Index reading: %f \n", _uva_calc);
   printf("UVB Index reading: %f \n", _uvb_calc);
   printf("UV Index reading: %f \n", _uvi_calc);
+  return 1;
 }
