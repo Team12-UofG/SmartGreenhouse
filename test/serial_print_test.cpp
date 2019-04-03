@@ -1,5 +1,5 @@
-#include "../include/UV_sensor/VEML6075.h"
-#include "../include/UV_sensor/VEML6075.cpp"
+#include "../include/VEML6075.h"
+#include "../include/VEML6075.cpp"
 
 UV_sensor lightSensor;
 
@@ -15,5 +15,4 @@ int main (){
   printf("UVA Index reading: %f \n", UVA_calc);
   printf("UVB Index reading: %f \n", UVB_calc);
   printf("UV Index reading: %f \n", UV_calc);
-  }
 }
