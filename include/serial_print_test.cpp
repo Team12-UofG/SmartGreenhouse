@@ -16,6 +16,6 @@ int main (){
     printf("UVA Index reading: %f \n", UVA_calc);
     printf("UVB Index reading: %f \n", UVB_calc);
     printf("UV Index reading: %f \n", UV_calc);
-    wait(1);
+    usleep(1);
   }
 }

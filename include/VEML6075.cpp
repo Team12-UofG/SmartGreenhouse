@@ -55,10 +55,10 @@ void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB
 /**************************************************************************/
 float UV_sensor::takeReading() {
 
-  float uva = wiringPiI2CRead(fd, VEML6075_UVA_DATA_REG);
-  float uvb = wiringPiI2CRead(fd, VEML6075_UVB_DATA_REG);
-  float uvcomp1 = wiringPiI2CRead(fd, VEML6075_UVCOMP1_DATA_REG);
-  float uvcomp2 = wiringPiI2CRead(fd, VEML6075_UVCOMP2_DATA_REG);
+  float uva = wiringPiI2CReadReg8(fd, VEML6075_UVA_DATA_REG);
+  float uvb = wiringPiI2CReadReg8(fd, VEML6075_UVB_DATA_REG);
+  float uvcomp1 = wiringPiI2CReadReg8(fd, VEML6075_UVCOMP1_DATA_REG);
+  float uvcomp2 = wiringPiI2CReadReg8(fd, VEML6075_UVCOMP2_DATA_REG);
 
   /*
   Serial.print("UVA: "); Serial.print(uva);
