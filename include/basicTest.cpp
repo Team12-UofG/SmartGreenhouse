@@ -38,7 +38,7 @@ float _uvb_resp = 0.002591; // Default for no coverglass
 static int intial_setup = wiringPiSetup();
 static int fd = wiringPiI2CSetup(VEML6075_ADDR);
 
-float takeReading();
+int takeReading();
 
 int main() {
   printf("Starting up\n\n");
