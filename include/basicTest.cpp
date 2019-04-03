@@ -46,7 +46,7 @@ int takeReading();
 
 int main() {
   printf("Starting up\n\n");
-  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON)
+  //wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON);
 
   printf("Configuring...\n\n");
   wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG, VEML6075_CONF_UV_AF_AUTO);
