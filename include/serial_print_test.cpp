@@ -8,6 +8,7 @@ int main (){
   printf("VEML6075 Simple Test \n");
   printf("Configuring... \n");
   lightSensor.uvConfigure(); // configure
+  lightSensor.UV_sensor(); // set coefficients
   int i = 0;
   for(i=1; i<10; i++){
     float UVA_calc = lightSensor.readUVA();
