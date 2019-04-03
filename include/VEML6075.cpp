@@ -65,16 +65,10 @@ float UV_sensor::takeReading() {
   float uvcomp1 = wiringPiI2CReadReg16(fd, VEML6075_UVCOMP1_DATA_REG);
   float uvcomp2 = wiringPiI2CReadReg16(fd, VEML6075_UVCOMP2_DATA_REG);
 
-
-  printf("UVA: %f ", uva);
-  printf("UVB: %f ", uvb);
-  printf("UVcomp1: %f ",uvcomp1);
-  printf(" UVcomp2: %f \n", uvcomp2);
-
   // Equation 1 & 2 in App note, without 'golden sample' calibration
-  float _uva_calc = uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2);
-  float _uvb_calc = uvb - (_uvb_c * uvcomp1) - (_uvb_d * uvcomp2);
-  float _uvi_calc = ((_uva_calc * _uva_resp) + (_uvb_calc * _uvb_resp)) / 2;
+  _uva_calc = uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2);
+  _uvb_calc = uvb - (_uvb_c * uvcomp1) - (_uvb_d * uvcomp2);
+  _uvi_calc = ((_uva_calc * _uva_resp) + (_uvb_calc * _uvb_resp)) / 2;
 
   printf("UVA calc: %f ", _uva_calc);
   printf("UVB calc: %f ", _uvb_calc);
