@@ -28,12 +28,12 @@
 #define VEML6075_UVCOMP2_DATA_REG       (0x0B) // IR noisecompensation register
 
 /* Definition of coefficients used to calculate UV Index */
-float _uva_a      2.22 // Default for no coverglass: "A"
-float _uva_b      1.33 // Default for no coverglass: "B"
-float _uva_c      2.95 // Default for no coverglass: "C"
-float _uva_d      1.74 // Default for no coverglass: "D"
-float _uva_resp     0.001461 // Default for no coverglass
-float _uvb_resp     0.002591 // Default for no coverglass
+float _uva_a      2.22; // Default for no coverglass: "A"
+float _uva_b      1.33; // Default for no coverglass: "B"
+float _uva_c      2.95; // Default for no coverglass: "C"
+float _uva_d      1.74; // Default for no coverglass: "D"
+float _uva_resp     0.001461; // Default for no coverglass
+float _uvb_resp     0.002591; // Default for no coverglass
 
 
 
