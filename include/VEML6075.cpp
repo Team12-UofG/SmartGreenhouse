@@ -52,7 +52,7 @@ void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB
   _uva_resp = UVA_response;
   _uvb_resp = UVB_response;
 
-  printf("Coefficients: %f %f %f %f %f %f %f %f\n" _uva_a, _uva_b, _uva_c, _uva_d, _uva_resp, _uva_resp);
+  printf("Coefficients: %f %f %f %f %f %f %f %f\n", _uva_a, _uva_b, _uvb_c, _uvb_d, _uva_resp, _uvb_resp);
 }
 
 /**************************************************************************/
