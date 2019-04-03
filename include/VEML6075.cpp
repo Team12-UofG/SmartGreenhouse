@@ -18,7 +18,7 @@ void UV_sensor::uvConfigure(void) {
   wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG,VEML6075_CONF_UV_IT_100MS);
 
   wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON); //shutdown to save
-  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_OFF); //power up  
+  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_OFF); //power up
 }
 
 /**************************************************************************/
@@ -51,6 +51,8 @@ void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB
   _uvb_d = UVB_D;
   _uva_resp = UVA_response;
   _uvb_resp = UVB_response;
+
+  printf("Coefficients: %f %f %f %f %f %f %f %f\n" _uva_a, _uva_b, _uva_c, _uva_d, _uva_resp, _uva_resp);
 }
 
 /**************************************************************************/
@@ -75,6 +77,10 @@ float UV_sensor::takeReading() {
   float _uva_calc = uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2);
   float _uvb_calc = uvb - (_uvb_c * uvcomp1) - (_uvb_d * uvcomp2);
   float _uvi_calc = ((_uva_calc * _uva_resp) + (_uvb_calc * _uvb_resp)) / 2;
+
+  printf("UVA calc: %f ", _uva_calc);
+  printf("UVB calc: %f ", _uvb_calc);
+  printf("UV calc: %f ",_uvi_calc);
 }
 
 /**************************************************************************/
