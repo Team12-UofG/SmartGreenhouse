@@ -1,7 +1,7 @@
 /**************************************************************************/
 /*!
     @file     MCP342X.cpp
-    @author   C. Schnarel I. Mitchell
+    @author   C. Schnarel, I. Mitchell
 		@license  BSD (see license.txt)
 
     This is part of an Arduino library to interface with the Microchip
@@ -25,27 +25,6 @@
 /**************************************************************************/
 
 #include "MCP342X.h"
-
-/*	static float	stepSizeTbl[] = {
-		0.001,		// 12-bit, 1X Gain
-		0.0005,		// 12-bit, 2X Gain
-		0.00025,	// 12-bit, 4X Gain
-		0.000125,	// 12-bit, 8X Gain
-		0.00025,	// 14-bit, 1X Gain
-		0.000125,	// 14-bit, 2X Gain
-		0.0000625,	// 14-bit, 4X Gain
-		0.00003125,	// 14-bit, 8X Gain
-		0.0000625,	// 16-bit, 1X Gain
-		0.00003125,	// 16-bit, 2X Gain
-		0.000015625,	// 16-bit, 4X Gain
-		0.0000078125,	// 16-bit, 8X Gain
-		0.000015625,	// 18-bit, 1X Gain
-		0.0000078125,	// 18-bit, 2X Gain
-		0.00000390625,	// 18-bit, 4X Gain
-		0.000001953125	// 18-bit, 8X Gain
-		};
-*/
-
 
 /**************************************************************************/
 /*!
@@ -77,18 +56,6 @@ MCP342X::MCP342X(uint8_t address) {
 
 /******************************************
  *!
- * brief Verify the I2C connection.
- * Make sure the device is connected and responds as expected.
- * @return True if connection is valid, false otherwise
-
-bool MCP342X::testConnection() {
-	static int intial_setup = wiringPiSetup();
-	static int fd = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
-}
-*/
-
-/******************************************
- *!
  * @brief Set the configuration shadow register
  */
 uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint16_t gain) {
@@ -99,14 +66,6 @@ uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint1
 	configData = (mode | channel | size | gain);
   return configData;
 }
-
-/******************************************
- * Get the step size based on the configuration shadow register
- */
-/*float MCP342X::getStepSize(void) {
-  uint8_t select = configRegShdw & (MCP342X_SIZE_MASK | MCP342X_GAIN_MASK);
-  return stepSizeTbl[select];
-}*/
 
 /******************************************
 *!
@@ -128,18 +87,7 @@ bool MCP342X::startConversion(uint8_t configData) {
 uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 	uint8_t adcStatus;
 	adcStatus = wiringPiI2CRead(fd);
-	/*
-  if((configRegShdw & MCP342X_SIZE_MASK) == MCP342X_SIZE_18BIT) {
-    return 0xFF;
-  }
 
-  do {
-       ((char*)dataPtr)[1] = wiringPiI2CRead(fd);
-       ((char*)dataPtr)[0] = wiringPiI2CRead(fd);
-       adcStatus = wiringPiI2CRead(fd);
-     }
-  while((adcStatus & MCP342X_RDY) != 0x00);
-	*/
   return adcStatus;
 }
 
@@ -155,13 +103,6 @@ uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
   uint8_t adcStatus;
 
-	/*if((configRegShdw & MCP342X_SIZE_MASK) == MCP342X_SIZE_18BIT) {
-    return 0xFF;
-  }
-
-	((char*)dataPtr)[1] = wiringPiI2CRead(fd);
-	((char*)dataPtr)[0] = wiringPiI2CRead(fd);
-	*/
 	adcStatus = wiringPiI2CRead(fd);
 
   return adcStatus;

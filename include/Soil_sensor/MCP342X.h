@@ -1,8 +1,8 @@
 /**************************************************************************/
 /*!
     @file     MCP342X.h
-    @author   C. Schnarel
-	@license  BSD (see license.txt)
+    @author   C. Schnarel, I. Mitchell
+	  @license  BSD (see license.txt)
 
     This is part of an Arduino library to interface with the Microchip
     MCP47X6 series of Analog-to-Digital converters which are connected
@@ -20,6 +20,7 @@
 	@section  HISTORY
 
     2013-Dec-24  - First release, C. Schnarel
+    2019-Apr-01  - Second release, I. Mitchell
 */
 /**************************************************************************/
 

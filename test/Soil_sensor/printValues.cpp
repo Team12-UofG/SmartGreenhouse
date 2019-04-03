@@ -1,22 +1,38 @@
-// Include libraries this sketch will use
+/**************************************************************************/
+/*!
+ *  @file printValues.cpp
+ *  @author I. Mitchell
+ *  @brief test of soil mositure sensor with the sampling rate and samplifng
+ *    frequency set by the user. Samples the sensor and prints the values.
+ *  @version 0.1
+ *  @date 2019-04-03
+ *  @copyright Copyright (c) 2019
+ *
+*/
+
 #include <wiringPi.h>
 #include <wiringPiI2C.h> // add "-lwiringPi" to compile
 #include <stdio.h>
-#include <iostream> // add "-lstdc++" to compile
+#include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
+#include "../include/MCP342X.h"
+#include "../include/MCP342X.cpp"
 
-#include "MCP342X.h"
-#include "MCP342X.cpp"
-
-// Instantiate objects used in this project
+/*!
+ * @brief Instantiate objects used in this project
+ */
 MCP342X myADC;
 static int configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
 using namespace std;
 
 int readData();
 
+
+/*!
+ * @brief main progam configures the sensor and calls function to read data from
+ * the soil moisture sensor
+ */
 int main(int argc, char** argv) {
-  printf("Starting up\n\n");
   myADC.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
 
   int counter = 0;
@@ -40,12 +56,14 @@ int main(int argc, char** argv) {
 
 }
 
+
+/*!
+ * @brief Function to read data from soil moisture sensor
+ */
 int readData() {
-    // add the sensor stuff here
     uint8_t result;
-    myADC.startConversion(configData);
-    printf("Result:");
-    result = myADC.getResult(&result); // conversion takes 63568us
-    printf("%d \n", result);
+    myADC.startConversion(configData); // Start conversion
+    result = myADC.getResult(&result); // Read converted value
+    printf("Result: %d \n", result);
     return 1;
 }
