@@ -27,9 +27,7 @@ void UV_sensor::uvConfigure(void) {
 */
 /**************************************************************************/
 UV_sensor::UV_sensor() {
-  setCoefficients(VEML6075_DEFAULT_UVA_A_COEFF, VEML6075_DEFAULT_UVA_B_COEFF,
-		  VEML6075_DEFAULT_UVB_C_COEFF, VEML6075_DEFAULT_UVB_D_COEFF,
-		  VEML6075_DEFAULT_UVA_RESPONSE, VEML6075_DEFAULT_UVB_RESPONSE);
+  setCoefficients(void);
 }
 
 /**************************************************************************/
@@ -43,14 +41,13 @@ UV_sensor::UV_sensor() {
     @param UVB_response the UVB responsivity
 */
 /**************************************************************************/
-void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB_D,
-					float UVA_response, float UVB_response) {
-  _uva_a = UVA_A;
-  _uva_b = UVA_B;
-  _uvb_c = UVB_C;
-  _uvb_d = UVB_D;
-  _uva_resp = UVA_response;
-  _uvb_resp = UVB_response;
+void UV_sensor::setCoefficients(void) {
+  _uva_a = VEML6075_DEFAULT_UVA_A_COEFF;
+  _uva_b = VEML6075_DEFAULT_UVA_B_COEFF;
+  _uvb_c = VEML6075_DEFAULT_UVB_C_COEFF;
+  _uvb_d = VEML6075_DEFAULT_UVB_D_COEFF;
+  _uva_resp = VEML6075_DEFAULT_UVA_RESPONSE;
+  _uvb_resp = VEML6075_DEFAULT_UVB_RESPONSE;
 
   printf("Coefficients: %f %f %f %f %f %f %f %f\n", _uva_a, _uva_b, _uvb_c, _uvb_d, _uva_resp, _uvb_resp);
 }
