@@ -118,7 +118,7 @@ class UV_sensor {
 
   // coefficients
   float _uva_a, _uva_b, _uvb_c, _uvb_d, _uva_resp, _uvb_resp;
-  float _uva_calc, _uvb_calc;
+  float _uva_calc, _uvb_calc, _uvi_calc;
 };
 
 #endif
