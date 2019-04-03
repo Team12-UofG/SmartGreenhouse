@@ -12,7 +12,7 @@
 static int intial_setup = wiringPiSetup();
 static int fd = wiringPiI2CSetup(VEML6075_ADDR);
 
-UV_sensor::uvConfigure() {
+void UV_sensor::uvConfigure(void) {
   wiringPiI2CWrite(fd,VEML6075_CONF_DEFAULT);
 }
 
@@ -100,7 +100,7 @@ float UV_sensor::readUVB(void) {
     @return the UV Index as a floating point
 */
 /**************************************************************************/
-float UV_sensor::readUVI() {
+float UV_sensor::readUVI(void) {
   takeReading();
   return _uvi_calc;
 }
