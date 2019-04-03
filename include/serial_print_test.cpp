@@ -1,7 +1,7 @@
 #include "VEML6075.h"
 #include "VEML6075.cpp"
 
-UV_sensor lightSensor
+UV_sensor lightSensor;
 
 int main (){
 
