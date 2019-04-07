@@ -21,7 +21,7 @@ static int fd_uv = wiringPiI2CSetup(VEML6075_ADDR);
  */
 /**************************************************************************/
 bool UV_sensor::testConnection() {
-  if(fd_soil < 0)
+  if(fd_uv < 0)
   {
     printf("ERROR: UV sensor could not be found \n");
     return 0;
