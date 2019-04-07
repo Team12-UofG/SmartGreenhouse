@@ -28,11 +28,11 @@
 
 /**************************************************************************/
 /*!
-    @brief Sets up the wiringPi I2C comms to the VEML6075 device
+    @brief Sets up the wiringPi I2C comms to the MCP3426 device
 */
 /**************************************************************************/
-static int intial_setup = wiringPiSetup();
-static int fd = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
+static int setupI2C_MCP3426 = wiringPiSetup();
+static int fd_soil = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
 
 /******************************************
  *!
@@ -59,10 +59,10 @@ MCP342X::MCP342X(uint8_t address) {
  * @brief Set the configuration shadow register
  */
 uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint16_t gain) {
-	wiringPiI2CWrite(fd, mode);
-  wiringPiI2CWrite(fd, channel);
-  wiringPiI2CWrite(fd, size);
-  wiringPiI2CWrite(fd, gain);
+	wiringPiI2CWrite(fd_soil, mode);
+  wiringPiI2CWrite(fd_soil, channel);
+  wiringPiI2CWrite(fd_soil, size);
+  wiringPiI2CWrite(fd_soil, gain);
 	configData = (mode | channel | size | gain);
   return configData;
 }
@@ -73,7 +73,7 @@ uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint1
  *   the shadow configuration register
  */
 bool MCP342X::startConversion(uint8_t configData) {
-  wiringPiI2CWriteReg8(fd, configData, MCP342X_RDY);
+  wiringPiI2CWriteReg8(fd_soil, configData, MCP342X_RDY);
 }
 
 /******************************************
@@ -86,7 +86,7 @@ bool MCP342X::startConversion(uint8_t configData) {
  */
 uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 	uint8_t adcStatus;
-	adcStatus = wiringPiI2CRead(fd);
+	adcStatus = wiringPiI2CRead(fd_soil);
 
   return adcStatus;
 }
@@ -103,7 +103,7 @@ uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
   uint8_t adcStatus;
 
-	adcStatus = wiringPiI2CRead(fd);
+	adcStatus = wiringPiI2CRead(fd_soil);
 
   return adcStatus;
 }

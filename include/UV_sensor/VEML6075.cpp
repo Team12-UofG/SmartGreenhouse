@@ -9,16 +9,16 @@
     @brief Sets up the wiringPi I2C comms to the VEML6075 device
 */
 /**************************************************************************/
-static int intial_setup = wiringPiSetup();
-static int fd = wiringPiI2CSetup(VEML6075_ADDR);
+static int setupI2C_veml6075 = wiringPiSetup();
+static int fd_uv = wiringPiI2CSetup(VEML6075_ADDR);
 
 void UV_sensor::uvConfigure(void) {
-  wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG,VEML6075_CONF_UV_AF_AUTO);
-  wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG,VEML6075_CONF_UV_TRIG_NO);
-  wiringPiI2CWriteReg16(fd,VEML6075_CONF_REG,VEML6075_CONF_UV_IT_100MS);
+  wiringPiI2CWriteReg16(fd_uv,VEML6075_CONF_REG,VEML6075_CONF_UV_AF_AUTO);
+  wiringPiI2CWriteReg16(fd_uv,VEML6075_CONF_REG,VEML6075_CONF_UV_TRIG_NO);
+  wiringPiI2CWriteReg16(fd_uv,VEML6075_CONF_REG,VEML6075_CONF_UV_IT_100MS);
 
-  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_ON); //shutdown to save
-  wiringPiI2CWriteReg16(fd, VEML6075_CONF_REG, VEML6075_CONF_SD_OFF); //power up
+  wiringPiI2CWriteReg16(fd_uv, VEML6075_CONF_REG, VEML6075_CONF_SD_ON); //shutdown to save
+  wiringPiI2CWriteReg16(fd_uv, VEML6075_CONF_REG, VEML6075_CONF_SD_OFF); //power up
 }
 
 /**************************************************************************/
@@ -60,10 +60,10 @@ void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB
 /**************************************************************************/
 float UV_sensor::takeReading() {
 
-  float uva = wiringPiI2CReadReg16(fd, VEML6075_UVA_DATA_REG);
-  float uvb = wiringPiI2CReadReg16(fd, VEML6075_UVB_DATA_REG);
-  float uvcomp1 = wiringPiI2CReadReg16(fd, VEML6075_UVCOMP1_DATA_REG);
-  float uvcomp2 = wiringPiI2CReadReg16(fd, VEML6075_UVCOMP2_DATA_REG);
+  float uva = wiringPiI2CReadReg16(fd_uv, VEML6075_UVA_DATA_REG);
+  float uvb = wiringPiI2CReadReg16(fd_uv, VEML6075_UVB_DATA_REG);
+  float uvcomp1 = wiringPiI2CReadReg16(fd_uv, VEML6075_UVCOMP1_DATA_REG);
+  float uvcomp2 = wiringPiI2CReadReg16(fd_uv, VEML6075_UVCOMP2_DATA_REG);
 
   // Equation 1 & 2 in App note, without 'golden sample' calibration
   _uva_calc = uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2);
