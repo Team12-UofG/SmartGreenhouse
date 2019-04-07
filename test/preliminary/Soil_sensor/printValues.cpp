@@ -23,6 +23,7 @@
  */
 MCP342X soil_sensor;
 using namespace std;
+int configData = 0;
 
 int readData();
 
@@ -32,7 +33,7 @@ int readData();
  * the soil moisture sensor
  */
 int main(int argc, char** argv) {
-  int configData = soil_sensor.configure();
+   configData = soil_sensor.configure();
 
   int counter = 0;
 

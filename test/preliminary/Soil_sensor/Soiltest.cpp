@@ -22,12 +22,12 @@
  */
 MCP342X soil_sensor;
 int readData();
-
+int configData;
 /*!
  * @brief main progam
  */
 int main() {
-  int configData = soil_sensor.configure();
+  configData = soil_sensor.configure();
   uint8_t value = readData();
 }
 
