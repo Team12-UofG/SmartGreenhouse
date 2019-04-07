@@ -58,12 +58,12 @@ MCP342X::MCP342X(uint8_t address) {
  *!
  * @brief Set the configuration shadow register
  */
-uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint16_t gain) {
-	wiringPiI2CWrite(fd_soil, mode);
-  wiringPiI2CWrite(fd_soil, channel);
-  wiringPiI2CWrite(fd_soil, size);
-  wiringPiI2CWrite(fd_soil, gain);
-	configData = (mode | channel | size | gain);
+uint8_t MCP342X::configure(void) {
+	wiringPiI2CWrite(fd_soil, MCP342X_MODE_CONTINUOUS);
+  wiringPiI2CWrite(fd_soil, MCP342X_CHANNEL_1);
+  wiringPiI2CWrite(fd_soil, MCP342X_SIZE_16BIT);
+  wiringPiI2CWrite(fd_soil, MCP342X_GAIN_1X);
+	configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
   return configData;
 }
 

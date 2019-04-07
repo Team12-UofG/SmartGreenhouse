@@ -21,8 +21,7 @@
 /*!
  * @brief Instantiate objects used in this project
  */
-MCP342X myADC;
-static int configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
+MCP342X soil_sensor;
 using namespace std;
 
 int readData();
@@ -33,7 +32,7 @@ int readData();
  * the soil moisture sensor
  */
 int main(int argc, char** argv) {
-  myADC.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
+  int configData = soil_sensor.configure();
 
   int counter = 0;
 
@@ -62,8 +61,8 @@ int main(int argc, char** argv) {
  */
 int readData() {
     uint8_t result;
-    myADC.startConversion(configData); // Start conversion
-    result = myADC.getResult(&result); // Read converted value
+    soil_sensor.startConversion(configData); // Start conversion
+    result = soil_sensor.getResult(&result); // Read converted value
     printf("Result: %d \n", result);
     return 1;
 }
