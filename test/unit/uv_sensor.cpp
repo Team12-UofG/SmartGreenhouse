@@ -14,8 +14,8 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include "../../../include/UV_sensor/VEML6075.h"
-#include "../../../include/UV_sensor/VEML6075.cpp"
+#include "../../include/UV_sensor/VEML6075.h"
+#include "../../include/UV_sensor/VEML6075.cpp"
 
 using namespace std;
 int configData = 0;
