@@ -97,11 +97,17 @@ class UV_sensor {
  public:
   UV_sensor(); // VEML6075 becomes UV_sensor
 
+  // Test the connection to the VEML6075 UV light sensor
+  bool testConnection(void);
+
+  // Set the coefficients for the VEML6075
   void setCoefficients(float UVA_A, float UVA_B, float UVA_C, float UVA_D,
 		       float UVA_response, float UVB_response);
 
+  // Set the configuration bits for the VEML6075
   void uvConfigure(void);
 
+  // Read the UVA, UVB and UV values
   float readUVA(void);
   float readUVB(void);
   float readUVI(void);

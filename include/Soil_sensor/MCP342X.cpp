@@ -28,11 +28,11 @@
 
 /**************************************************************************/
 /*!
-    @brief Sets up the wiringPi I2C comms to the VEML6075 device
+    @brief Sets up the wiringPi I2C comms to the MCP3426 device
 */
 /**************************************************************************/
-static int intial_setup = wiringPiSetup();
-static int fd = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
+static int setupI2C_MCP3426 = wiringPiSetup();
+static int fd_soil = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
 
 /******************************************
  *!
@@ -56,14 +56,30 @@ MCP342X::MCP342X(uint8_t address) {
 
 /******************************************
  *!
+ * @breif Verify the I2C connection.
+ * Make sure the device is connected and responds as expected.
+ * @return True if connection is valid, false otherwise
+ */
+bool MCP342X::testConnection() {
+  if(fd_soil < 0)
+  {
+    printf("ERROR: Soil moisture sensor could not be found \n");
+    return 0;
+  }
+    else {
+      return 1;
+    }
+}
+/******************************************
+ *!
  * @brief Set the configuration shadow register
  */
-uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint16_t gain) {
-	wiringPiI2CWrite(fd, mode);
-  wiringPiI2CWrite(fd, channel);
-  wiringPiI2CWrite(fd, size);
-  wiringPiI2CWrite(fd, gain);
-	configData = (mode | channel | size | gain);
+uint8_t MCP342X::configure(void) {
+	wiringPiI2CWrite(fd_soil, MCP342X_MODE_CONTINUOUS);
+  wiringPiI2CWrite(fd_soil, MCP342X_CHANNEL_1);
+  wiringPiI2CWrite(fd_soil, MCP342X_SIZE_16BIT);
+  wiringPiI2CWrite(fd_soil, MCP342X_GAIN_1X);
+	configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
   return configData;
 }
 
@@ -73,7 +89,7 @@ uint8_t MCP342X::configure(uint16_t mode, uint16_t channel, uint16_t size, uint1
  *   the shadow configuration register
  */
 bool MCP342X::startConversion(uint8_t configData) {
-  wiringPiI2CWriteReg8(fd, configData, MCP342X_RDY);
+  wiringPiI2CWriteReg8(fd_soil, configData, MCP342X_RDY);
 }
 
 /******************************************
@@ -86,7 +102,7 @@ bool MCP342X::startConversion(uint8_t configData) {
  */
 uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 	uint8_t adcStatus;
-	adcStatus = wiringPiI2CRead(fd);
+	adcStatus = wiringPiI2CRead(fd_soil);
 
   return adcStatus;
 }
@@ -103,7 +119,7 @@ uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
   uint8_t adcStatus;
 
-	adcStatus = wiringPiI2CRead(fd);
+	adcStatus = wiringPiI2CRead(fd_soil);
 
   return adcStatus;
 }

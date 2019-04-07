@@ -14,22 +14,20 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include "../../include/Soil_sensor/MCP342X.h"
-#include "../../include/Soil_sensor/MCP342X.cpp"
+#include "../../../include/Soil_sensor/MCP342X.h"
+#include "../../../include/Soil_sensor//MCP342X.cpp"
 
 /*!
  * @brief Instantiate objects used in this project
  */
-MCP342X soilSensor;
-static int configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
-
+MCP342X soil_sensor;
 int readData();
-
+int configData;
 /*!
  * @brief main progam
  */
 int main() {
-  soilSensor.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
+  configData = soil_sensor.configure();
   uint8_t value = readData();
 }
 
@@ -38,8 +36,8 @@ int main() {
  */
 int readData() {
     uint8_t result;
-    soilSensor.startConversion(configData); // Start conversion
-    result = soilSensor.getResult(&result); // Read converted value
+    soil_sensor.startConversion(configData); // Start conversion
+    result = soil_sensor.getResult(&result); // Read converted value
     printf("Result: %d \n", result);
     return 1;
 }

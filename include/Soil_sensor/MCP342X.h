@@ -83,7 +83,7 @@
 #define MCP342X_SIZE_14BIT	0x04
 #define MCP342X_SIZE_16BIT	0x08
 #define MCP342X_SIZE_18BIT	0x0C
-#define MCP342X_SIZE_MASK	0x0C
+#define MCP342X_SIZE_MASK	  0x0C
 
 
 // Programmable Gain definitions
@@ -103,8 +103,11 @@ class MCP342X {
         MCP342X();
         MCP342X(uint8_t address);
 
-        // Set/Get the configuration bits for the ADC
-        uint8_t configure(uint16_t mode, uint16_t channel, uint16_t size, uint16_t gain);
+        // Test connection to the MCP3426X ADC
+        bool testConnection(void);
+
+        // Set the configuration bits for the ADC
+        uint8_t configure(void);
 
         // Start a conversion
         bool startConversion(uint8_t configData);
