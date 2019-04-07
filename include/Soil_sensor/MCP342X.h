@@ -106,7 +106,7 @@ class MCP342X {
         // Test connection to the MCP3426X ADC
         bool testConnection(void);
 
-        // Set/Get the configuration bits for the ADC
+        // Set the configuration bits for the ADC
         uint8_t configure(void);
 
         // Start a conversion

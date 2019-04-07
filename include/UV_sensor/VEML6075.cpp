@@ -12,6 +12,25 @@
 static int setupI2C_veml6075 = wiringPiSetup();
 static int fd_uv = wiringPiI2CSetup(VEML6075_ADDR);
 
+
+/**************************************************************************/
+/*!
+ * @breif Verify the I2C connection.
+ * Make sure the device is connected and responds as expected.
+ * @return True if connection is valid, false otherwise
+ */
+/**************************************************************************/
+bool UV_sensor::testConnection() {
+  if(fd_soil < 0)
+  {
+    printf("ERROR: UV sensor could not be found \n");
+    return 0;
+  } else
+  {
+    return 1;
+    }
+}
+
 void UV_sensor::uvConfigure(void) {
   wiringPiI2CWriteReg16(fd_uv,VEML6075_CONF_REG,VEML6075_CONF_UV_AF_AUTO);
   wiringPiI2CWriteReg16(fd_uv,VEML6075_CONF_REG,VEML6075_CONF_UV_TRIG_NO);

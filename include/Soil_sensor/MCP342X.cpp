@@ -55,7 +55,8 @@ MCP342X::MCP342X(uint8_t address) {
 }
 
 /******************************************
- * Verify the I2C connection.
+ *!
+ * @breif Verify the I2C connection.
  * Make sure the device is connected and responds as expected.
  * @return True if connection is valid, false otherwise
  */
