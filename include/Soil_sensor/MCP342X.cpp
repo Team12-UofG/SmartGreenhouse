@@ -55,6 +55,21 @@ MCP342X::MCP342X(uint8_t address) {
 }
 
 /******************************************
+ * Verify the I2C connection.
+ * Make sure the device is connected and responds as expected.
+ * @return True if connection is valid, false otherwise
+ */
+bool MCP342X::testConnection() {
+  if(fd_soil < 0)
+  {
+    printf("ERROR: Soil moisture sensor could not be found \n");
+    return 0;
+  }
+    else {
+      return 1;
+    }
+}
+/******************************************
  *!
  * @brief Set the configuration shadow register
  */
