@@ -8,6 +8,9 @@
  *  @copyright Copyright (c) 2019
  *
 */
+/*! @file printValues.cpp
+* @brief Prints output sensor readings.
+*/
 /**************************************************************************/
 
 #include "../include/VEML6075.h"
