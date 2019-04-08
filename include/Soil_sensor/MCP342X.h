@@ -48,6 +48,7 @@
 /** MCP3421, MCP3425 & MCP3426 are factory programed for any of 0x68 thru 0x6F */
 #define MCP342X_DEFAULT_ADDRESS	0x68
 
+//@{
 /** MCP3422, MCP3423, MCP3424, MCP3427 & MCP3428 addresses are controlled by address lines A0 and A1
  each address line can be low (GND), high (VCC) or floating (FLT) */
 #define MCP342X_A0GND_A1GND		0x68
@@ -58,7 +59,7 @@
 #define MCP342X_A0VCC_A1FLT		0x6D
 #define MCP342X_A0VCC_A1VCC		0x6E
 #define MCP342X_A0FLT_A1VCC		0x6F
-
+//@}
 
 /** Conversion mode definitions */
 #define MCP342X_MODE_ONESHOT	0x00
