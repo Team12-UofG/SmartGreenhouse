@@ -1,7 +1,8 @@
 /******************************************/
 /*!
  *  @file printValues.cpp
- *  @brief Prints output sensor readings.
+ *  
+ *  Prints output sensor readings.
  *  Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
  *  
  *  @author Isla Mitchell
