@@ -4,11 +4,11 @@
     @author   C. Schnarel, I. Mitchell
 		@license  BSD (see license.txt)
 
-    This is part of an Arduino library to interface with the Microchip
+    @brief This is part of an Arduino library to interface with the Microchip
     MCP47X6 series of Analog-to-Digital converters which are connected
     via the I2C bus.
 
-    MCP342X I2C device class
+    @detailed MCP342X I2C device class
     Based on Microchip datasheets for the following part numbers
         MCP3421, MCP3422, MCP3423, MCP3424, MCP3425, MCP3426, MCP3427, MCP3428
     These parts share a common programming interface
@@ -17,13 +17,15 @@
     Updates should (hopefully) always be available at
         https://github.com/uchip/MCP342X
 
-	@section  HISTORY
+    @section  History
 
     2013-Dec-24  - First release, C. Schnarel
-		2019-Apr-01  - Second release, I. Mitchell
+    2019-Apr-01  - Second release, I. Mitchell
 */
 /**************************************************************************/
-
+/*! @file MCP342X.cpp
+ @brief Interface with the Microchip MCP47X6 series of Analog-to-Digital converters which are connected
+    via the I2C bus. */
 #include "MCP342X.h"
 
 /**************************************************************************/
@@ -32,10 +34,16 @@
 */
 /**************************************************************************/
 static int setupI2C_MCP3426 = wiringPiSetup();
+/**************************************************************************/
+/*!
+    @brief Sets up the wiringPi I2C comms to the MCP3426 device
+    @param[] MCP342X_DEFAULT_ADDRESS :
+*/
+/**************************************************************************/
 static int fd_soil = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
 
 /******************************************
- *!
+ /*!
  * @brief  Default constructor, uses default I2C address.
  * @see MCP342X_DEFAULT_ADDRESS
  */
@@ -46,7 +54,7 @@ MCP342X::MCP342X() {
 /******************************************
  *!
  * @brief Specific address constructor.
- * @param address I2C address
+ * @param[] address : I2C address
  * @see MCP342X_DEFAULT_ADDRESS
  * @see MCP342X_A0GND_A1GND, etc.
  */
@@ -56,7 +64,7 @@ MCP342X::MCP342X(uint8_t address) {
 
 /******************************************
  *!
- * @breif Verify the I2C connection.
+ * @brief Verify the I2C connection.
  * Make sure the device is connected and responds as expected.
  * @return True if connection is valid, false otherwise
  */
@@ -72,7 +80,7 @@ bool MCP342X::testConnection() {
 }
 /******************************************
  *!
- * @brief Set the configuration shadow register
+ * @brief Set the configuration shadow register.
  */
 uint8_t MCP342X::configure(void) {
 	wiringPiI2CWrite(fd_soil, MCP342X_MODE_CONTINUOUS);
@@ -86,7 +94,8 @@ uint8_t MCP342X::configure(void) {
 /******************************************
 *!
 * @brief Start a conversion using configuration settings from
- *   the shadow configuration register
+ *   the shadow configuration register.
+ * @param[] configData : 
  */
 bool MCP342X::startConversion(uint8_t configData) {
   wiringPiI2CWriteReg8(fd_soil, configData, MCP342X_RDY);
@@ -94,11 +103,12 @@ bool MCP342X::startConversion(uint8_t configData) {
 
 /******************************************
 *!
-* @brief Read the conversion value (12, 14 or 16 bit)
+* @brief Read the conversion value (12, 14 or 16 bit).
  *  Spins reading status until ready then
  *  fills in the supplied location with the 16-bit (two byte)
- *  conversion value and returns the status byte
- *  Note: status of -1 "0xFF' implies read error
+ *  conversion value and returns the status byte,
+ *  Note: status of -1 "0xFF' implies read error.
+ * @param[] dataPtr : 
  */
 uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 	uint8_t adcStatus;
@@ -115,6 +125,7 @@ uint8_t MCP342X::getResult(uint8_t *dataPtr) {
  *  fill in the supplied location with the 16-bit (two byte)
  *  conversion value and status the config byte
  *  Note: status of -1 "0xFF' implies read error
+ * @param[] dataPtr : 
  */
 uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
   uint8_t adcStatus;
