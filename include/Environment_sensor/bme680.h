@@ -123,7 +123,7 @@ int8_t bme680_soft_reset(struct bme680_dev *dev);
  *	0x00	|	BME680_SLEEP_MODE
  *	0x01	|	BME680_FORCED_MODE
  *
- * * @return Result of API execution status
+ *  @return Result of API execution status
  * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
  */
 int8_t bme680_set_sensor_mode(struct bme680_dev *dev);
@@ -197,7 +197,7 @@ int8_t bme680_get_sensor_data(struct bme680_field_data *data, struct bme680_dev 
  *	BME680_NBCONV_SEL          |    To set NB conversion setting.
  *	BME680_GAS_SENSOR_SEL      |    To set all gas sensor related settings
  *
- * @note : Below are the macros to be used by the user for selecting the
+ * @note Below are the macros to be used by the user for selecting the
  * desired settings. User can do OR operation of these macros for configuring
  * multiple settings.
  *
