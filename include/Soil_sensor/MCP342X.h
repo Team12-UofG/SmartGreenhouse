@@ -1,7 +1,7 @@
 /**************************************************************************/
 /*!
     @file     MCP342X.h
-    @brief MCP342X I2C device class header file.
+    @brief ADC MCP342X I2C device class header file.
     @author   C. Schnarel, I. Mitchell
     @license  BSD (see license.txt)
 
