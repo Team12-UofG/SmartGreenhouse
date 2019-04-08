@@ -1,6 +1,6 @@
 /**
 * @file printValues.cpp
-* @brief Test file for printing output reading of UV sensor.
+* Test file for printing output reading of UV sensor.
 * @author Isla Mitchell
 */
 
@@ -13,7 +13,7 @@
 UV_sensor lightSensor; // create UV sensor object
 
 /*!
- * @brief Main function for UV sesnor test.
+ * @brief Main function for UV sensor test.
  */
 int main (){
 
