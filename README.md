@@ -28,6 +28,7 @@ Jaime Robb
 ## Required Packages 
 
 ## Documentation
+Documentation for all methods can be found at: https://team12-uofg.github.io/SmartGreenhouse/index.html
 
 ## Social Media
 [Instagram](https://www.instagram.com/uofg_smartgreenhouse/?hl=en "Instagram")
