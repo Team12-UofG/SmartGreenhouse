@@ -743,10 +743,7 @@ int8_t bme680_get_sensor_data(struct bme680_field_data *data, struct bme680_dev 
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to read the calibrated data from the sensor.
- * @param dev
- */
+
 static int8_t get_calib_data(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -823,10 +820,7 @@ static int8_t get_calib_data(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to set the gas configuration of the sensor.
- * @param dev
- */
+
 static int8_t set_gas_config(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -854,12 +848,6 @@ static int8_t set_gas_config(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to get the gas configuration of the sensor.
- * @note heatr_temp and heatr_dur values are currently register data
- * and not the actual values set.
- * @param dev
- */
 static int8_t get_gas_config(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -894,11 +882,6 @@ static int8_t get_gas_config(struct bme680_dev *dev)
 
 #ifndef BME680_FLOAT_POINT_COMPENSATION
 
-/*!
- * @brief This internal API is used to calculate the temperature value.
- * @param temp_adc
- * @param dev
- */
 static int16_t calc_temperature(uint32_t temp_adc, struct bme680_dev *dev)
 {
 	int64_t var1;
@@ -916,11 +899,6 @@ static int16_t calc_temperature(uint32_t temp_adc, struct bme680_dev *dev)
 	return calc_temp;
 }
 
-/*!
- * @brief This internal API is used to calculate the pressure value.
- * @param pres_adc
- * @param dev
- */
 static uint32_t calc_pressure(uint32_t pres_adc, const struct bme680_dev *dev)
 {
 	int32_t var1;
@@ -959,11 +937,6 @@ static uint32_t calc_pressure(uint32_t pres_adc, const struct bme680_dev *dev)
 
 }
 
-/*!
- * @brief This internal API is used to calculate the humidity value.
- * @param hum_adc
- * @param dev
- */
 static uint32_t calc_humidity(uint16_t hum_adc, const struct bme680_dev *dev)
 {
 	int32_t var1;
@@ -997,12 +970,7 @@ static uint32_t calc_humidity(uint16_t hum_adc, const struct bme680_dev *dev)
 	return (uint32_t) calc_hum;
 }
 
-/*!
- * @brief This internal API is used to calculate the gas resistance value.
- * @param gas_res_adc
- * @param gas_range
- * @param dev
- */
+
 static uint32_t calc_gas_resistance(uint16_t gas_res_adc, uint8_t gas_range, const struct bme680_dev *dev)
 {
 	int64_t var1;
@@ -1029,11 +997,7 @@ static uint32_t calc_gas_resistance(uint16_t gas_res_adc, uint8_t gas_range, con
 	return calc_gas_res;
 }
 
-/*!
- * @brief This internal API is used to calculate the heat resistance value.
- * @param temp
- * @param dev
- */
+
 static uint8_t calc_heater_res(uint16_t temp, const struct bme680_dev *dev)
 {
 	uint8_t heatr_res;
@@ -1228,10 +1192,7 @@ static float calc_heater_res(uint16_t temp, const struct bme680_dev *dev)
 
 #endif
 
-/*!
- * @brief This internal API is used to calculate the heat duration value.
- * @param dur
- */
+
 static uint8_t calc_heater_dur(uint16_t dur)
 {
 	uint8_t factor = 0;
@@ -1250,11 +1211,7 @@ static uint8_t calc_heater_dur(uint16_t dur)
 	return durval;
 }
 
-/*!
- * @brief This internal API is used to calculate the field data of sensor.
- * @param data
- * @param dev
- */
+
 static int8_t read_field_data(struct bme680_field_data *data, struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -1308,11 +1265,6 @@ static int8_t read_field_data(struct bme680_field_data *data, struct bme680_dev 
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to set the memory page based on register address.
- * @param reg_addr
- * @param dev
- */
 static int8_t set_mem_page(uint8_t reg_addr, struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -1349,10 +1301,6 @@ static int8_t set_mem_page(uint8_t reg_addr, struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to get the memory page based on register address.
- * @param dev
- */
 static int8_t get_mem_page(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -1371,14 +1319,6 @@ static int8_t get_mem_page(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to validate the boundary.
- * conditions.
- * @param value
- * @param min
- * @param max
- * @param dev
- */
 static int8_t boundary_check(uint8_t *value, uint8_t min, uint8_t max, struct bme680_dev *dev)
 {
 	int8_t rslt = BME680_OK;
@@ -1403,11 +1343,6 @@ static int8_t boundary_check(uint8_t *value, uint8_t min, uint8_t max, struct bm
 	return rslt;
 }
 
-/*!
- * @brief This internal API is used to validate the device structure pointer for
- * null conditions.
- * @param dev
- */
 static int8_t null_ptr_check(const struct bme680_dev *dev)
 {
 	int8_t rslt;
