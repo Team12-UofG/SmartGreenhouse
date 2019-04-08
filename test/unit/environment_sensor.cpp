@@ -2,7 +2,7 @@
 /*!
 *  @file environment_sensor.cpp
 *  @author I. Mitchell
-*  @brief test for checking I2C communication with the BME680 sensor and taking
+*  @brief Test for checking I2C communication with the BME680 sensor and taking
 *   temperature, humidity, air quality and pressure readings.
 *  @version 0.1
 *  @date 2019-04-07
@@ -65,7 +65,13 @@
 	{
 	    sleep(period/1000);
 	}
-
+/*!
+* @brief Read I2C information.
+* @param dev_id
+* @param reg_addr
+* @param reg_data
+* @param len
+*/
 	int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 	{
 	    int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
@@ -84,6 +90,13 @@
 
 	    return rslt;
 	}
+/*!
+* @brief Write I2C information.
+* @param dev_id
+* @param reg_addr
+* @param reg_data
+* @param len
+*/
 
 	int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 	{
