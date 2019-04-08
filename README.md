@@ -1,4 +1,4 @@
-# SmartGreenhouse
+# SmartGreenhouse   [![Build Status](https://travis-ci.org/Team12-UofG/SmartGreenhouse.svg?branch=master)](https://travis-ci.org/Team12-UofG/SmartGreenhouse)
 
 ## Overview
 The agricultural industry is facing enormous development as a result of population growth, climate change and urbanisation. This, along with developments in smart technology has given rise to the smart greenhouse, which automates the plant growing process. Monitoring and control systems can be developed to produce a self-controlled microclimate to save time, reduce labour, and help planes thrive.
