@@ -4,7 +4,7 @@
     @author   C. Schnarel, I. Mitchell
 		@license  BSD (see license.txt)
 
-    @brief MCP342X I2C device class.
+    @brief ADC MCP342X I2C device class.
     
     This is part of an Arduino library to interface with the Microchip
     MCP47X6 series of Analog-to-Digital converters which are connected
