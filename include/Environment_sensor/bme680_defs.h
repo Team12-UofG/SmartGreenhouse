@@ -46,7 +46,8 @@
  */
 
 /*! @file bme680_defs.h
- @brief For BME680 sensor. */
+    @brief For BME680 sensor. 
+*/
 /*!
  * @defgroup BME680 SENSOR API
  * @{*/
