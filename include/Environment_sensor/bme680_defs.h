@@ -66,7 +66,7 @@
 
 //@{
 /******************************************************************************/
-/*! @brief		Common macros					      */
+/*! @brief Common macros					      */
 /******************************************************************************/
 
 #if !defined(UINT8_C) && !defined(INT8_C)
@@ -91,6 +91,7 @@
 //@}
 
 /**@}*/
+
 //@{
 /** C standard macros */
 #ifndef NULL
@@ -110,27 +111,27 @@
 #endif
 //@}
 
-/** BME680 General configuration. */
+/** @brief BME680 General configuration. */
 #define BME680_POLL_PERIOD_MS		UINT8_C(10)
 
 //@{
-/** BME680 I2C addresses. */
+/** @brief BME680 I2C addresses. */
 #define BME680_I2C_ADDR_PRIMARY		UINT8_C(0x76)
 #define BME680_I2C_ADDR_SECONDARY	UINT8_C(0x77)
 //@}
 
-/** BME680 unique chip identifier. */
+/** @brief BME680 unique chip identifier. */
 #define BME680_CHIP_ID  UINT8_C(0x61)
 
 //@{
-/** BME680 coefficients related defines. */
+/** @brief BME680 coefficients related defines. */
 #define BME680_COEFF_SIZE		UINT8_C(41)
 #define BME680_COEFF_ADDR1_LEN		UINT8_C(25)
 #define BME680_COEFF_ADDR2_LEN		UINT8_C(16)
 //@}
 
 //@{
-/** BME680 field_x related defines. */
+/** @brief BME680 field_x related defines. */
 #define BME680_FIELD_LENGTH		UINT8_C(15)
 #define BME680_FIELD_ADDR_OFFSET	UINT8_C(17)
 //@}
