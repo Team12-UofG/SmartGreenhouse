@@ -1,8 +1,9 @@
 /**
-* @file printValues.cpp
+@file printValues.cpp
+*/
+/**
 * @author Isla Mitchell
 * @brief Test file for printing output reading of UV sensor.
-
 */
 
 #include "../include/VEML6075.h"
