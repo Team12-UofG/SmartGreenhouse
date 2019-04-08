@@ -24,7 +24,7 @@
  * @brief Instantiate objects used in this project.
  */
 MCP342X soilSensor;
-static int Soil_configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
+int Soil_configData = 0;
 
 UV_sensor lightSensor; // create sensor
 int readData();
@@ -37,7 +37,7 @@ int main (){
   printf("Simple Test \n");
   lightSensor.uvConfigure(); // configure sensor
 
-  soilSensor.configure(MCP342X_MODE_CONTINUOUS, MCP342X_CHANNEL_1, MCP342X_SIZE_16BIT, MCP342X_GAIN_1X);
+  Soil_configData = soilSensor.configure();
   uint8_t value = readData();
 }
 
@@ -46,7 +46,7 @@ int main (){
  */
 int readData() {
     uint8_t result;
-    soilSensor.startConversion(configData); // Start conversion
+    soilSensor.startConversion(Soil_configData); // Start conversion
     result = soilSensor.getResult(&result); // Read converted value
     printf("Soil moisture reading: %d \n", result);
 
