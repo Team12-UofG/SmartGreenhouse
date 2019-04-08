@@ -59,7 +59,7 @@
 
 /*!
 * @brief Set the user delay in milliseconds.
-* @param period[in]
+* @param[in] period
 */
 	void user_delay_ms(uint32_t period)
 	{
