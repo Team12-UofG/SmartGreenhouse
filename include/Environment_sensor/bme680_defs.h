@@ -49,7 +49,6 @@
  @brief For BME680 sensor. */
 /*!
  * @defgroup BME680 SENSOR API
- * @brief
  * @{*/
 #ifndef BME680_DEFS_H_
 #define BME680_DEFS_H_
