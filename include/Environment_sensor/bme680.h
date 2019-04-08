@@ -62,7 +62,7 @@ extern "C"
 /* Header includes */
 #include "bme680_defs.h"
 
-/* function prototype declarations */
+/* Function prototype declarations */
 /*!
  *  @brief This API is the entry point.
  *  It reads the chip-id and calibration data from the sensor.
@@ -78,11 +78,11 @@ int8_t bme680_init(struct bme680_dev *dev);
  * @brief This API writes the given data to the register address
  * of the sensor.
  *
- * @param[in] reg_addr : Register address from where the data to be written.
+ * @param[in] reg_addr : Register address from where the data is to be written
  * @param[in] reg_data : Pointer to data buffer which is to be written
  * in the sensor.
- * @param[in] len : No of bytes of data to write..
- * @param[in] dev : Structure instance of bme680_dev.
+ * @param[in] len : Number of bytes of data to write
+ * @param[in] dev : Structure instance of bme680_dev
  *
  * @return Result of API execution status
  * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
@@ -92,10 +92,10 @@ int8_t bme680_set_regs(const uint8_t *reg_addr, const uint8_t *reg_data, uint8_t
 /*!
  * @brief This API reads the data from the given register address of the sensor.
  *
- * @param[in] reg_addr : Register address from where the data to be read
- * @param[out] reg_data : Pointer to data buffer to store the read data.
- * @param[in] len : No of bytes of data to be read.
- * @param[in] dev : Structure instance of bme680_dev.
+ * @param[in] reg_addr : Register address from where the data is to be read
+ * @param[out] reg_data : Pointer to data buffer to store the read data
+ * @param[in] len : Number of bytes of data to be read
+ * @param[in] dev : Structure instance of bme680_dev
  *
  * @return Result of API execution status
  * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
@@ -105,10 +105,10 @@ int8_t bme680_get_regs(uint8_t reg_addr, uint8_t *reg_data, uint16_t len, struct
 /*!
  * @brief This API performs the soft reset of the sensor.
  *
- * @param[in] dev : Structure instance of bme680_dev.
+ * @param[in] dev : Structure instance of bme680_dev
  *
  * @return Result of API execution status
- * @retval zero -> Success / +ve value -> Warning / -ve value -> Error.
+ * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
  */
 int8_t bme680_soft_reset(struct bme680_dev *dev);
 
@@ -147,8 +147,8 @@ int8_t bme680_get_sensor_mode(struct bme680_dev *dev);
 /*!
  * @brief This API is used to set the profile duration of the sensor.
  *
- * @param[in] dev	   : Structure instance of bme680_dev.
- * @param[in] duration : Duration of the measurement in ms.
+ * @param[in] dev	   : Structure instance of bme680_dev
+ * @param[in] duration : Duration of the measurement in milliseconds
  *
  * @return Nothing
  */
@@ -157,20 +157,20 @@ void bme680_set_profile_dur(uint16_t duration, struct bme680_dev *dev);
 /*!
  * @brief This API is used to get the profile duration of the sensor.
  *
- * @param[in] dev	   : Structure instance of bme680_dev.
- * @param[in] duration : Duration of the measurement in ms.
+ * @param[in] dev	   : Structure instance of bme680_dev
+ * @param[in] duration : Duration of the measurement in milliseconds
  *
  * @return Nothing
  */
 void bme680_get_profile_dur(uint16_t *duration, const struct bme680_dev *dev);
 
 /*!
- * @brief This API reads the pressure, temperature and humidity and gas data
+ * @brief This API reads the temperature, pressure, humidity and gas data
  * from the sensor, compensates the data and store it in the bme680_data
  * structure instance passed by the user.
  *
- * @param[out] data: Structure instance to hold the data.
- * @param[in] dev : Structure instance of bme680_dev.
+ * @param[out] data: Structure instance to hold the data
+ * @param[in] dev : Structure instance of bme680_dev
  *
  * @return Result of API execution status
  * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
@@ -178,12 +178,12 @@ void bme680_get_profile_dur(uint16_t *duration, const struct bme680_dev *dev);
 int8_t bme680_get_sensor_data(struct bme680_field_data *data, struct bme680_dev *dev);
 
 /*!
- * @brief This API is used to set the oversampling, filter and T,P,H, gas selection
+ * @brief This API is used to set the oversampling, filter and temperature, pressure, humidity and gas selection
  * settings in the sensor.
  *
- * @param[in] dev : Structure instance of bme680_dev.
+ * @param[in] dev : Structure instance of bme680_dev
  * @param[in] desired_settings : Variable used to select the settings which
- * are to be set in the sensor.
+ * are to be set in the sensor
  *
  *	 Macros	                   |  Functionality
  *---------------------------------|----------------------------------------------
@@ -202,20 +202,20 @@ int8_t bme680_get_sensor_data(struct bme680_field_data *data, struct bme680_dev 
  * multiple settings.
  *
  * @return Result of API execution status
- * @retval zero -> Success / +ve value -> Warning / -ve value -> Error.
+ * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
  */
 int8_t bme680_set_sensor_settings(uint16_t desired_settings, struct bme680_dev *dev);
 
 /*!
- * @brief This API is used to get the oversampling, filter and T,P,H, gas selection
+ * @brief This API is used to get the oversampling, filter and temperature, pressure, humidity and gas selection
  * settings in the sensor.
  *
- * @param[in] dev : Structure instance of bme680_dev.
+ * @param[in] dev : Structure instance of bme680_dev
  * @param[in] desired_settings : Variable used to select the settings which
- * are to be get from the sensor.
+ * are to be get from the sensor
  *
  * @return Result of API execution status
- * @retval zero -> Success / +ve value -> Warning / -ve value -> Error.
+ * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
  */
 int8_t bme680_get_sensor_settings(uint16_t desired_settings, struct bme680_dev *dev);
 #ifdef __cplusplus
