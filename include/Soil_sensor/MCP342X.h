@@ -108,11 +108,11 @@
 class MCP342X {
     public:
 	/*!
-	@brief MCP342X I2C device class.
+	@brief Default I2C device address constructor.
 	*/
         MCP342X();
 	/*!
-	* @brief MCP342X I2C device class.
+	* @brief MCP342X Specific I2C device address constructor.
 	* @param[in] address
 	*/
         MCP342X(uint8_t address);
