@@ -103,12 +103,14 @@
 /** /RDY bit definition */
 #define MCP342X_RDY	0x80
 
-
+/*!
+@brief MCP342X I2C device class.
+*/
 class MCP342X {
     public:
         MCP342X();
 	/*!
-	* @brief 
+	* @brief MCP342X I2C device class.
 	* @param[] address
 	*/
         MCP342X(uint8_t address);
