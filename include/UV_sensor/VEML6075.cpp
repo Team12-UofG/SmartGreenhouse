@@ -10,7 +10,7 @@
  * to interface with the breakout.
  *
  *
- * @author: Isla Mitchell
+ * @author Isla Mitchell
  *
  */
 
