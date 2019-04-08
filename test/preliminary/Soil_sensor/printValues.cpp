@@ -1,9 +1,9 @@
 /**************************************************************************/
 /*!
  *  @file printValues.cpp
- *  @author I. Mitchell
  *  @brief test of soil mositure sensor with the sampling rate and samplifng
  *    frequency set by the user. Samples the sensor and prints the values.
+ *  @author Isla Mitchell
  *  @version 0.1
  *  @date 2019-04-03
  *  @copyright Copyright (c) 2019
@@ -19,18 +19,24 @@
 #include "../../../include/MCP342X.cpp"
 
 /*!
- * @brief Instantiate objects used in this project
+ * @brief Instantiate objects used in this project.
  */
 MCP342X soil_sensor;
 using namespace std;
+
+/*!
+ * @brief Instantiate data configuration to zero.
+ */
 int configData = 0;
 
 int readData();
 
 
 /*!
- * @brief main progam configures the sensor and calls function to read data from
- * the soil moisture sensor
+ * @brief Main progam configures the sensor and calls function to read data from
+ * the soil moisture sensor.
+ * @param argc
+ * @param argv
  */
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
