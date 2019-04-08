@@ -26,6 +26,13 @@ Jaime Robb
 * Greenhouse & planter 
 
 ## Required Packages 
+Packages can be downloaded to your Raspberry pi using `sudo apt install <package_name>`
+* `apache 2`
+* `g++` `gcc`
+* `git`
+* `javascript-common` 
+* `mysql-server` `mysql-client` `php-mysql`
+* `php 7.0`
 
 ## Documentation
 Documentation for all methods can be found at: https://team12-uofg.github.io/SmartGreenhouse/index.html
