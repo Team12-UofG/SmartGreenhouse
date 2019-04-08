@@ -3,7 +3,7 @@
  * @file printValues.cpp
  *
  *
- * Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
+ * @brief Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
  * @author Isla Mitchell
  * @version 0.1
  * @date 2019-04-03
