@@ -1,8 +1,20 @@
+/**
+* @file printValues.cpp
+* @brief Test file for printing output reading of UV sensor.
+* @author Isla Mitchell
+*/
+
 #include "../include/VEML6075.h"
 #include "../include/VEML6075.cpp"
 
+/*!
+ * @brief UV sensor object.
+ */
 UV_sensor lightSensor; // create UV sensor object
 
+/*!
+ * @brief Main function for UV sesnor test.
+ */
 int main (){
 
   printf("VEML6075 Simple Test \n");
