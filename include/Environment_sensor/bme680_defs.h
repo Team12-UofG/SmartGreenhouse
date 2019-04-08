@@ -42,7 +42,7 @@
  /*! @file	bme680_defs.h
  * @date	19 Jun 2018
  * @version	3.5.9
- * @brief For BME680 sensor.
+ * @brief 
  */
 
 /*! @file bme680_defs.h
