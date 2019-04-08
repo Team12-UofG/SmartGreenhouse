@@ -309,13 +309,7 @@ int8_t bme680_init(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This API reads the data from the given register address of the sensor.
- * @param reg_addr
- * @param reg_data
- * @param len
- * @param dev
- */
+
 int8_t bme680_get_regs(uint8_t reg_addr, uint8_t *reg_data, uint16_t len, struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -337,14 +331,7 @@ int8_t bme680_get_regs(uint8_t reg_addr, uint8_t *reg_data, uint16_t len, struct
 	return rslt;
 }
 
-/*!
- * @brief This API writes the given data to the register address
- * of the sensor.
- * @param reg_addr
- * @param reg_data
- * @param len
- * @param dev
- */
+
 int8_t bme680_set_regs(const uint8_t *reg_addr, const uint8_t *reg_data, uint8_t len, struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -381,10 +368,6 @@ int8_t bme680_set_regs(const uint8_t *reg_addr, const uint8_t *reg_data, uint8_t
 	return rslt;
 }
 
-/*!
- * @brief This API performs the soft reset of the sensor.
- * @param dev
- */
 int8_t bme680_soft_reset(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -415,12 +398,7 @@ int8_t bme680_soft_reset(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This API is used to set the oversampling, filter and temperature, humidity, pressure and gas selection
- * settings in the sensor.
- * @param desired_settings
- * @param dev
- */
+
 int8_t bme680_set_sensor_settings(uint16_t desired_settings, struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -541,12 +519,6 @@ int8_t bme680_set_sensor_settings(uint16_t desired_settings, struct bme680_dev *
 	return rslt;
 }
 
-/*!
- * @brief This API is used to get the oversampling, filter and temperature, pressure, humidity and gas selection
- * settings in the sensor.
- * @param desired_settings
- * @param dev
- */
 int8_t bme680_get_sensor_settings(uint16_t desired_settings, struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -596,10 +568,7 @@ int8_t bme680_get_sensor_settings(uint16_t desired_settings, struct bme680_dev *
 	return rslt;
 }
 
-/*!
- * @brief This API is used to set the power mode of the sensor.
- * @param dev
- */
+
 int8_t bme680_set_sensor_mode(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -636,10 +605,7 @@ int8_t bme680_set_sensor_mode(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This API is used to get the power mode of the sensor.
- * @param dev
- */
+
 int8_t bme680_get_sensor_mode(struct bme680_dev *dev)
 {
 	int8_t rslt;
@@ -656,11 +622,7 @@ int8_t bme680_get_sensor_mode(struct bme680_dev *dev)
 	return rslt;
 }
 
-/*!
- * @brief This API is used to set the profile duration of the sensor.
- * @param duration
- * @param dev
- */
+
 void bme680_set_profile_dur(uint16_t duration, struct bme680_dev *dev)
 {
 	uint32_t tph_dur; /* Calculate in us */
@@ -683,11 +645,6 @@ void bme680_set_profile_dur(uint16_t duration, struct bme680_dev *dev)
 	dev->gas_sett.heatr_dur = duration - (uint16_t) tph_dur;
 }
 
-/*!
- * @brief This API is used to get the profile duration of the sensor.
- * @param duration
- * @param dev
- */
 void bme680_get_profile_dur(uint16_t *duration, const struct bme680_dev *dev)
 {
 	uint32_t tph_dur; /* Calculate in us */
@@ -716,13 +673,7 @@ void bme680_get_profile_dur(uint16_t *duration, const struct bme680_dev *dev)
 	}
 }
 
-/*!
- * @brief This API reads the pressure, temperature and humidity and gas data
- * from the sensor, compensates the data and store it in the bme680_data
- * structure instance passed by the user.
- * @param data
- * @param dev
- */
+
 int8_t bme680_get_sensor_data(struct bme680_field_data *data, struct bme680_dev *dev)
 {
 	int8_t rslt;
