@@ -39,10 +39,10 @@
  * No license is granted by implication or otherwise under any patent or
  * patent rights of the copyright holder.
  *
- /*! @file	bme680_defs.h
+ * @file	bme680_defs.h
  * @date	19 Jun 2018
  * @version	3.5.9
- * @brief 
+ * @brief 	For BME680 sensor.
  */
 
 /*! @file bme680_defs.h
