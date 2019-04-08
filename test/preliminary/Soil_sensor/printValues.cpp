@@ -12,6 +12,13 @@
  *
 */
 
+/*!
+ *  @file printValues.cpp
+ *  
+ *  @brief Prints output sensor readings.
+ *  @details Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
+ */
+
 #include <wiringPi.h>
 #include <wiringPiI2C.h> // add "-lwiringPi" to compile
 #include <stdio.h>
