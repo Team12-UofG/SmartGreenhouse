@@ -1,10 +1,11 @@
 /**************************************************************************/
 /*!
     @file     MCP342X.h
+    @brief MCP342X I2C device class header file.
     @author   C. Schnarel, I. Mitchell
     @license  BSD (see license.txt)
 
-    @brief MCP342X I2C device class header file.
+    
     @detailed This is part of an Arduino library to interface with the Microchip
     MCP47X6 series of Analog-to-Digital converters which are connected
     via the I2C bus. Based on Microchip datasheets for the following part numbers
