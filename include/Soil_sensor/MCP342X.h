@@ -17,7 +17,7 @@
     Updates should (hopefully) always be available at
         https://github.com/uchip/MCP342X
 
-	@section  HISTORY
+    @section  History
 
     2013-Dec-24  - First release, C. Schnarel
     2019-Apr-01  - Second release, I. Mitchell
@@ -105,7 +105,7 @@ class MCP342X {
         MCP342X();
 	/*!
 	* @brief 
-	* @param[]
+	* @param[] address
 	*/
         MCP342X(uint8_t address);
 
@@ -132,13 +132,21 @@ class MCP342X {
         uint8_t getResult(uint8_t *data);
 
         /*!
-	* @brief Non-blocking Read the ADC result.
+	* @brief Non-blocking read the ADC result.
 	* @param[] data :
 	*/
         uint8_t checkforResult(uint8_t *data);
 
     private:
+	/*!
+	* @brief .
+	* @param[]  :
+	*/
         uint8_t devAddr;
+	/*!
+	* @brief .
+	* @param[]  :
+	*/
         uint8_t configData;
 	//float	stepSizeTbl[];
 };
