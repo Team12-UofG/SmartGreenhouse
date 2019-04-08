@@ -1,8 +1,6 @@
 /**************************************************************************/
 /**
  *printValues.cpp
- *
- *
  * @author Isla Mitchell
  * @brief Prints output sensor readings.
  * @version 0.1
