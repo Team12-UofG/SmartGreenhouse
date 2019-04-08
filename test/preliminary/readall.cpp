@@ -1,9 +1,9 @@
 /**************************************************************************/
 /*!
  *  @file readall.cpp
- *  @author I. Mitchell
- *  @brief takes one reading of the soil moisture sensor and UV light UV_sensor
- * and prints the value
+ *  @author Isla Mitchell
+ *  @brief Takes one reading of the soil moisture sensor and UV light UV_sensor
+ * and prints the value.
  *  @version 0.1
  *  @date 2019-04-07
  *  @copyright Copyright (c) 2019
@@ -21,15 +21,16 @@
 #include "../../include/UV_sensor/VEML6075.cpp"
 
 /*!
- * @brief Instantiate objects used in this project
+ * @brief Instantiate objects used in this project.
  */
 MCP342X soilSensor;
 static int Soil_configData = (MCP342X_MODE_CONTINUOUS | MCP342X_CHANNEL_1 | MCP342X_SIZE_16BIT | MCP342X_GAIN_1X);
+
 UV_sensor lightSensor; // create sensor
 int readData();
 
 /*!
- * @brief main progam
+ * @brief Main progam.
  */
 int main (){
 
@@ -41,7 +42,7 @@ int main (){
 }
 
 /*!
- * @brief function to read data from soil moisture and UV light sensor
+ * @brief Function to read data from soil moisture and UV light sensor.
  */
 int readData() {
     uint8_t result;
