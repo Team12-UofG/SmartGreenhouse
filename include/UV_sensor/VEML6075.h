@@ -1,14 +1,14 @@
 /*
- * VEML6075.h
+ * @file VEML6075.h
  *
- * Header for the Vishay VEML6075 UVA/UVB i2c sensor using the Vishay
+ * @brief Header for the Vishay VEML6075 UVA/UVB I2C sensor using the Vishay
  * VEML6075 application notes and Adafruit_VEML6075.h
  *
- * Author: Isla Mitchell
  *
- * @file Adafruit_VEML6075.h
  *
- * Designed specifically to work with the VEML6075 sensor from Adafruit
+ * file Adafruit_VEML6075.h
+ *
+ * @detailed Designed specifically to work with the VEML6075 sensor from Adafruit
  * ----> https://www.adafruit.com/products/3964
  *
  * These sensors use I2C to communicate, 2 pins (SCL+SDA) are required
@@ -18,9 +18,10 @@
  * please support Adafruit and open-source hardware by purchasing
  * products from Adafruit!
  *
+ * @author: Isla Mitchell, (Limor Fried/Ladyada for Adafruit Industries)
  * Written by Limor Fried/Ladyada for Adafruit Industries.
  *
- * MIT license, all text here must be included in any redistribution.
+ * @license MIT license, all text here must be included in any redistribution.
  *
  */
 
@@ -50,10 +51,13 @@
 #include <wiringPi.h>
 #endif
 
+//@{
 /* VEML6075 slave address */
 #define VEML6075_ADDR                   0x10 // I2C address
 #define VEML6075_DEVID                  0x26 // Manufacture ID
+//@}
 
+//@{
 /* Register definitions */
 #define VEML6075_CONF_REG               0x00 // Configuration register
 #define VEML6075_UVA_DATA_REG           0x07 // UVA raw measurement register
@@ -62,7 +66,9 @@
 #define VEML6075_UVCOMP1_DATA_REG       0x0A // Visible noise compensation register
 #define VEML6075_UVCOMP2_DATA_REG       0x0B // IR noisecompensation register
 #define VEML6075_ID_REG                 0x0C // Device ID register
+//@}
 
+//@{
 /* Register value define : UV_CONF */
 #define VEML6075_CONF_SD_OFF            0x00 // Power up
 #define VEML6075_CONF_SD_ON             0x01 // Power down
@@ -79,7 +85,9 @@
 #define VEML6075_CONF_UV_IT_400MS       0x30 // Integration time = 400ms
 #define VEML6075_CONF_UV_IT_800MS       0x40 // Integration time = 800ms
 #define VEML6075_CONF_DEFAULT           (VEML6075_CONF_UV_AF_AUTO | VEML6075_CONF_UV_TRIG_NO | VEML6075_CONF_UV_IT_100MS)
+//@}
 
+//@{
 /* Definition of coefficients used to calculate UV Index */
 #define VEML6075_DEFAULT_UVA_A_COEFF      2.22 // Default for no coverglass: "A"
 #define VEML6075_DEFAULT_UVA_B_COEFF      1.33 // Default for no coverglass: "B"
@@ -87,10 +95,11 @@
 #define VEML6075_DEFAULT_UVB_D_COEFF      1.74 // Default for no coverglass: "D"
 #define VEML6075_DEFAULT_UVA_RESPONSE     0.001461 // Default for no coverglass
 #define VEML6075_DEFAULT_UVB_RESPONSE     0.002591 // Default for no coverglass
+//@}
 
 /**************************************************************************/
 /*!
-    @brief  Class that stores state and functions for interacting with VEML6075 sensor IC
+    @brief  Class that stores state and functions for interacting with VEML6075 sensor IC.
 */
 /**************************************************************************/
 class UV_sensor {
@@ -104,7 +113,7 @@ class UV_sensor {
   void setCoefficients(float UVA_A, float UVA_B, float UVA_C, float UVA_D,
 		       float UVA_response, float UVB_response);
 
-  // Set the configuration bits for the VEML6075
+  /*! @brief Set the configuration bits for the VEML6075. */
   void uvConfigure(void);
 
   // Read the UVA, UVB and UV values
@@ -115,9 +124,12 @@ class UV_sensor {
  private:
   float takeReading();
 
+	/*! @brief .*/
   uint16_t _read_delay;
 
-  // coefficients
+  //@{
+  /*!
+  * @brief Coefficient. */
   float _uva_a;
   float _uva_b;
   float _uvb_c;
@@ -128,5 +140,6 @@ class UV_sensor {
   float _uvb_calc;
   float _uvi_calc;
 };
+//@}
 
 #endif
