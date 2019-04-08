@@ -103,7 +103,8 @@
 /** /RDY bit definition */
 #define MCP342X_RDY	0x80
 
-/*! @class Class for MCP342X I2C device.
+/*! @class MCP342X
+* @brief I2C sensor device class.
 */
 class MCP342X {
     public:
@@ -112,7 +113,7 @@ class MCP342X {
 	*/
         MCP342X();
 	/*!
-	* @brief MCP342X Specific I2C device address constructor.
+	* @brief Specific I2C device address constructor.
 	* @param[in] address
 	*/
         MCP342X(uint8_t address);
