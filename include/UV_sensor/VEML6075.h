@@ -1,4 +1,4 @@
-/*
+/**
  * @file VEML6075.h
  *
  * @brief Header for the Vishay VEML6075 UVA/UVB I2C sensor using the Vishay
@@ -7,7 +7,7 @@
  *
  * file Adafruit_VEML6075.h
  *
- * @detailed Designed specifically to work with the VEML6075 sensor from Adafruit
+ * Designed specifically to work with the VEML6075 sensor from Adafruit
  * ----> https://www.adafruit.com/products/3964
  *
  * These sensors use I2C to communicate, 2 pins (SCL+SDA) are required
