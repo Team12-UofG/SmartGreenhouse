@@ -22,9 +22,7 @@
  */
 MCP342X soil_sensor;
 
-/*!
- * @brief Read in data.
- */
+
 int readData();
 
 /*!
