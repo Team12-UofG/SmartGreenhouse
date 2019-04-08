@@ -6,11 +6,22 @@ branches:
   only:
     - master
 
+#Environment variables
+env:
+  global:
+    - GH_REPO_NAME: SmartGreenhouse
+    - DOXYFILE: $TRAVIS_BUILD_DIR/SmartGreenhouse/.travis.yml
+    - GH_REPO_REF: github.com/Team12-UofG/SmartGreenhouse.git
+
 # Install dependencies
 addons:
   apt:
     packages:
       - doxygen
+      - doxygen-doc
+      - doxygen-latex
+      - doxygen-gui
+      - graphviz
 
 # Build your code e.g. by calling make
 script:
