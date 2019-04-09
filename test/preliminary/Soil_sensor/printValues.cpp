@@ -34,8 +34,8 @@ int readData();
  */
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
-
-  int counter = 0;
+   pinmode (6, OUTPUT);
+   int counter = 0;
 
   // decode arguments
     if(argc < 3) {
@@ -62,6 +62,7 @@ int main(int argc, char** argv) {
  */
 int readData() {
     uint8_t result;
+    digitalwrite(6, HIGH);
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
     printf("Result: %d \n", result);
