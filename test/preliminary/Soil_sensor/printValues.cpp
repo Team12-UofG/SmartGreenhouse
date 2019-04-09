@@ -34,7 +34,8 @@ int readData();
  */
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
-   pinmode (6, OUTPUT);
+   wiringPiSetup();
+   pinmode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
    int counter = 0;
 
   // decode arguments
