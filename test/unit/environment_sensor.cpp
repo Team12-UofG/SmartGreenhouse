@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "../../../include/Environment_sensor/bme680.h"
+#include "../../include/Environment_sensor/bme680.h"
 
 // I2C Linux device handle
 	int g_i2cFid;
@@ -287,7 +287,7 @@
         printf("Error reading air quality");
         exit(1);
       }
-    
+
 			// Trigger a meausurement
 			rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
