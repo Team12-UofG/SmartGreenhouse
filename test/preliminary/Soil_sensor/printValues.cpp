@@ -15,8 +15,8 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include "../../../include/MCP342X.h"
-#include "../../../include/MCP342X.cpp"
+#include "../../../include/Soil_sensor/MCP342X.h"
+#include "../../../include/Soil_sensor/MCP342X.cpp"
 
 /*!
  * @brief Instantiate objects used in this project
