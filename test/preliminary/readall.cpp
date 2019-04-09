@@ -24,7 +24,7 @@
  * @brief Instantiate objects used in this project
  */
 MCP342X soilSensor;
-int Soil_configData = ();
+int Soil_configData = 0;
 UV_sensor lightSensor; // create sensor
 int readData();
 
