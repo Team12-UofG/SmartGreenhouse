@@ -159,7 +159,7 @@
 		printf("** UofG Smartgreenhouse Temperature Humidity Air Quality measurements using BME680 **\n");
 
 		time_t t = time(NULL);
-	    putenv(DESTZONE);               // Switch to destination time zone
+	  //putenv(DESTZONE);               // Switch to destination time zone
 
 
 	  // open Linux I2C device
@@ -243,8 +243,8 @@
 			}
 
       // Check that measurements are sensible values
-      float temp_reading = data.temperature / 100f;
-      float pressure_reading = data.pressure / 100f;
+      float temp_reading = data.temperature / 100.0f;
+      float pressure_reading = data.pressure / 100.0f;
       float humidty_reading = data.humidity / 1000.0f;
       float air_quality = data.gas_resistance;
 
