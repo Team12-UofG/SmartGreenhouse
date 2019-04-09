@@ -35,7 +35,7 @@ int readData();
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
    wiringPiSetup();
-   pinmode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
+   pinMode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
    int counter = 0;
 
   // decode arguments
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
  */
 int readData() {
     uint8_t result;
-    digitalwrite(6, HIGH);
+    digitalWrite(6, HIGH);
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
     printf("Result: %d \n", result);
