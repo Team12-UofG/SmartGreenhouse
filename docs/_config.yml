@@ -1,5 +1,6 @@
 site_name: SmartGreenhouse
 
+theme: cayman
 repo_url: "https://team12-uofg.github.io/SmartGreenhouse/"
 site_favicon:
 copyright: "SmartGreenhouse is licensed under the <a href='https://github.com/Team12-UofG/SmartGreenhouse/blob/master/LICENSE.txt'> GNU General Public License</a><br>."
