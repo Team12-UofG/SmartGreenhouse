@@ -12,4 +12,6 @@ int main(int argc, char** argv) {
   pinMode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
   digitalWrite(6, HIGH);
   auto finish = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = finish - start;
+  std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 }
