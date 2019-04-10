@@ -1,11 +1,18 @@
 /******************************************/
 /*!
+<<<<<<< HEAD:test/preliminary/Soil_sensor/printSoilValues.cpp
+ *  @file printSoilValues.cpp
+ *  @author I. Mitchell
+ *  @brief test of soil mositure sensor with the sampling rate and samplifng
+ *    frequency set by the user. Samples the sensor and prints the values.
+=======
  *  @file test/preliminary/Soil_sensor/printValues.cpp
  *  
  *  Prints output sensor readings.
  *  Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
  *  
  *  @author Isla Mitchell
+>>>>>>> master:test/preliminary/Soil_sensor/printValues.cpp
  *  @version 0.1
  *  @date 2019-04-03
  *  @copyright Copyright (c) 2019
@@ -24,8 +31,9 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include "../../../include/MCP342X.h"
-#include "../../../include/MCP342X.cpp"
+#include <time.h> // -lrt
+#include "../../../include/Soil_sensor/MCP342X.h"
+#include "../../../include/Soil_sensor/MCP342X.cpp"
 
 /*!
  * @brief Instantiate objects used in this project.
@@ -49,8 +57,9 @@ int readData();
  */
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
-
-  int counter = 0;
+   wiringPiSetup();
+   pinMode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
+   int counter = 0;
 
   // decode arguments
     if(argc < 3) {
@@ -77,6 +86,7 @@ int main(int argc, char** argv) {
  */
 int readData() {
     uint8_t result;
+    digitalWrite(6, HIGH);
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
     printf("Result: %d \n", result);

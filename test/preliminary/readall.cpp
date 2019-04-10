@@ -25,7 +25,10 @@
  */
 MCP342X soilSensor;
 int Soil_configData = 0;
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
 UV_sensor lightSensor; // create sensor
 int readData();
 
@@ -36,7 +39,10 @@ int main (){
 
   printf("Simple Test \n");
   lightSensor.uvConfigure(); // configure sensor
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
   Soil_configData = soilSensor.configure();
   uint8_t value = readData();
 }
