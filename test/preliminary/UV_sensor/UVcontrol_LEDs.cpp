@@ -35,10 +35,10 @@ int main (){
   float UV_calc = lightSensor.readUVI(); // UV value
   if (UV_calc < UVI_threshold) {
     printf("UV Index is too low: %f . Turning LED Growth Matrix on \n", UV_calc);
-    led_panel.on;
+    led_panel.on();
   }
   else {
-    led_panel.off;
+    led_panel.off();
     printf("UV Index is %f \n", UV_calc);
   }
 }
