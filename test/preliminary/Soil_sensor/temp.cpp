@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv) {
   auto start = std::chrono::high_resolution_clock::now();
-  configData = soil_sensor.configure();
+  int configData = soil_sensor.configure();
   wiringPiSetup();
   pinMode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
   digitalWrite(6, HIGH);
