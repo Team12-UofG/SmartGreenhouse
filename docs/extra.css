@@ -1,0 +1,23 @@
+.bs-sidenav {
+    font-size: 16px;
+}
+
+.navbar {
+    font-size: 16px;
+}
+
+.navbar-default {
+    background-color: #343838;
+}
+
+.navbar .dropdown-menu>li>a, .navbar .dropdown-menu>li>a:focus {
+    font-size: 14px;
+}
+
+table {
+    font-size: 13px;
+}
+
+body {
+    font-size: 14px;
+}
