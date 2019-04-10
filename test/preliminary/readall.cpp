@@ -3,7 +3,7 @@
  *  @file readall.cpp
  *  @author Isla Mitchell
  *  @brief Takes one reading of the soil moisture sensor and UV light UV_sensor
- * and prints the value.
+ *   and prints the value.
  *  @version 0.1
  *  @date 2019-04-07
  *  @copyright Copyright (c) 2019
@@ -25,7 +25,6 @@
  */
 MCP342X soilSensor;
 int Soil_configData = 0;
-
 UV_sensor lightSensor; // create sensor
 int readData();
 
@@ -36,7 +35,6 @@ int main (){
 
   printf("Simple Test \n");
   lightSensor.uvConfigure(); // configure sensor
-
   Soil_configData = soilSensor.configure();
   uint8_t value = readData();
 }
