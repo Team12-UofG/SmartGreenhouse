@@ -1,30 +1,11 @@
 /******************************************/
 /*!
-<<<<<<< HEAD:test/preliminary/Soil_sensor/printSoilValues.cpp
  *  @file printSoilValues.cpp
  *  @author I. Mitchell
- *  @brief test of soil mositure sensor with the sampling rate and samplifng
- *    frequency set by the user. Samples the sensor and prints the values.
-=======
- *  @file test/preliminary/Soil_sensor/printValues.cpp
- *  
- *  Prints output sensor readings.
- *  Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
- *  
- *  @author Isla Mitchell
->>>>>>> master:test/preliminary/Soil_sensor/printValues.cpp
- *  @version 0.1
- *  @date 2019-04-03
- *  @copyright Copyright (c) 2019
- *
-*/
-
-/*!
- *  @file test/preliminary/Soil_sensor/printValues.cpp
- *  
  *  @brief Prints output sensor readings.
- *  @details Test of soil mositure sensor with the sampling rate and sampling frequency set by the user. Samples the sensor and prints the values.
- */
+ *  @brief Test of soil mositure sensor with the sampling rate and sampling
+ *    frequency set by the user. Samples the sensor and prints the values.
+*/
 
 #include <wiringPi.h>
 #include <wiringPiI2C.h> // add "-lwiringPi" to compile
