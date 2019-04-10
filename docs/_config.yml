@@ -1,20 +1,21 @@
 site_name: SmartGreenhouse
 
 theme: jekyll-theme-cayman
-repo_url: "https://team12-uofg.github.io/SmartGreenhouse/"
+url: "https://team12-uofg.github.io/SmartGreenhouse/"
+baseurl: "/SmartGreenhouse"
 site_favicon:
 copyright: "SmartGreenhouse is licensed under the <a href='https://github.com/Team12-UofG/SmartGreenhouse/blob/master/LICENSE.txt'> GNU General Public License</a><br>."
 
-
-pages:
-    - Home: index.md
+# List of links in the navigation bar
+navbar-links:
+    - Home: "index"
     - Project Overview:
-        - About Us: beforeyoustart.html
-        - System Overview: stystemoverview.md
+        - About Us: "beforeyoustart"
+        - System Overview: "systemoverview"
     - Install:
-        - Hardware: install-hw.md
-        - Software: install-sw.md
+        - Hardware: "install-hw"
+        - Software: "install-sw"
     - FAQ:
-        - FAQ.md
+        - "FAQ"
     - MySmartGreenhouse:
-        - mysmartgreenhouse.md
+        - "mysmartgreenhouse"
