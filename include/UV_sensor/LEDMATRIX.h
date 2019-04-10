@@ -3,9 +3,8 @@
 
 class LED_matrix {
  public:
-  LED_matrix();
-
   void configurePanel(int LED_pin);
+  
   // Turn the panel on
   void on(void);
 
