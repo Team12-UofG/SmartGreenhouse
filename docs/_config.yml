@@ -6,16 +6,16 @@ baseurl: "/SmartGreenhouse"
 site_favicon:
 copyright: "SmartGreenhouse is licensed under the <a href='https://github.com/Team12-UofG/SmartGreenhouse/blob/master/LICENSE.txt'> GNU General Public License</a><br>."
 
-# List of links in the navigation bar
-navbar-links:
-    - Home: "index"
+
+pages:
+    - Home: index.md
     - Project Overview:
-        - About Us: "beforeyoustart"
-        - System Overview: "systemoverview"
+        - About Us: beforeyoustart.html
+        - System Overview: systemoverview.md
     - Install:
-        - Hardware: "install-hw"
-        - Software: "install-sw"
+        - Hardware: install-hw.md
+        - Software: install-sw.md
     - FAQ:
-        - "FAQ"
+        - FAQ.md
     - MySmartGreenhouse:
-        - "mysmartgreenhouse"
+        - mysmartgreenhouse.md
