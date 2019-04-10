@@ -13,7 +13,7 @@ class LED_matrix {
   void off(void);
 
  private:
-   int LED_pin
+   int LED_pin;
 };
 
 
