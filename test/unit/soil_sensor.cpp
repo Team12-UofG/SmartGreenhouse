@@ -2,8 +2,8 @@
 /*!
  *  @file soil_sensor.cpp
  *  @author I. Mitchell
- *  @brief test for checking the  MCP3426 ADC class for the soil moisture
- *   sensor
+ *  @brief Test for checking the  MCP3426 ADC class for the soil moisture
+ *   sensor.
  *  @version 0.1
  *  @date 2019-04-07
  *  @copyright Copyright (c) 2019
@@ -19,10 +19,13 @@
 #include "../../include/Soil_sensor/MCP342X.cpp"
 
 using namespace std;
+/*!
+ * @brief Instantiate data configuration to zero.
+ */
 int configData = 0;
 
 /*!
- * @brief main progam will test the MCP3426 ADC class including:
+ * @brief Main progam will test the MCP3426 ADC class including:
  * testing the I2C connection to the ADC, configuring the ADC, starting a data
  * conversion and getting the results.
  */

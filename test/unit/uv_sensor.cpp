@@ -2,7 +2,7 @@
 /*!
  *  @file uv_sensor.cpp
  *  @author I. Mitchell
- *  @brief test for checking the VEML6075 class for the UV light sensor
+ *  @brief Test for checking the VEML6075 class for the UV light sensor.
  *  @version 0.1
  *  @date 2019-04-07
  *  @copyright Copyright (c) 2019
@@ -18,10 +18,13 @@
 #include "../../include/UV_sensor/VEML6075.cpp"
 
 using namespace std;
+/*!
+ * @brief Instantiate data configuration to zero.
+ */
 int configData = 0;
 
 /*!
- * @brief main progam will test the VEML6075 class including:
+ * @brief Main progam will test the VEML6075 class including:
  * testing the I2C connection to the sensor, configuring the sensor,
  * and taking a reading.
  */

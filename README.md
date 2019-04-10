@@ -1,4 +1,4 @@
-# SmartGreenhouse
+# SmartGreenhouse   [![Build Status](https://travis-ci.org/Team12-UofG/SmartGreenhouse.svg?branch=master)](https://travis-ci.org/Team12-UofG/SmartGreenhouse)
 
 ## Overview
 The agricultural industry is facing enormous development as a result of population growth, climate change and urbanisation. This, along with developments in smart technology has given rise to the smart greenhouse, which automates the plant growing process. Monitoring and control systems can be developed to produce a self-controlled microclimate to save time, reduce labour, and help planes thrive.
@@ -26,8 +26,16 @@ Jaime Robb
 * Greenhouse & planter 
 
 ## Required Packages 
+Packages can be downloaded to your Raspberry pi using `sudo apt install <package_name>`
+* `apache 2`
+* `g++` `gcc`
+* `git`
+* `javascript-common` 
+* `mysql-server` `mysql-client` `php-mysql`
+* `php 7.0`
 
 ## Documentation
+Documentation for all methods can be found at: https://team12-uofg.github.io/SmartGreenhouse/index.html
 
 ## Social Media
 [Instagram](https://www.instagram.com/uofg_smartgreenhouse/?hl=en "Instagram")

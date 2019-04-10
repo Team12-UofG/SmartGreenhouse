@@ -2,7 +2,7 @@
 /*!
 *  @file environment_sensor.cpp
 *  @author I. Mitchell
-*  @brief test for checking I2C communication with the BME680 sensor and taking
+*  @brief Test for checking I2C communication with the BME680 sensor and taking
 *   temperature, humidity, air quality and pressure readings.
 *  @version 0.1
 *  @date 2019-04-07
@@ -21,10 +21,13 @@
 #include <unistd.h>
 #include "../../include/Environment_sensor/bme680.h"
 
-// I2C Linux device handle
+/*!
+* @brief I2C Linux device handle.
+*/
 	int g_i2cFid;
-
-	// open the Linux device
+/*!
+* @brief Open the Linux device.
+*/
 	void i2cOpen()
 	{
 		g_i2cFid = open("/dev/i2c-1", O_RDWR);
@@ -34,14 +37,17 @@
 			exit(1);
 		}
 	}
-
-	// close the Linux device
+/*!
+* @brief Close the Linux device.
+*/
 	void i2cClose()
 	{
 		close(g_i2cFid);
 	}
-
-	// set the I2C slave address for all subsequent I2C device transfers
+/*!
+* @brief Set the I2C slave address for all subsequent I2C device transfers.
+* @param[in] address
+*/
 	void i2cSetAddress(int address)
 	{
 		if (ioctl(g_i2cFid, I2C_SLAVE, address) < 0) {
@@ -51,12 +57,21 @@
 	}
 
 
-
+/*!
+* @brief Set the user delay in milliseconds.
+* @param[in] period
+*/
 	void user_delay_ms(uint32_t period)
 	{
 	    sleep(period/1000);
 	}
-
+/*!
+* @brief Read I2C information.
+* @param dev_id
+* @param reg_addr
+* @param reg_data
+* @param len
+*/
 	int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 	{
 	    int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
@@ -75,6 +90,13 @@
 
 	    return rslt;
 	}
+/*!
+* @brief Write I2C information.
+* @param dev_id
+* @param reg_addr
+* @param reg_data
+* @param len
+*/
 
 	int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 	{
@@ -96,7 +118,12 @@
 	    return rslt;
 	}
 
-
+/*!
+* @brief Writes measurements to output file specified.
+* @param outputFile
+* @param tm 
+* @param data
+*/
 	void write2file(char *outputFile, struct tm tm, struct bme680_field_data data)
 	{
 		// Write measurement to output file if specified.
@@ -120,7 +147,11 @@
 
 		}
 	}
-
+/*!
+* @brief Main function.
+* @param argc
+* @param argv
+*/
 	int main(int argc, char *argv[] )
 	{
 		// create lock file first

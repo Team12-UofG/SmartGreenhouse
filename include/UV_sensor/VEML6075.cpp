@@ -1,21 +1,38 @@
+/**
+ * @file VEML6075.cpp
+ *
+ * @brief File for the operation of Vishay VEML6075 UVA/UVB I2C sensor
+
+ * Designed specifically to work with the VEML6075 sensor from Adafruit
+ * ----> https://www.adafruit.com/products/3964
+ *
+ * These sensors use I2C to communicate, 2 pins (SCL+SDA) are required
+ * to interface with the breakout.
+ *
+ *
+ * @author Isla Mitchell
+ *
+ */
+
 #include <stdio.h>
 #include <cstdlib>
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 #include "VEML6075.h"
 
+//@{
 /**************************************************************************/
 /*!
-    @brief Sets up the wiringPi I2C comms to the VEML6075 device
+    @brief Sets up the wiringPi I2C comms to the VEML6075 device.
 */
 /**************************************************************************/
 static int setupI2C_veml6075 = wiringPiSetup();
 static int fd_uv = wiringPiI2CSetup(VEML6075_ADDR);
-
+//@}
 
 /**************************************************************************/
 /*!
- * @breif Verify the I2C connection.
+ * @brief Verify the I2C connection.
  * Make sure the device is connected and responds as expected.
  * @return True if connection is valid, false otherwise
  */
@@ -42,7 +59,7 @@ void UV_sensor::uvConfigure(void) {
 
 /**************************************************************************/
 /*!
-    @brief Constructor initializes default configuration value
+    @brief Constructor initialises default configuration value.
 */
 /**************************************************************************/
 UV_sensor::UV_sensor() {
@@ -53,13 +70,13 @@ UV_sensor::UV_sensor() {
 
 /**************************************************************************/
 /*!
-    @brief Set the UVI calculation coefficients
-    @param UVA_A  the UVA visible coefficient
-    @param UVA_B  the UVA IR coefficient
-    @param UVB_C  the UVB visible coefficient
-    @param UVB_D  the UVB IR coefficient
-    @param UVA_response the UVA responsivity
-    @param UVB_response the UVB responsivity
+    @brief Set the UVI calculation coefficients.
+    @param UVA_A : The UVA visible coefficient
+    @param UVA_B : The UVA IR coefficient
+    @param UVB_C : The UVB visible coefficient
+    @param UVB_D : The UVB IR coefficient
+    @param UVA_ : Response the UVA responsivity
+    @param UVB_ :Response the UVB responsivity
 */
 /**************************************************************************/
 void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB_D,
@@ -74,7 +91,7 @@ void UV_sensor::setCoefficients(float UVA_A, float UVA_B, float UVB_C, float UVB
 
 /**************************************************************************/
 /*!
-    @brief Perform a reading and calculate UV value
+    @brief Perform a reading and calculate UV value.
 */
 /**************************************************************************/
 float UV_sensor::takeReading() {
@@ -92,7 +109,7 @@ float UV_sensor::takeReading() {
 
 /**************************************************************************/
 /*!
-    @brief  Read the calibrated UVA band reading
+    @brief  Read the calibrated UVA band reading.
     @return the UVA reading in unitless counts
 */
 /*************************************************************************/
@@ -103,7 +120,7 @@ float UV_sensor::readUVA(void) {
 
 /**************************************************************************/
 /*!
-    @brief  Read the calibrated UVB band reading
+    @brief  Read the calibrated UVB band reading.
     @return the UVB reading in unitless counts
 */
 /*************************************************************************/
@@ -114,7 +131,7 @@ float UV_sensor::readUVB(void) {
 
 /**************************************************************************/
 /*!
-    @brief  read and calculate the approximate UV Index reading
+    @brief  read and calculate the approximate UV Index reading.
     @return the UV Index as a floating point
 */
 /**************************************************************************/

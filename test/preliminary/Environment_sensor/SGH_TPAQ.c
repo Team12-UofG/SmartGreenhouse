@@ -1,14 +1,15 @@
-/*
- * SGH_TPAQ.c
+/**
+ * @file SGH_TPAQ.c
  *
- * I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor
- * Based on example by twartzek and Boschsensortech
+ * @brief I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor
+ *
+ * 
  * Sensor Data is exported to MySQL database
  * Application Note
  *
- * Author: Anton Saikia
+ * @author Anton Saikia (based on example by twartzek and Boschsensortech)
  *
- */
+ **/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,14 +22,18 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <mysql/mysql.h>
-#include "../../../include/Environment_sensor/bme680.h"
+#include "bme680.h"
 
+/*! @brief Our destination time zone */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
 
-// I2C Linux device handle
+/*! @brief I2C Linux device handle.
+*/
 int g_i2cFid;
 
-// open the Linux device
+/*!
+    @brief Open the Linux device.
+*/
 void i2cOpen()
 {
 	g_i2cFid = open("/dev/i2c-1", O_RDWR);
@@ -38,13 +43,18 @@ void i2cOpen()
 	}
 }
 
-// close the Linux device
+/*!
+    @brief Close the Linux device.
+*/
 void i2cClose()
 {
 	close(g_i2cFid);
 }
 
-// set the I2C slave address for all subsequent I2C device transfers
+/*!
+    @brief Set the I2C slave address for all subsequent I2C device transfers.
+    @param address[in] : 12C slave address
+*/
 void i2cSetAddress(int address)
 {
 	if (ioctl(g_i2cFid, I2C_SLAVE, address) < 0) {
@@ -54,7 +64,10 @@ void i2cSetAddress(int address)
 }
 
 
-
+/*!
+    @brief Set the user delay in milliseconds.
+    @param period[in]
+*/
 void user_delay_ms(uint32_t period)
 {
 
@@ -64,6 +77,13 @@ void user_delay_ms(uint32_t period)
 
 }
 
+/*!
+    @brief Read I2C information.
+    @param  dev_id
+    @param  reg_addr
+    @param  reg_data
+    @param  len
+*/
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
@@ -83,6 +103,13 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
     return rslt;
 }
 
+/*!
+    @brief Write I2C information.
+    @param  dev_id
+    @param  reg_addr
+    @param  reg_data
+    @param  len
+*/
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
@@ -90,7 +117,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 	uint8_t reg[16];
     reg[0]=reg_addr;
-
+	
     for (int i=1; i<len+1; i++)
        reg[i] = reg_data[i-1];
 
@@ -103,7 +130,12 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
     return rslt;
 }
 
-
+/*!
+    @brief Writes measurements to output file specified.
+    @param outputFile
+    @param tm
+    @param bme680_field_data
+*/
 void write2file(char *outputFile, struct tm tm, struct bme680_field_data data)
 {
 	// Write measurement to output file if specified.
@@ -124,10 +156,14 @@ void write2file(char *outputFile, struct tm tm, struct bme680_field_data data)
 			fprintf(f,"\r\n");
 			fclose(f);
 		}
-
+	
 	}
 }
-
+/*!
+    @brief Main function.
+    @param argc
+    @param argv 
+*/
 int main(int argc, char *argv[] )
 {
         //Connection to MySQL database
@@ -167,10 +203,10 @@ int main(int argc, char *argv[] )
 	else if( argc == 4 ) {
 		delay = strtol(argv[1], NULL, 10);
 		nMeas = strtol(argv[2], NULL, 10);
-		outputFile = argv[3];
+		outputFile = argv[3]; 
 	}
 	else {
-
+		
 	}
 
 
@@ -214,10 +250,10 @@ int main(int argc, char *argv[] )
 
 	/* Select the power mode */
 	/* Must be set before writing the sensor configuration */
-	gas_sensor.power_mode = BME680_FORCED_MODE;
+	gas_sensor.power_mode = BME680_FORCED_MODE; 
 
 	/* Set the required sensor settings needed */
-	set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL
+	set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL 
 		| BME680_GAS_SENSOR_SEL;
 
 	/* Set the desired sensor configuration */
@@ -238,7 +274,7 @@ int main(int argc, char *argv[] )
     struct bme680_field_data data;
 
 	struct tm tm = *localtime(&t);
-
+	
 	int i=0;
 	int backupCounter = 0;
 
@@ -246,8 +282,8 @@ int main(int argc, char *argv[] )
 
 		// Get sensor data
 		rslt = bme680_get_sensor_data(&data, &gas_sensor);
-
-		// Avoid using measurements from an unstable heating setup
+		
+		// Avoid using measurements from an unstable heating setup 
 		if(data.status & BME680_HEAT_STAB_MSK)
 		{
 			t = time(NULL);
@@ -260,7 +296,7 @@ int main(int argc, char *argv[] )
 			write2file(outputFile, tm, data);
 			i++;
 		}
-
+             	
 		// Measurement to MYSQL database
 		if(mysql_real_connect(mysqlConn, host, user, pass, dbname, 0, NULL, 0)!=NULL)
 		{
@@ -272,7 +308,7 @@ int main(int argc, char *argv[] )
 		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
-		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
+		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */			
 
 		backupCounter++;
 	}
@@ -285,9 +321,9 @@ int main(int argc, char *argv[] )
 
   	// close Linux I2C device
 	i2cClose();
-
+	
 	// delete lock file
 	remove("~bme680i2c.lock");
-
+	
 	return 0;
 }
