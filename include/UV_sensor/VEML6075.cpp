@@ -102,9 +102,9 @@ float UV_sensor::takeReading() {
   float uvcomp2 = wiringPiI2CReadReg16(fd_uv, VEML6075_UVCOMP2_DATA_REG);
 
   // Equation 1 & 2 in App note, without 'golden sample' calibration
-  _uva_calc = uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2);
-  _uvb_calc = uvb - (_uvb_c * uvcomp1) - (_uvb_d * uvcomp2);
-  _uvi_calc = ((_uva_calc * _uva_resp) + (_uvb_calc * _uvb_resp)) / 2;
+  _uva_calc = abs(uva - (_uva_a * uvcomp1) - (_uva_b * uvcomp2));
+  _uvb_calc = abs(uvb - (_uvb_c * uvcomp1) - (_uvb_d * uvcomp2));
+  _uvi_calc = (((_uva_calc * _uva_resp) + (_uvb_calc * _uvb_resp)) / 2) * 10;
 }
 
 /**************************************************************************/
