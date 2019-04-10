@@ -46,6 +46,8 @@ Documentation for all methods can be found at: https://team12-uofg.github.io/Sma
 
 [Youtube](https://www.youtube.com/channel/UCLjnLePXFhfWH4YzIdtP1aw "Youtube")
 
+[Github Pages](https://team12-uofg.github.io/SmartGreenhouse/ "Github Pages")
+
 ## User Manual
 * Before You Start
 * Getting Started
