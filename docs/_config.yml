@@ -1,9 +1,5 @@
 site_name: SmartGreenhouse
 
-theme: jekyll-theme-cayman
-url: "https://team12-uofg.github.io/SmartGreenhouse/"
-baseurl: "/SmartGreenhouse"
-site_favicon:
 copyright: "SmartGreenhouse is licensed under the <a href='https://github.com/Team12-UofG/SmartGreenhouse/blob/master/LICENSE.txt'> GNU General Public License</a><br>."
 
 
