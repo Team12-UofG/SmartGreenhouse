@@ -1,8 +1,8 @@
-# Neptune #
+# SmartGreenhouse #
 
 ## Release ##
 
-**Neptune 1.2.5**
+**0.1**
 
 ## Resources ##
 
