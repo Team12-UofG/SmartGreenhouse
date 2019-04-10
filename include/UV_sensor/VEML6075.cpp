@@ -100,7 +100,7 @@ float UV_sensor::takeReading() {
 /*************************************************************************/
 float UV_sensor::readUVA(void) {
   takeReading();
-  return _uva_calc);
+  return _uva_calc;
 }
 
 /**************************************************************************/
