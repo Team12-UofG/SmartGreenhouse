@@ -16,7 +16,8 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include <time.h> // -lrt
+#include <chrono>
+
 #include "../../../include/Soil_sensor/MCP342X.h"
 #include "../../../include/Soil_sensor/MCP342X.cpp"
 
@@ -65,13 +66,29 @@ int main(int argc, char** argv) {
  */
 int readData() {
     uint8_t result;
+
+    auto start = std::chrono::high_resolution_clock::now();
+
     digitalWrite(6, HIGH); // charging
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
-    while(result < 127){
+    while(result < 255){
       soil_sensor.startConversion(configData); // Start conversion
       result = soil_sensor.getResult(&result); // Read converted value
     }
 
+    digitalWrite(6, LOW); // charging
+    soil_sensor.startConversion(configData); // Start conversion
+    result = soil_sensor.getResult(&result); // Read converted value
+    while(result > 1){
+      soil_sensor.startConversion(configData); // Start conversion
+      result = soil_sensor.getResult(&result); // Read converted value
+    }
+
+    auto finish = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double> elapsed = finish - start;
+    std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+    
     return 1;
 }
