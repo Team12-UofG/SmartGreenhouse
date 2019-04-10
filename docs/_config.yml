@@ -9,7 +9,7 @@ copyright: "SmartGreenhouse is licensed under the <a href='https://github.com/Te
 pages:
     - Home: index.md
     - Project Overview:
-        - About Us: beforeyoustart.md
+        - About Us: beforeyoustart.html
         - System Overview: stystemoverview.md
     - Install:
         - Hardware: install-hw.md
