@@ -1,2 +1,0 @@
-##SmartGreenhouse System##
-##Features##
