@@ -21,7 +21,7 @@
 #include "../../../include/UV_sensor/LEDMATRIX.cpp"
 
 UV_sensor lightSensor;  // create UV sensor object
-led_panel LED_matrix;   // create LED matrix panel object
+LED_matrix led_panel;   // create LED matrix panel object
 
 int LED_pin = 22;       // GPIO 22 is pin 29
 int UVI_threshold = 3;  // This is the UVI value at which the LEDs will turn on
