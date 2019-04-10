@@ -1,3 +1,13 @@
+/**************************************************************************/
+/*!
+ *  @file printUVValues.cpp
+ *  @author I. Mitchell
+ *  @brief Prints the UVA, UVB and UVI reading from the VEML6075
+ *  @version 0.1
+ *  @date 2019-04-09
+ *  @copyright Copyright (c) 2019
+ *
+*/
 #include "../../../include/UV_sensor/VEML6075.h"
 #include "../../../include/UV_sensor/VEML6075.cpp"
 

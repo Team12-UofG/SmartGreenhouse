@@ -27,7 +27,7 @@
 MCP342X soil_sensor;
 using namespace std;
 int configData = 0;
-
+int CapPower = 6;
 int readData();
 
 
@@ -38,7 +38,7 @@ int readData();
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
    wiringPiSetup();
-   pinMode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
+   pinMode (CapPower, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
    int counter = 0;
 
   // decode arguments
@@ -69,7 +69,7 @@ int readData() {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    digitalWrite(6, HIGH); // charging
+    digitalWrite(CapPower, HIGH); // charging
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
     while(result < 255){
@@ -77,7 +77,7 @@ int readData() {
       result = soil_sensor.getResult(&result); // Read converted value
     }
 
-    digitalWrite(6, LOW); // charging
+    digitalWrite(CapPower, LOW); // charging
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
     while(result > 1){
@@ -89,6 +89,6 @@ int readData() {
 
     std::chrono::duration<double> elapsed = finish - start;
     std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-    
+
     return 1;
 }
