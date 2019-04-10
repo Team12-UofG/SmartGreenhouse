@@ -1,5 +1,5 @@
-#include "../include/VEML6075.h"
-#include "../include/VEML6075.cpp"
+#include "../../../include/UV_sensor/VEML6075.h"
+#include "../../../include/UV_sensor/VEML6075.cpp"
 
 UV_sensor lightSensor; // create UV sensor object
 

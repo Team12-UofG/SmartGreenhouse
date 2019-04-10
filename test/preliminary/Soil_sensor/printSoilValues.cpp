@@ -1,6 +1,6 @@
 /**************************************************************************/
 /*!
- *  @file printValues.cpp
+ *  @file printSoilValues.cpp
  *  @author I. Mitchell
  *  @brief test of soil mositure sensor with the sampling rate and samplifng
  *    frequency set by the user. Samples the sensor and prints the values.
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
+#include <time.h> // -lrt
 #include "../../../include/Soil_sensor/MCP342X.h"
 #include "../../../include/Soil_sensor/MCP342X.cpp"
 
