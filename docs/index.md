@@ -6,7 +6,7 @@ SmartGreenhouse was created with the aim of utilising the capabilities of a Rasp
 This release enables sensor readings to be taken and uploaded to the SmartGreenhouse webpage.
 
 ## Resources
-**Source:**  (https://github.com/Team12-UofG/SmartGreenhouse)
+**Source:**  (https://github.com/Team12-UofG/SmartGreenhouse)  
 **Hardware Installation:**  
 **Software Installation:**  
 
