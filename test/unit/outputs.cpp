@@ -33,7 +33,7 @@ int main (){
 
   printf("Turning the HEAT PAD ON \n");
   digitalWrite(heat_pad, HIGH);
-  usleep(3000000);
+  usleep(10000000);
 
   printf("Turning the HEAD PAD OFF \n");
   digitalWrite(heat_pad, LOW);
