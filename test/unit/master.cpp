@@ -85,7 +85,7 @@ void i2cSetAddress(int address)
 */
 void user_delay_ms(uint32_t period)
 {
-    sleep(period/20000);
+    sleep(period/1000);
 }
 
 /*!
