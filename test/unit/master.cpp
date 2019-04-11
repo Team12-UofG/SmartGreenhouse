@@ -85,7 +85,7 @@ void i2cSetAddress(int address)
 */
 void user_delay_ms(uint32_t period)
 {
-    sleep(period/1000);
+    sleep(period/20000);
 }
 
 /*!
@@ -153,9 +153,14 @@ int main(int argc, char *argv[] ) {
 
 	Soil_configData = soilSensor.configure();
 
-	uint8_t value = readData();
-	
-	
+        uint8_t SM;
+	soilSensor.startConversion(Soil_configData); // Start conversion
+	SM = soilSensor.getResult(&SM); // Read converted value
+	printf("Soil moisture reading: %d \n", SM);
+
+	float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
+	printf("UV Index reading: %f \n", UV_calc);
+		
 	// initialize connection to MySQL database
         MYSQL *mysqlConn;
         MYSQL_RES result;
@@ -277,7 +282,7 @@ int main(int argc, char *argv[] ) {
 		// Measurement to MYSQL database
 		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 		{
-                        snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('','%d', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
+                        snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",SM, UV_calc, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
 	                mysql_query(mysqlConn, buff);
 		}
 
@@ -303,39 +308,3 @@ int main(int argc, char *argv[] ) {
 	return 0;
 }
 
-int readData() {
-        uint8_t result;
-	soilSensor.startConversion(Soil_configData); // Start conversion
-	result = soilSensor.getResult(&result); // Read converted value
-	printf("Soil moisture reading: %d \n", result);
-
-
-
-	float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
-
-	printf("UV Index reading: %f \n", UV_calc);
-
-        //Connection to MySQL database
-        MYSQL *mysqlConn;
-        MYSQL_RES res;
-        MYSQL_ROW row;
-        mysqlConn = mysql_init(NULL);
-        char buff[1024];
-
-	//Measurement to MYSQL database
-
-        if (mysql_real_connect(mysqlConn,"localhost" ,"UOG_SGH","test","SGH_TPAQ", 0, NULL, 0) != NULL)
-
-        {
-	      snprintf(buff, sizeof buff, "INSERT INTO SM VALUES (CURRENT_TIME(),'','%d','%f');", result, UV_calc);
-	      mysql_query(mysqlConn, buff);
-
-     }
-
-// close MySQL
-
-	mysql_close(mysqlConn);
-
-	return 1;
-
-}
