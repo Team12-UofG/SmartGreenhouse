@@ -25,15 +25,19 @@ int heat_pad  = 29;
 int water_pump = 23;
 
 int main (){
-
+  wiringPiSetup():
   printf("Testing the outputs \n");
-  led_panel.configurePanel(LED_panel1, LED_panel2);  // configure LED panel
+  pinMode(LED_panel1, OUTPUT);
+  pinMode(LED_panel2, OUTPUT);
+  //led_panel.configurePanel(LED_panel1, LED_panel2);  // configure LED panel
 
   printf("Turning the LED matrix ON \n");
-  led_panel.on();
+  digitalWrite(LED_panel1, LOW);
+  digitalWrite(LED_panel2, LOW);
   usleep(3000000);
 
   printf("Turning the LED matrix OFF \n");
-  led_panel.off();
+  digitalWrite(LED_panel1, HIGH);
+  digitalWrite(LED_panel2, HIGH);
   usleep(3000000);
 }
