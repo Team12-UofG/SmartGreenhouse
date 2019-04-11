@@ -31,9 +31,9 @@ int main (){
 
   printf("Turning the LED matrix ON \n");
   led_panel.on();
-  usleep(1000);
+  usleep(3000000);
 
   printf("Turning the LED matrix OFF \n");
   led_panel.off();
-  usleep(1000);
+  usleep(3000000);
 }
