@@ -18,10 +18,7 @@ static int setup_ledpanel = wiringPiSetup();
 /**************************************************************************/
 void LED_matrix::configurePanel(int LED_pin1, int LED_pin2) {
   pinMode(LED_pin1, OUTPUT);  // Setup LED growth matrix panel
-  digitalWrite(LED_pin1, HIGH); // 'LOW' turns the panel on
-
   pinMode(LED_pin2, OUTPUT);  // Setup LED growth matrix panel
-  digitalWrite(LED_pin2, HIGH); // 'LOW' turns the panel on
 }
 
 /**************************************************************************/
@@ -30,8 +27,8 @@ void LED_matrix::configurePanel(int LED_pin1, int LED_pin2) {
 */
 /**************************************************************************/
 void LED_matrix::on(void){
-  digitalWrite(LED_pin1, LOW);
-  digitalWrite(LED_pin2, LOW);
+  digitalWrite(LED_pin1, HIGH);
+  digitalWrite(LED_pin2, HIGH);
 }
 
 /**************************************************************************/
@@ -40,6 +37,6 @@ void LED_matrix::on(void){
 */
 /**************************************************************************/
 void LED_matrix::off(void){
-  digitalWrite(LED_pin1, HIGH);
-  digitalWrite(LED_pin2, HIGH);
+  digitalWrite(LED_pin1, LOW);
+  digitalWrite(LED_pin2, LOW);
 }

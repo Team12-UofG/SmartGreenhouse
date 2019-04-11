@@ -29,8 +29,16 @@ int main (){
   printf("Testing the outputs \n");
   pinMode(heat_pad, OUTPUT);
   pinMode(water_pump, OUTPUT);
-  //led_panel.configurePanel(LED_panel1, LED_panel2);  // configure LED panel
+  led_panel.configurePanel(LED_panel1, LED_panel2);  // configure LED panel
 
+  printf("Turning the LEDs ON \n");
+  led_panel.on();
+  sleep(3);
+
+  printf("Turning the LEDs ON \n");
+  led_panel.off();
+
+  /*
   printf("Turning the HEAT PAD ON \n");
   digitalWrite(heat_pad, HIGH);
   usleep(10000000);
@@ -38,7 +46,7 @@ int main (){
   printf("Turning the HEAD PAD OFF \n");
   digitalWrite(heat_pad, LOW);
   usleep(3000000);
-
+  */
 
   //printf("Turning the PUMP ON \n");
   //digitalWrite(water_pump, HIGH);
@@ -47,7 +55,5 @@ int main (){
   //printf("Turning the PUMP OFF \n");
   //digitalWrite(water_pump, LOW);
 //  usleep(1000000);
-
-
 
 }
