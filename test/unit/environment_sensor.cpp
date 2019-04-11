@@ -1,5 +1,5 @@
 /**
- * @file SGH_TPAQ.c
+ * @file environment_sensor.cpp
  *
  * @brief I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor
  *
@@ -129,36 +129,6 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 }
 
 /*!
-    @brief Writes measurements to output file specified.
-    @param outputFile
-    @param tm
-    @param bme680_field_data
-*/
-
-void write2file(char *outputFile, struct tm tm, struct bme680_field_data data)
-{
-	// Write measurement to output file if specified.
-	if(outputFile != NULL)
-	{
-		FILE *f = fopen(outputFile, "a");
-		if (f == NULL)
-		{
-			printf("Error opening file!\n");
-			//exit(1);
-		}
-		else
-		{
-			fprintf(f,"%d-%02d-%02d %02d:%02d:%02d ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-			fprintf(f,"T: %.2f degC, P: %.2f hPa, H: %.2f %%rH", data.temperature / 100.0f,
-					data.pressure / 100.0f, data.humidity / 1000.0f );
-			fprintf(f,", G: %d Ohms", data.gas_resistance);
-			fprintf(f,"\r\n");
-			fclose(f);
-		}
-	}
-}
-
-/*!
     @brief Main function.
     @param argc
     @param argv 
@@ -282,7 +252,6 @@ int main(int argc, char *argv[] )
 					data.pressure / 100.0f, data.humidity / 1000.0f );
 			printf(", G: %d Ohms", data.gas_resistance);
 			printf("\r\n");
-			write2file(outputFile, tm, data);
 			i++;
 	}
     	
