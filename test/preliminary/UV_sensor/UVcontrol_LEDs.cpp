@@ -23,7 +23,7 @@
 UV_sensor lightSensor;  // create UV sensor object
 LED_matrix led_panel;   // create LED matrix panel object
 
-int LED_pin = 26;       // GPIO 22 is pin 29
+int LED_pin = 26;       // GPIO 27 is pin 32
 int UVI_threshold = 3;  // This is the UVI value at which the LEDs will turn on
 
 int main (){
