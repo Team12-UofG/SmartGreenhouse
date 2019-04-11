@@ -25,7 +25,7 @@ int heat_pad  = 29;
 int water_pump = 23;
 
 int main (){
-  wiringPiSetup():
+  wiringPiSetup();
   printf("Testing the outputs \n");
   pinMode(heat_pad, OUTPUT);
   pinMode(water_pump, OUTPUT);
