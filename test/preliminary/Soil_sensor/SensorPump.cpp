@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
    pinMode (water_pump, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
 
    soil_sensor.startConversion(configData); // Start conversion
-   int result
+   int result;
    result = soil_sensor.getResult(&result); // Read converted value
 
    if (result > dry_threshold){
