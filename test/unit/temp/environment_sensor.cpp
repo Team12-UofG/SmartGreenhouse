@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "../../include/Environment_sensor/bme680.h"
+#include "bme680.h"
 
 /*!
 * @brief I2C Linux device handle.
@@ -121,7 +121,7 @@
 /*!
 * @brief Writes measurements to output file specified.
 * @param outputFile
-* @param tm 
+* @param tm
 * @param data
 */
 	void write2file(char *outputFile, struct tm tm, struct bme680_field_data data)
