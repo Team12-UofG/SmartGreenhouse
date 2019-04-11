@@ -40,13 +40,13 @@ int main (){
   usleep(3000000);
 
 
-  printf("Turning the PUMP ON \n");
-  digitalWrite(water_pump, HIGH);
-  usleep(1000000);
+  //printf("Turning the PUMP ON \n");
+  //digitalWrite(water_pump, HIGH);
+  //usleep(1000000);
 
-  printf("Turning the PUMP OFF \n");
-  digitalWrite(water_pump, LOW);
-  usleep(1000000);
+  //printf("Turning the PUMP OFF \n");
+  //digitalWrite(water_pump, LOW);
+//  usleep(1000000);
 
 
 
