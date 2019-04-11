@@ -1,18 +1,22 @@
-/**
- * @file environment_sensor.cpp
- *
- * @brief I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor
- *
- * 
- * Sensor Data is exported to MySQL database
- * Application Note
- * @version 0.2
- * @date 2019-04-11
- * @author Anton Saikia (based on example by twartzek and Boschsensortech)
- *
- */
+/**************************************************************************/
 
+/*!
+ *  @file readall.cpp
+ *  @authors I.Mitchell and A. Saikia
+ *  @brief takes one reading of the environment sensor, soil moisture sensor, UV light UV_sensor
+ * and prints the value
+ *  @version 0.1
+ *  @date 2019-04-11
+ *  @copyright Copyright (c) 2019
+ *
+*/
+
+#include <wiringPi.h>
+#include <wiringPiI2C.h> // add "-lwiringPi" to compile
 #include <stdio.h>
+#include <iostream>      // add "-lstdc++" to compile
+#include <unistd.h>
+#include <mysql/mysql.h> // add "-lmysqlclient" to compile
 #include <stdlib.h>
 #include <time.h>
 #include <linux/i2c-dev.h>
@@ -21,13 +25,22 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
-#include <mysql/mysql.h>
 #include "bme680.h"
+#include "MCP342X.h"
+#include "MCP342X.cpp"
+#include "VEML6075.h"
+#include "VEML6075.cpp"
 
 /*! @brief Our destination time zone */
-
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
+
+/*!
+ * @brief Instantiate objects used in this project
+ */
+MCP342X soilSensor;
+int Soil_configData = 0;;
+UV_sensor lightSensor; // create sensor
+int readData();
 
 /*! @brief I2C Linux device handle.
 */
@@ -129,14 +142,25 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 }
 
 /*!
-    @brief Main function.
-    @param argc
-    @param argv 
-*/
+ * @brief main progam
+ */
 
-int main(int argc, char *argv[] )
-{
+int main(int argc, char *argv[] ) {
+	
+	printf("Simple Test \n");
 
+	lightSensor.uvConfigure(); // configure sensor
+
+	Soil_configData = soilSensor.configure();
+
+        uint8_t SM;
+	soilSensor.startConversion(Soil_configData); // Start conversion
+	SM = soilSensor.getResult(&SM); // Read converted value
+	printf("Soil moisture reading: %d \n", SM);
+
+	float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
+	printf("UV Index reading: %f \n", UV_calc);
+		
 	// initialize connection to MySQL database
         MYSQL *mysqlConn;
         MYSQL_RES result;
@@ -258,7 +282,7 @@ int main(int argc, char *argv[] )
 		// Measurement to MYSQL database
 		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 		{
-                        snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('','%d', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
+                        snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",SM, UV_calc, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
 	                mysql_query(mysqlConn, buff);
 		}
 
@@ -283,3 +307,4 @@ int main(int argc, char *argv[] )
 
 	return 0;
 }
+
