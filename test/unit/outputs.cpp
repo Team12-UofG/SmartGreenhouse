@@ -36,7 +36,7 @@ int main (){
   sleep(3);
 
   printf("Turning the LEDs ON \n");
-  digitalWrite(LED_panel1, HIGH);
+  digitalWrite(LED_panel1, LOW);
 
   /*
   printf("Turning the HEAT PAD ON \n");
