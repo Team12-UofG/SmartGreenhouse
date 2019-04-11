@@ -27,7 +27,6 @@ int water_pump = 23;
 int main (){
 
   printf("Testing the outputs \n");
-  lightSensor.uvConfigure();          // configure sensor
   led_panel.configurePanel(LED_panel1, LED_panel2);  // configure LED panel
 
   printf("Turning the LED matrix ON \n");
