@@ -29,14 +29,14 @@ int main (){
   printf("Testing the outputs \n");
   pinMode(heat_pad, OUTPUT);
   pinMode(water_pump, OUTPUT);
-  led_panel.configurePanel(LED_panel1, LED_panel2);  // configure LED panel
+  pinMode(LED_panel1, OUTPUT);
 
   printf("Turning the LEDs ON \n");
-  led_panel.on();
+  digitalWrite(LED_panel1, HIGH);
   sleep(3);
 
   printf("Turning the LEDs ON \n");
-  led_panel.off();
+  digitalWrite(LED_panel1, HIGH);
 
   /*
   printf("Turning the HEAT PAD ON \n");
