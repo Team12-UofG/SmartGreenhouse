@@ -45,11 +45,11 @@ int main(int argc, char** argv) {
    result = soil_sensor.getResult(&result); // Read converted value
 
    if (result > dry_threshold){
-     printf("Soil is too dry, pump is turning on");
+     printf("Soil is too dry, pump is turning on \n");
      digitalWrite(water_pump, HIGH);
      sleep(2);
      digitalWrite(water_pump, LOW);
-     printf("Pump is off");
+     printf("Pump is off \n");
    }
 
 }
