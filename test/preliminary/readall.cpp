@@ -351,7 +351,7 @@ void thread_fn()
 	while (flag){
 		int soilVal = checkSoil();
 		float uvVal = checkUV();
-		checkEnv environment = readBME680():
+		checkEnv environment = readBME680();
 
 		// fill in sensor_data with values
 		sensor_data.soil_moisture = soilVal;
@@ -359,7 +359,7 @@ void thread_fn()
 		sensor_data.temperature = environment.temp;
 		sensor_data.humidty = environment.humidity;
 		sensor_data.air_pressure = environment.pressure;
-		sensor_data.air_quality = environment.air_quality;
+		sensor_data.air_quality = environment.airQual;
 
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 
