@@ -41,7 +41,7 @@ More information can be found [here.](https://github.com/Team12-UofG/SmartGreenh
 
 
 ## Build & Install 
-A more detailed walkthrough can be found [here.](https://team12-uofg.github.io/SmartGreenhouse/ "here.")
+A more detailed walkthrough can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/build-and-install/ "here.")
 
 
 ## Documentation
