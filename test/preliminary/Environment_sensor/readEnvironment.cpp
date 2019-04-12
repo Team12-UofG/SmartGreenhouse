@@ -234,7 +234,7 @@ int main(int argc, char *argv[] ) {
 	std::chrono::duration<double> elapsed = finish - start;
 	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 
-	auto start = std::chrono::high_resolution_clock::now();
+	auto start2 = std::chrono::high_resolution_clock::now();
 	while(i<nMeas && backupCounter < nMeas+3) {
 		// Get sensor data
 		rslt = bme680_get_sensor_data(&data, &gas_sensor);
@@ -260,10 +260,10 @@ int main(int argc, char *argv[] ) {
 	   	backupCounter++;
 	}
 
-	auto finish = std::chrono::high_resolution_clock::now();
+	auto finish2 = std::chrono::high_resolution_clock::now();
 
- 	std::chrono::duration<double> elapsed = finish - start;
- 	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+ 	std::chrono::duration<double> elapsed2 = finish2 - start2;
+ 	std::cout << "Elapsed time: " << elapsed2.count() << " s\n";
 
 	printf("** End of measurement **\n");
 
