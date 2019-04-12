@@ -13,6 +13,7 @@
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
 #include <time.h> // -lrt
+#include <chrono>
 #include "../../../include/Soil_sensor/MCP342X.h"
 #include "../../../include/Soil_sensor/MCP342X.cpp"
 
@@ -38,8 +39,6 @@ int readData();
  */
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
-   wiringPiSetup();
-   pinMode (6, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
    int counter = 0;
 
   // decode arguments
@@ -67,7 +66,6 @@ int main(int argc, char** argv) {
  */
 int readData() {
     uint8_t result;
-    digitalWrite(6, HIGH);
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
     printf("Result: %d \n", result);

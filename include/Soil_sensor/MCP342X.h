@@ -5,7 +5,7 @@
     @author   C. Schnarel, I. Mitchell
     @license  BSD (see license.txt)
 
-    
+
     This is part of an Arduino library to interface with the Microchip
     MCP47X6 series of Analog-to-Digital converters which are connected
     via the I2C bus. Based on Microchip datasheets for the following part numbers
@@ -122,7 +122,7 @@ class MCP342X {
  	* @brief Test connection to the MCP3426X ADC.
  	*/
         bool testConnection(void);
-	
+
 	/*!
         * @brief Set the configuration bits for the ADC.
 	*/

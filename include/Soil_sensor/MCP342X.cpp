@@ -5,7 +5,7 @@
 		@license  BSD (see license.txt)
 
     @brief ADC MCP342X I2C device class.
-    
+
     This is part of an Arduino library to interface with the Microchip
     MCP47X6 series of Analog-to-Digital converters which are connected
     via the I2C bus. Based on Microchip datasheets for the following part numbers
@@ -94,7 +94,7 @@ uint8_t MCP342X::configure(void) {
 *!
 * @brief Start a conversion using configuration settings from
  *   the shadow configuration register.
- * @param[] configData : 
+ * @param[] configData :
  */
 bool MCP342X::startConversion(uint8_t configData) {
   wiringPiI2CWriteReg8(fd_soil, configData, MCP342X_RDY);
@@ -107,7 +107,7 @@ bool MCP342X::startConversion(uint8_t configData) {
  *  fills in the supplied location with the 16-bit (two byte)
  *  conversion value and returns the status byte,
  *  Note: status of -1 "0xFF' implies read error.
- * @param[] dataPtr : 
+ * @param[] dataPtr :
  */
 uint8_t MCP342X::getResult(uint8_t *dataPtr) {
 	uint8_t adcStatus;
@@ -124,7 +124,7 @@ uint8_t MCP342X::getResult(uint8_t *dataPtr) {
  *  fill in the supplied location with the 16-bit (two byte)
  *  conversion value and status the config byte
  *  Note: status of -1 "0xFF' implies read error
- * @param[] dataPtr : 
+ * @param[] dataPtr :
  */
 uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
   uint8_t adcStatus;
