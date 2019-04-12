@@ -67,23 +67,27 @@ void i2cSetAddress(int address);
 void user_delay_ms(uint32_t period);
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
-void configureBME();
+
+void configureBME(int delay, int nMeas);
 
 /*!
  * @brief Main progam.
  */
 int main (){
-
+  int delay = 3;
+  int nMeas = 1;
   time_t t = time(NULL);
 
-  configureBME();
+  configureBME(delay, nMeas);
+  struct bme680_field_data data;
+  struct tm tm = *localtime(&t);
 
 	int i=0;
 	int backupCounter = 0;
 
 	while(i<nMeas && backupCounter < nMeas+3) {
 		// Get sensor data
-		rslt = bme680_get_sensor_data(&data, &gas_sensor);
+		int8_t rslt = bme680_get_sensor_data(&data, &gas_sensor);
 
 		// Avoid using measurements from an unstable heating setup
 		if(data.status & BME680_HEAT_STAB_MSK)
@@ -96,14 +100,15 @@ int main (){
 			printf(", G: %d Ohms", data.gas_resistance);
 			printf("\r\n");
 			i++;
-	}
+	   }
 
 		// Trigger a meausurement
-		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
+    struct bme680_dev gas_sensor;
+		int8_t rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
 		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
-	   	backupCounter++;
+	  backupCounter++;
 	}
 
 	printf("** End of measurement **\n");
@@ -130,9 +135,7 @@ int main (){
 }
 
 
-void configureBME(){
-  int delay = 3;
-	int nMeas = 1;
+void configureBME(int delay, int nMeas){
 
 	// Input argument parser
 	if( argc == 2 ) {
@@ -200,14 +203,6 @@ void configureBME(){
   uint16_t meas_period;
   bme680_get_profile_dur(&meas_period, &gas_sensor);
   user_delay_ms(meas_period + delay*1000); /* Delay till the measurement is ready */
-
-  struct bme680_field_data data;
-
-  struct tm tm = *localtime(&t);
-
-  int i=0;
-  int backupCounter = 0;
-
 }
 
 /*!
@@ -215,7 +210,7 @@ void configureBME(){
  */
 
 int checkSoil() {
-  uint8_t soilData = 0;
+  uint8_t soil = 0;
   soilSensor.startConversion(Soil_configData); // Start conversion
   soilData = soilSensor.checkforResult(&soilData); // Read converted value
   printf("Soil reading = %d \n", soilData);
