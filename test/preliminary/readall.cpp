@@ -53,14 +53,14 @@ int readData() {
   uint8_t soilSum = 0;
   float UVsum = 0;
     for(int i=0;i<sample_no;i++){
-      uint8_t soilData = 0;
+      int soilData = 0;
       soilSensor.startConversion(Soil_configData); // Start conversion
       soilData = soilSensor.getResult(&soilData); // Read converted value
       soilSum += soilData;
       printf("Soil Sum = %d \n", soilSum);
     }
 
-    uint8_t averageSoil = soilSum / sample_no;
+    int averageSoil = soilSum / sample_no;
     printf("Average soil moisture reading: %d \n", averageSoil);
 
     for(int i=0;i<sample_no;i++){
