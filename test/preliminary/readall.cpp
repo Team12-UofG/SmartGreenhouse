@@ -67,7 +67,7 @@ struct checkEnv{
 	float pressure;
 	float humidity;
 	float airQual;
-}
+};
 
 /******************************************************************************
  * Functions for communicating with the BME680 sensor over i2cClose           *
@@ -173,7 +173,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 /*!
  * @brief Structure initialises BME680 sensors anr performs a reading.
- * @return Returns a structure containing the temperature, humidty, air pressure
+ * @return Returns a structure containing the temperature, humidty, air pressurie
  * and air quality reading.
 */
 checkEnv readBME680(){
@@ -266,7 +266,7 @@ checkEnv readBME680(){
   }
 
 	environment_data.temp = data.temperature;
-	environment_data.humidity = data.humidty;
+	environment_data.humidity = data.humidity;
 	environment_data.pressure = data.pressure;
 	environment_data.airQual = data.gas_resistance;
 
