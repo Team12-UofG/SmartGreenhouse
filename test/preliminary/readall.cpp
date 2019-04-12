@@ -75,7 +75,7 @@ int checkSoil() {
   soilData = soilSensor.checkforResult(&soilData); // Read converted value
   printf("Soil reading = %d \n", soilData);
 
-  if(soilData < dry_threshold){
+  if(soilData > dry_threshold){
     digitalWrite(water_pump, HIGH);
     sleep(5);
   }
@@ -99,33 +99,3 @@ int checkUV() {
   }
   return 1;
 }
-
-
-
-/*
-void foo()
-{
-  // do stuff...
-}
-
-void bar(int x)
-{
-  // do stuff...
-}
-
-int main()
-{
-  std::thread first (foo);     // spawn new thread that calls foo()
-  std::thread second (bar,0);  // spawn new thread that calls bar(0)
-
-  std::cout << "main, foo and bar now execute concurrently...\n";
-
-  // synchronize threads:
-  first.join();                // pauses until first finishes
-  second.join();               // pauses until second finishes
-
-  std::cout << "foo and bar completed.\n";
-
-  return 0;
-}
-*/
