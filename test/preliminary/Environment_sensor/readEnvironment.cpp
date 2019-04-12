@@ -177,7 +177,6 @@ int main(int argc, char *argv[] ) {
 	// set address of the BME680
 	i2cSetAddress(0x76);
 
-	auto start = std::chrono::high_resolution_clock::now();
 	// init device
 	struct bme680_dev gas_sensor;
 	gas_sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
@@ -221,20 +220,15 @@ int main(int argc, char *argv[] ) {
 	 * measurement is complete */
 	uint16_t meas_period;
 	bme680_get_profile_dur(&meas_period, &gas_sensor);
-	user_delay_ms(meas_period + delay*1000); /* Delay till the measurement is ready */
+	user_delay_ms(meas_period); /* Delay till the measurement is ready */
 
-    struct bme680_field_data data;
+  struct bme680_field_data data;
 
 	struct tm tm = *localtime(&t);
 
 	int i=0;
 	int backupCounter = 0;
 
-	auto finish = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-
-	auto start2 = std::chrono::high_resolution_clock::now();
 	while(i<nMeas && backupCounter < nMeas+3) {
 		// Get sensor data
 		rslt = bme680_get_sensor_data(&data, &gas_sensor);
@@ -256,14 +250,9 @@ int main(int argc, char *argv[] ) {
 		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
-		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
+		user_delay_ms(meas_period); /* Wait for the measurement to complete */
 	   	backupCounter++;
 	}
-
-	auto finish2 = std::chrono::high_resolution_clock::now();
-
- 	std::chrono::duration<double> elapsed2 = finish2 - start2;
- 	std::cout << "Elapsed time: " << elapsed2.count() << " s\n";
 
 	printf("** End of measurement **\n");
 
