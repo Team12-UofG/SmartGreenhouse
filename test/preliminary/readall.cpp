@@ -15,6 +15,8 @@
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
 #include <thread>       // add "-lpthread" to compile
+#include <future>
+#include <mysql/mysql.h> // add "-lmysqlclient" to compile
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -33,6 +35,10 @@
 #include "../../include/UV_sensor/VEML6075.cpp"
 
 using namespace std;
+
+/*! @brief Our destination time zone */
+#define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
+
 /*!
  * @brief Instantiate objects for the soil sensor and light sensor.
  */
@@ -169,30 +175,50 @@ int main (int argc, char *argv[]){
 
   printf("Test to read all of the sensor values \n");
 
-  lightSensor.uvConfigure(); // configure sensor
-  Soil_configData = soilSensor.configure();
+	/* Configure the UV and Soil Sensor */
+  lightSensor.uvConfigure(); // configure UV sensor
+  Soil_configData = soilSensor.configure(); // configure soil sensor
 
+	/* Setup water pump, LEDs and heat mat */
   wiringPiSetup();
   pinMode(water_pump, OUTPUT);
   pinMode(LED_pin, OUTPUT);
   pinMode(heat_pin, OUTPUT);
 
-	auto start = std::chrono::high_resolution_clock::now();
+	/* Initialise connection to MySQL database */
+	MYSQL *mysqlConn;
+	MYSQL_RES result;
+	MYSQL_ROW row;
+	mysqlConn = mysql_init(NULL);
 
-  std::thread soil (checkSoil);
-  std::thread light (checkUV);
+/*
+]
+int func() { return 1; }
+std::future<int> ret = std::async(&func);
+int i = ret.get();
+*/
+
+	/* Read sensor values */
+  std::future<int> soil = td::async(checkSoil);
+  std::future<int> light = td::async(checkUV);
   std::thread envir (checkEnv);
 
   soil.join();
   light.join();
   envir.join();
 
-	auto finish = std::chrono::high_resolution_clock::now();
+	int soil_val = soil.get();
+	int uv_val = light.get():
 
- 	std::chrono::duration<double> elapsed = finish - start;
- 	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-
-  printf("Threads complete \n");
+	printf("Soil val = %d   UV val = %d \n", soil_val, uv_val)
+	/* Send measurements to MYSQL database
+	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
+	{
+		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",SM, UV_calc, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
+		mysql_query(mysqlConn, buff);
+	}
+	*/
+	/* Just for testing - turn outputs off */
   sleep(1);
   digitalWrite(water_pump, LOW);
   digitalWrite(LED_pin, LOW);
@@ -203,8 +229,6 @@ int main (int argc, char *argv[]){
 void checkEnv(){
   int delay = 3;
   int nMeas = 1;
-
-  printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
 
   time_t t = time(NULL);
   // open Linux I2C device
@@ -296,9 +320,6 @@ void checkEnv(){
   else {
     digitalWrite(heat_pin, LOW);
   }
-
-  printf("** End of measurement **\n");
-
     // close Linux I2C device
   i2cClose();
 }
@@ -320,7 +341,7 @@ int checkSoil() {
     sleep(5);
   }
 
-  return 1;
+  return soilData;
 }
 
 
@@ -339,5 +360,5 @@ int checkUV() {
   else {
     digitalWrite(LED_pin, LOW);
   }
-  return 1;
+  return UV_calc;
 }
