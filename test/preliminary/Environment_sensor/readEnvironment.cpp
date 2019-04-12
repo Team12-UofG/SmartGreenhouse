@@ -145,29 +145,6 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 int main(int argc, char *argv[] ) {
 
-	lightSensor.uvConfigure(); // configure sensor
-	Soil_configData = soilSensor.configure();
-
-  uint8_t SM;
-	soilSensor.startConversion(Soil_configData); // Start conversion
-	SM = soilSensor.getResult(&SM); // Read converted value
-	printf("Soil moisture reading: %d \n", SM);
-
-	float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
-	printf("UV Index reading: %f \n", UV_calc);
-
-	char buff[1024];
-
-	// create lock file first
-	FILE *f = fopen("~bme680i2c.lock", "w");
-	if (f == NULL)
-	{
-		printf("Error opening file!\n");
-		exit(1);
-	}
-	fprintf(f,"I2C locked by BME680 readout. \r\n");
-	fclose(f);
-
 	int delay = 3;
 	int nMeas = 1;
 	char *outputFile = NULL;
