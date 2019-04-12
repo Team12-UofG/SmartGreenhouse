@@ -344,7 +344,7 @@ struct all_data
 
 std::atomic<all_data> sensor_data;
 
-std::atomic_bool flag = true;
+std::atomic_bool flag {true};
 
 void thread_fn()
 {
@@ -353,13 +353,18 @@ void thread_fn()
 		float uvVal = checkUV();
 		checkEnv environment = readBME680();
 
+
+		all_data data;
+
 		// fill in sensor_data with values
-		sensor_data.soil_moisture = soilVal;
-		sensor_data.uv_index = uvVal;
-		sensor_data.temperature = environment.temp;
-		sensor_data.humidty = environment.humidity;
-		sensor_data.air_pressure = environment.pressure;
-		sensor_data.air_quality = environment.airQual;
+		data.soil_moisture = soilVal;
+		data.uv_index = uvVal;
+		data.temperature = environment.temp;
+		data.humidity = environment.humidity;
+		data.air_pressure = environment.pressure;
+		data.air_quality = environment.airQual;
+
+		sensor_data = data;
 
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 
@@ -380,6 +385,9 @@ int main (int argc, char *argv[]){
   lightSensor.uvConfigure(); // configure UV sensor
   Soil_configData = soilSensor.configure(); // configure soil sensor
 
+	/* Read sensor values */
+	std::thread sensors_thread(&thread_fn);
+	
 	/* Setup water pump, LEDs and heat mat */
   wiringPiSetup();
   pinMode(water_pump, OUTPUT);
@@ -397,23 +405,23 @@ int main (int argc, char *argv[]){
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 
-	/* Read sensor values */
-	std::thread sensors_thread(&thread_fn);
 	sensors_thread.join();
 
-	printf("UV = %d \n", sensor_data.uv_index);
-	/* Send measurements to MYSQL database
+	auto data = sensor_data.load();
+
+	flag = false;
+
+	/* Send measurements to MYSQL database */
 	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 	{
-		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",soil_val, uv_val, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, temp, pressure, humidity, air_quality);
+		printf("Sending values to website \n");
+		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",data.soil_moisture, data.uv_index, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature, data.air_pressure, data.humidity, data.air_quality);
 		mysql_query(mysqlConn, buff);
 	}
-	*/
+
 	/* Just for testing - turn outputs off */
   sleep(1);
   digitalWrite(water_pump, LOW);
   digitalWrite(LED_pin, LOW);
   digitalWrite(heat_pin, LOW);
-
-	flag = false;
 }
