@@ -2,7 +2,7 @@
 /*!
  *  @file waterpump.cpp
  *  @author A. Saikia
- *  @brief turns each of the outputs on in turn to check connection
+ *  @brief turns water pump on for 10 seconds
  *  @version 0.1
  *  @date 2019-04-12
  *  @copyright Copyright (c) 2019
