@@ -55,7 +55,8 @@ int readData() {
     for(int i=0;i<sample_no;i++){
       int soilData = 0;
       soilSensor.startConversion(Soil_configData); // Start conversion
-      soilData = soilSensor.getResult(&soilData); // Read converted value
+      soilData = soilSensor.checkforResult(&soilData); // Read converted value
+      printf("Soil reading = %d \n", soilData);
       soilSum += soilData;
       printf("Soil Sum = %d \n", soilSum);
     }
