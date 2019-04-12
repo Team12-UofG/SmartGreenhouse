@@ -74,6 +74,9 @@ void configureBME(int delay, int nMeas);
  * @brief Main progam.
  */
 int main (int argc, char *argv[]){
+  int delay = 3;
+  int nMeas = 1;
+  
   // Input argument parser
   if( argc == 2 ) {
     delay = strtol(argv[1], NULL, 10);
@@ -87,13 +90,9 @@ int main (int argc, char *argv[]){
   else if( argc == 4 ) {
     delay = strtol(argv[1], NULL, 10);
     nMeas = strtol(argv[2], NULL, 10);
-    outputFile = argv[3];
   }
 
 
-
-  int delay = 3;
-  int nMeas = 1;
   time_t t = time(NULL);
 
   configureBME(delay, nMeas);
