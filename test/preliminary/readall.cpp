@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include <thread>
+#include <thread>       // add "-lpthread" to compile
 #include "../../include/Soil_sensor/MCP342X.h"
 #include "../../include/Soil_sensor/MCP342X.cpp"
 #include "../../include/UV_sensor/VEML6075.h"
