@@ -28,6 +28,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <chrono>
+#include <atomic>
 #include "../../include/Environment_sensor/bme680.h"
 #include "../../include/Soil_sensor/MCP342X.h"
 #include "../../include/Soil_sensor/MCP342X.cpp"
@@ -331,6 +332,40 @@ int checkUV() {
 
 
 
+struct all_data
+{
+	int soil_moisture;
+	float uv_index;
+	float temperature;
+	float humidity;
+	float air_pressure;
+	float air_quality;
+};
+
+std::atomic<all_data> sensor_data;
+
+std::atomic_bool flag = true;
+
+void thread_fn()
+{
+	while (flag){
+		int soilVal = checkSoil();
+		float uvVal = checkUV();
+		checkEnv environment = readBME680():
+
+		// fill in sensor_data with values
+		sensor_data.soil_moisture = soilVal;
+		sensor_data.uv_index = uvVal;
+		sensor_data.temperature = environment.temp;
+		sensor_data.humidty = environment.humidity;
+		sensor_data.air_pressure = environment.pressure;
+		sensor_data.air_quality = environment.air_quality;
+
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+
+	}
+}
+
 
 
 
@@ -363,18 +398,10 @@ int main (int argc, char *argv[]){
 	struct tm tm = *localtime(&t);
 
 	/* Read sensor values */
-  std::future<int> soil = std::async(checkSoil);
-  std::future<int> light = std::async(checkUV);
-  std::future<checkEnv> envir = std::async(readBME680);
+	std::thread sensors_thread(&thread_fn);
+	sensors_thread.join();
 
-	// Get the values from sensors
-	int soil_val = soil.get();
-	float uv_val = light.get();
-	auto env_data = envir.get();
-
-	std::cout << "Environment data" << env_data << " s\n";
-
-
+	printf("UV = %d \n", sensor_data.uv_index);
 	/* Send measurements to MYSQL database
 	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 	{
@@ -387,4 +414,6 @@ int main (int argc, char *argv[]){
   digitalWrite(water_pump, LOW);
   digitalWrite(LED_pin, LOW);
   digitalWrite(heat_pin, LOW);
+
+	flag = false;
 }
