@@ -174,21 +174,6 @@ void readBME();
  */
 int main (int argc, char *argv[]){
 
-  // Input argument parser
-  if( argc == 2 ) {
-    delay = strtol(argv[1], NULL, 10);
-  }
-
-  else if( argc == 3 ) {
-    delay = strtol(argv[1], NULL, 10);
-    nMeas = strtol(argv[2], NULL, 10);
-  }
-
-  else if( argc == 4 ) {
-    delay = strtol(argv[1], NULL, 10);
-    nMeas = strtol(argv[2], NULL, 10);
-  }
-
   readBME();
 
 /*
