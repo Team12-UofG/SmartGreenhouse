@@ -210,7 +210,7 @@ int i = ret.get();
 	int soil_val = soil.get();
 	int uv_val = light.get();
 
-	printf("Soil val = %d   UV val = %d \n", soil_val, uv_val)
+	printf("Soil val = %d   UV val = %d \n", soil_val, uv_val);
 	/* Send measurements to MYSQL database
 	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 	{
