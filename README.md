@@ -48,7 +48,7 @@ A more detailed walkthrough can be found [here.](https://github.com/Team12-UofG/
 Documentation for all methods can be found at [here.] (https://team12-uofg.github.io/SmartGreenhouse/index.html/ "here.")
 
 ## Contributing 
-This project is for the assessment of Real Time Embedded Programming 5 at University of Glasgow. Prior to course completion contributions will be welcome however, please draw your attention to our [license.](https://github.com/Team12-UofG/SmartGreenhouse/master/LICENSE/ "license.")
+This project is for the assessment of Real Time Embedded Programming 5 at University of Glasgow. Prior to course completion contributions will be welcome however, please draw your attention to our [license.](LICENSE "license.")
 
 ## Progress
 Details of project progress and evaluation can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Evaluation/ "here.")
@@ -57,7 +57,7 @@ Details of project progress and evaluation can be found [here.](https://github.c
 [Anton Saikia,](https://github.com/AntonSaikia) 
 [Isla Mitchell,](https://github.com/islasummer)
 [Jaime Robb](https://github.com/jaimesrobb)  
-More information about the team of developers can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Development-Team/ "here.")
+More information about the team of developers can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Team-of-Developers "here.")
 ![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/media/MeetTheTeam.png?raw=true) 
 
 ## Social Media
