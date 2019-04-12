@@ -172,7 +172,9 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 
 /*!
-	@brief Structure initialises BME680 sensors anr performs a reading.
+ * @brief Structure initialises BME680 sensors anr performs a reading.
+ * @return Returns a structure containing the temperature, humidty, air pressure
+ * and air quality reading.
 */
 checkEnv readBME680(){
 	checkEnv environment_data;
@@ -285,7 +287,9 @@ checkEnv readBME680(){
 
 
 /*!
- * @brief Function to read data from soil moisture sensor and check against threshold
+ * @brief Function to read data from soil moisture sensor and checks against
+ * the dry level threshold.
+* @return Returns the soil moisture reading.
  */
 
 int checkSoil() {
@@ -305,7 +309,8 @@ int checkSoil() {
 
 
 /*!
- * @brief Function to read data from UV sensor and check against the threshold
+ * @brief Function to read data from UV sensor and check against the threshold.
+ * @return Returns the UV Index.
  */
 int checkUV() {
   float UV_calc = 0;
@@ -329,7 +334,7 @@ int checkUV() {
 
 
 
-*!
+/*!
  * @brief Main progam.
  */
 int main (int argc, char *argv[]){
