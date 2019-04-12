@@ -68,7 +68,6 @@ struct checkEnv{
 	float humidity;
 	float airQual;
 }
-checkEnv readBME680();
 
 /******************************************************************************
  * Functions for communicating with the BME680 sensor over i2cClose           *
@@ -172,75 +171,9 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 }
 
 
-
-
 /*!
- * @brief Main progam.
- */
-int main (int argc, char *argv[]){
-
-  printf("Test to read all of the sensor values \n");
-
-	/* Configure the UV and Soil Sensor */
-  lightSensor.uvConfigure(); // configure UV sensor
-  Soil_configData = soilSensor.configure(); // configure soil sensor
-
-	/* Setup water pump, LEDs and heat mat */
-  wiringPiSetup();
-  pinMode(water_pump, OUTPUT);
-  pinMode(LED_pin, OUTPUT);
-  pinMode(heat_pin, OUTPUT);
-
-	/* Initialise connection to MySQL database */
-	MYSQL *mysqlConn;
-	MYSQL_RES result;
-	MYSQL_ROW row;
-	mysqlConn = mysql_init(NULL);
-	char buff[1024];
-
-	/* Initialise time */
-	time_t t = time(NULL);
-	struct tm tm = *localtime(&t);
-
-/*
-]
-int func() { return 1; }
-std::future<int> ret = std::async(&func);
-int i = ret.get();
+	@brief Structure initialises BME680 sensors anr performs a reading.
 */
-
-	/* Read sensor values */
-  std::future<int> soil = std::async(checkSoil);
-  std::future<int> light = std::async(checkUV);
-  std::future<checkEnv> envir = std::async(readBME680);
-
-  //soil.join();
-  //light.join();
-  //envir.join();
-
-	// Get the values from sensors
-	int soil_val = soil.get();
-	float uv_val = light.get();
-	float temp = envir.get().temp;
-	float pressure = envir.get().pressure;
-	float humidtiy = envir.get().humidity;
-	float air_quality = envir.get().airQual;
-
-	/* Send measurements to MYSQL database */
-	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
-	{
-		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",soil_val, uv_val, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, temp, pressure, humidity, air_quality);
-		mysql_query(mysqlConn, buff);
-	}
-
-	/* Just for testing - turn outputs off */
-  sleep(1);
-  digitalWrite(water_pump, LOW);
-  digitalWrite(LED_pin, LOW);
-  digitalWrite(heat_pin, LOW);
-}
-
-
 checkEnv readBME680(){
 	checkEnv environment_data;
   int delay = 3;
@@ -386,4 +319,67 @@ int checkUV() {
     digitalWrite(LED_pin, LOW);
   }
   return UV_calc;
+}
+
+
+
+
+
+
+
+
+
+*!
+ * @brief Main progam.
+ */
+int main (int argc, char *argv[]){
+
+  printf("Test to read all of the sensor values \n");
+
+	/* Configure the UV and Soil Sensor */
+  lightSensor.uvConfigure(); // configure UV sensor
+  Soil_configData = soilSensor.configure(); // configure soil sensor
+
+	/* Setup water pump, LEDs and heat mat */
+  wiringPiSetup();
+  pinMode(water_pump, OUTPUT);
+  pinMode(LED_pin, OUTPUT);
+  pinMode(heat_pin, OUTPUT);
+
+	/* Initialise connection to MySQL database */
+	MYSQL *mysqlConn;
+	MYSQL_RES result;
+	MYSQL_ROW row;
+	mysqlConn = mysql_init(NULL);
+	char buff[1024];
+
+	/* Initialise time */
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
+
+	/* Read sensor values */
+  std::future<int> soil = std::async(checkSoil);
+  std::future<int> light = std::async(checkUV);
+  std::future<checkEnv> envir = std::async(readBME680);
+
+	// Get the values from sensors
+	int soil_val = soil.get();
+	float uv_val = light.get();
+	float temp = envir.get().temp;
+	float pressure = envir.get().pressure;
+	float humidtiy = envir.get().humidity;
+	float air_quality = envir.get().airQual;
+
+	/* Send measurements to MYSQL database */
+	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
+	{
+		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",soil_val, uv_val, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, temp, pressure, humidity, air_quality);
+		mysql_query(mysqlConn, buff);
+	}
+
+	/* Just for testing - turn outputs off */
+  sleep(1);
+  digitalWrite(water_pump, LOW);
+  digitalWrite(LED_pin, LOW);
+  digitalWrite(heat_pin, LOW);
 }
