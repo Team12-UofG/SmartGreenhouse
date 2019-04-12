@@ -365,23 +365,23 @@ int main (int argc, char *argv[]){
 	/* Read sensor values */
   std::future<int> soil = std::async(checkSoil);
   std::future<int> light = std::async(checkUV);
-  std::future<checkEnv> envir = std::async(std::launch::deferred, readBME680);
+  std::future<checkEnv> envir = std::async(readBME680);
 
 	// Get the values from sensors
 	int soil_val = soil.get();
 	float uv_val = light.get();
-	float temp = envir.get().temp;
-	float pressure = envir.get().pressure;
-	float humidity = envir.get().humidity;
-	float air_quality = envir.get().airQual;
+	auto env_data = envir.get();
 
-	/* Send measurements to MYSQL database */
+	std::cout << "Environment data" << env_data << " s\n";
+
+
+	/* Send measurements to MYSQL database
 	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 	{
 		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",soil_val, uv_val, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, temp, pressure, humidity, air_quality);
 		mysql_query(mysqlConn, buff);
 	}
-
+	*/
 	/* Just for testing - turn outputs off */
   sleep(1);
   digitalWrite(water_pump, LOW);
