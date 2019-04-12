@@ -365,12 +365,11 @@ int main (int argc, char *argv[]){
 	/* Read sensor values */
   std::future<int> soil = std::async(checkSoil);
   std::future<int> light = std::async(checkUV);
-  std::future<checkEnv> envir = std::async(readBME680);
+  std::future<checkEnv> envir = std::async(std::launch::deferred, readBME680);
 
 	// Get the values from sensors
 	int soil_val = soil.get();
 	float uv_val = light.get();
-	envir.wait();
 	float temp = envir.get().temp;
 	float pressure = envir.get().pressure;
 	float humidity = envir.get().humidity;
