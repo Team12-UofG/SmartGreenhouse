@@ -56,6 +56,7 @@ int readData() {
       uint8_t soilData = 0;
       soilSensor.startConversion(Soil_configData); // Start conversion
       soilData = soilSensor.getResult(&soilData); // Read converted value
+      printf("Soil reading %d \n", soilData);
       soilSum += soilData;
     }
 
@@ -65,6 +66,7 @@ int readData() {
     for(int i=0;i<sample_no;i++){
       float UV_calc = 0;
       UV_calc = lightSensor.readUVI();  // Read converted value
+      printf("UV reading %f \n", UV_calc);
       UVsum += UV_calc;
     }
 
