@@ -33,7 +33,7 @@ UV_sensor lightSensor; // create sensor
  */
 int Soil_configData = 0;
 int readData();
-int sample_no = 100;
+int sample_no = 10;
 
 /*!
  * @brief Main progam.
@@ -53,15 +53,15 @@ int readData() {
   uint8_t soilSum = 0;
   float UVsum = 0;
     for(int i=0;i<sample_no;i++){
-      int soilData = 0;
+      uint8_t soilData = 0;
       soilSensor.startConversion(Soil_configData); // Start conversion
       soilData = soilSensor.checkforResult(&soilData); // Read converted value
-      printf("Soil reading = %d \n", soilData);
+      printf("Soil reading = %d \n", soilDa)
       soilSum += soilData;
       printf("Soil Sum = %d \n", soilSum);
     }
 
-    int averageSoil = soilSum / sample_no;
+    uint8_t averageSoil = soilSum / sample_no;
     printf("Average soil moisture reading: %d \n", averageSoil);
 
     for(int i=0;i<sample_no;i++){

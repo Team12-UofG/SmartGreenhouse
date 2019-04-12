@@ -109,8 +109,8 @@ bool MCP342X::startConversion(uint8_t configData) {
  *  Note: status of -1 "0xFF' implies read error.
  * @param[] dataPtr :
  */
-int MCP342X::getResult(int *dataPtr) {
-	int adcStatus;
+uint8_t MCP342X::getResult(uint8_t *dataPtr) {
+	uint8_t adcStatus;
 	adcStatus = wiringPiI2CRead(fd_soil);
 
   return adcStatus;
@@ -126,8 +126,8 @@ int MCP342X::getResult(int *dataPtr) {
  *  Note: status of -1 "0xFF' implies read error
  * @param[] dataPtr :
  */
-int MCP342X::checkforResult(int *dataPtr) {
-  int adcStatus;
+uint8_t MCP342X::checkforResult(uint8_t *dataPtr) {
+  uint8_t adcStatus;
 
 	adcStatus = wiringPiI2CRead(fd_soil);
 

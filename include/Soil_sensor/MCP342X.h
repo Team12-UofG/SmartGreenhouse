@@ -138,13 +138,13 @@ class MCP342X {
 	* @brief Read the ADC result.
 	* @param[] data :
 	*/
-        int getResult(int *data);
+        uint8_t getResult(uint8_t *data);
 
         /*!
 	* @brief Non-blocking read the ADC result.
 	* @param[] data :
 	*/
-        int checkforResult(int *data);
+        uint8_t checkforResult(uint8_t *data);
 
     private:
 	/*!
