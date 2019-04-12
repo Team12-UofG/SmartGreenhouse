@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <chrono>
 #include "../../include/Environment_sensor/bme680.h"
 #include "../../include/Soil_sensor/MCP342X.h"
 #include "../../include/Soil_sensor/MCP342X.cpp"
@@ -55,7 +56,7 @@ int temp_threshold = 15;
  */
 int checkSoil();
 int checkUV();
-int checkEnv();
+void checkEnv();
 
 /******************************************************************************
  * Functions for communicating with the BME680 sensor over i2cClose           *
@@ -159,14 +160,6 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 }
 
 
-/*!
- * @brief Declaration of function used to get readings from BME680
- */
-void readBME();
-
-
-
-
 
 
 /*!
@@ -184,13 +177,20 @@ int main (int argc, char *argv[]){
   pinMode(LED_pin, OUTPUT);
   pinMode(heat_pin, OUTPUT);
 
+	auto start = std::chrono::high_resolution_clock::now();
+
   std::thread soil (checkSoil);
   std::thread light (checkUV);
-  std::thread envir (readBME);
+  std::thread envir (checkEnv);
 
   soil.join();
   light.join();
   envir.join();
+
+	auto finish = std::chrono::high_resolution_clock::now();
+
+ 	std::chrono::duration<double> elapsed = finish - start;
+ 	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 
   printf("Threads complete \n");
   sleep(1);
@@ -200,7 +200,7 @@ int main (int argc, char *argv[]){
 }
 
 
-void readBME(){
+void checkEnv(){
   int delay = 3;
   int nMeas = 1;
 
