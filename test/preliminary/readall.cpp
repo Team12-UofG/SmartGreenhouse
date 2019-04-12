@@ -199,12 +199,12 @@ int i = ret.get();
 */
 
 	/* Read sensor values */
-  std::future<int> soil = td::async(checkSoil);
-  std::future<int> light = td::async(checkUV);
+  std::future<int> soil = std::async(checkSoil);
+  std::future<int> light = std::async(checkUV);
   std::thread envir (checkEnv);
 
-  soil.join();
-  light.join();
+  //soil.join();
+  //light.join();
   envir.join();
 
 	int soil_val = soil.get();
