@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#include <chrono>
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
 #include <string.h>
