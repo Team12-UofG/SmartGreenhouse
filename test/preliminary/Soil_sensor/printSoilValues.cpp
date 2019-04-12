@@ -38,17 +38,7 @@ int readData();
  * @param argv
  */
 int main(int argc, char** argv) {
-
-  auto t1 = std::chrono::high_resolution_clock::now();
-
    configData = soil_sensor.configure();
-
-   auto t2 = std::chrono::high_resolution_clock::now();
-
-   std::chrono::duration<double> t = t2 - t1;
-   std::cout << "Elapsed time: " << t.count() << " s\n";
-
-
    int counter = 0;
 
   // decode arguments
@@ -75,20 +65,9 @@ int main(int argc, char** argv) {
  * @brief Function to read data from soil moisture sensor
  */
 int readData() {
-
-auto start = std::chrono::high_resolution_clock::now();
-
-
-
     uint8_t result;
     soil_sensor.startConversion(configData); // Start conversion
     result = soil_sensor.getResult(&result); // Read converted value
-
-    auto finish = std::chrono::high_resolution_clock::now();
-
-    std::chrono::duration<double> elapsed = finish - start;
-    std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-
     printf("Result: %d \n", result);
     return 1;
 }
