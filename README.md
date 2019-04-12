@@ -1,20 +1,20 @@
 # SmartGreenhouse   [![Build Status](https://travis-ci.org/Team12-UofG/SmartGreenhouse.svg?branch=master)](https://travis-ci.org/Team12-UofG/SmartGreenhouse)
 
 ## Overview
-The agricultural industry is facing enormous development as a result of population growth, climate change and urbanisation. This, along with developments in smart technology has given rise to the smart greenhouse, which automates the plant growing process. Monitoring and control systems can be developed to produce a self-controlled microclimate to save time, reduce labour, and help planes thrive.
+The aim of the project is to design and develop a modular smart greenhouse that is capable of detecting and responding to a number of changes in environmental conditions in real time. Sensors are used to measure soil moisture, humidity, temperature, UVI/light and air quality. The system will also incorporate LED light, heating and watering systems with automated and manual control. Moreover, the real-time measurements will be displayed on an online web portal enabling the user to view the real-time and historic growth of the plant.
 
-The aim of the project is to design and develop a modular smart greenhouse that is capable of detecting and responding to a number of changes in environmental conditions in real time. A number of sensors will be used to measure soil moisture, humidity, temperature, amount of sunlight, CO2 and even plant growth. The system will also incorporate automated light and temperature control in addition to an automated watering system, thus ensuring that plants can thrive without any human intervention. Moreover, the real-time measurements will be displayed on an online web portal enabling the user to view the real-time and historic growth of the plant.
+The **SmartGreenhouse** will enable users to monitor and manage their plant growth environment remotely, making this an ideal system for travelling professionals and students or those who live in unpredictable climates. 
 
 ![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/media/SYSTEM.jpg?raw=true) 
 
-## Team Members
-Anton Saikia,
-Isla Mitchell,
-Jaime Robb
+## Version 
+**SmartGreenhouse 1.0**  
+_Reads sensor data, uploads and displays on the SmartGreenhouse webpage._
 
-![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/media/MeetTheTeam.png?raw=true)       
+## File Information      
 
-## Hardware 
+## Requirements
+### Hardware 
 * Raspberry Pi 3 Model B 
 * Vishay VEML6075 UVA & UVB sensor
 * Bosch Sensortec BME 680 sensor 
@@ -23,10 +23,12 @@ Jaime Robb
 * Water resevoir tank & piping
 * SmartGreenhouse LED panels
 * Wire Kinetics stainless steel heat mat
-* Greenhouse & planter 
+* Greenhouse & planter  
 
-## Required Packages 
-Packages can be downloaded to your Raspberry pi using `sudo apt install <package_name>`
+More information can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Hardware/ "here.")  
+
+### Packages 
+Packages can be downloaded to your Raspberry pi using `sudo apt install <package_name>`.
 * `apache 2`
 * `g++` `gcc`
 * `git`
@@ -34,10 +36,32 @@ Packages can be downloaded to your Raspberry pi using `sudo apt install <package
 * `mysql-server` `mysql-client` `php-mysql`
 * `php 7.0`
 
+### Software
+More information can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Software/ "here.")
+
+
+## Build & Install 
+A more detailed walkthrough can be found [here.](https://team12-uofg.github.io/SmartGreenhouse/ "here.")
+
+
 ## Documentation
 Documentation for all methods can be found at: https://team12-uofg.github.io/SmartGreenhouse/index.html
 
+## Contributing 
+This project is for the assessment of Real Time Embedded Programming 5 at University of Glasgow. Prior to course completion contributions will be welcome however, please draw your attention to our [license.](https://github.com/Team12-UofG/SmartGreenhouse/master/LICENSE.txt)
+
+## Progress
+Details of project progress and evaluation can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Evaluation)
+
+## Team Members
+Anton Saikia,
+Isla Mitchell,
+Jaime Robb
+More information about the team of developers can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Development-Team)
+![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/media/MeetTheTeam.png?raw=true) 
+
 ## Social Media
+Stay up to date with all our project developments using our social media pages, do not forget to 'like' and 'share'.
 [Instagram](https://www.instagram.com/uofg_smartgreenhouse/?hl=en "Instagram")
 
 [Twitter](https://twitter.com/UofG_SmartGreen "Twitter")
@@ -46,12 +70,5 @@ Documentation for all methods can be found at: https://team12-uofg.github.io/Sma
 
 [Youtube](https://www.youtube.com/channel/UCLjnLePXFhfWH4YzIdtP1aw "Youtube")
 
-[Github Pages](https://team12-uofg.github.io/SmartGreenhouse/ "Github Pages")
-
-## User Manual
-* Before You Start
-* Getting Started
-* Setting Up The SmartGreenhouse
-* Installation of Software
-* FAQs
+More information can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Publicity-and-Promotion/ "here.")
 
