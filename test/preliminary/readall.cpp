@@ -199,8 +199,8 @@ int main (int argc, char *argv[]){
 	char buff[1024];
 
 	/* Initialise time */
-	struct tm tm = *localtime(&t);
 	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
 
 /*
 ]
@@ -223,7 +223,7 @@ int i = ret.get();
 	float uv_val = light.get();
 	float temp = envir.get().temp;
 	float pressure = envir.get().pressure;
-	float humidty = envir.get().humidity;
+	float humidtiy = envir.get().humidity;
 	float air_quality = envir.get().airQual;
 
 	/* Send measurements to MYSQL database */
@@ -331,7 +331,7 @@ checkEnv readBME680(){
   }
 
 	environment_data.temp = data.temperature;
-	environment_data.humidty = data.humidty;
+	environment_data.humidity = data.humidty;
 	environment_data.pressure = data.pressure;
 	environment_data.airQual = data.gas_resistance;
 
