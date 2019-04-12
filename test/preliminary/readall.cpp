@@ -116,7 +116,7 @@ int main (int argc, char *argv[]){
 
 void configureBME(int delay, int nMeas){
   time_t t = time(NULL);
-  struct tm tm = *localtime(&t);
+
   // init device
 	struct bme680_dev gas_sensor;
 	gas_sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
