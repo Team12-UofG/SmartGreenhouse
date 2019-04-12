@@ -80,6 +80,7 @@ int main (){
 
   configureBME(delay, nMeas);
   struct bme680_field_data data;
+  struct bme680_dev gas_sensor;
   struct tm tm = *localtime(&t);
 
 	int i=0;
@@ -88,7 +89,7 @@ int main (){
 	while(i<nMeas && backupCounter < nMeas+3) {
 		// Get sensor data
 		int8_t rslt = bme680_get_sensor_data(&data, &gas_sensor);
-
+    uint16_t meas_period;
 		// Avoid using measurements from an unstable heating setup
 		if(data.status & BME680_HEAT_STAB_MSK)
 		{
@@ -103,8 +104,7 @@ int main (){
 	   }
 
 		// Trigger a meausurement
-    struct bme680_dev gas_sensor;
-		int8_t rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
+		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
 		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
@@ -136,23 +136,6 @@ int main (){
 
 
 void configureBME(int delay, int nMeas){
-
-	// Input argument parser
-	if( argc == 2 ) {
-		delay = strtol(argv[1], NULL, 10);
-	}
-
-	else if( argc == 3 ) {
-		delay = strtol(argv[1], NULL, 10);
-		nMeas = strtol(argv[2], NULL, 10);
-	}
-
-	else if( argc == 4 ) {
-		delay = strtol(argv[1], NULL, 10);
-		nMeas = strtol(argv[2], NULL, 10);
-		outputFile = argv[3];
-	}
-
   // open Linux I2C device
   i2cOpen();
 
@@ -202,7 +185,6 @@ void configureBME(int delay, int nMeas){
    * measurement is complete */
   uint16_t meas_period;
   bme680_get_profile_dur(&meas_period, &gas_sensor);
-  user_delay_ms(meas_period + delay*1000); /* Delay till the measurement is ready */
 }
 
 /*!
@@ -210,7 +192,7 @@ void configureBME(int delay, int nMeas){
  */
 
 int checkSoil() {
-  uint8_t soil = 0;
+  uint8_t soilData = 0;
   soilSensor.startConversion(Soil_configData); // Start conversion
   soilData = soilSensor.checkforResult(&soilData); // Read converted value
   printf("Soil reading = %d \n", soilData);
