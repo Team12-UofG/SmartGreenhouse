@@ -27,7 +27,7 @@ int main (){
   auto finish1 = std::chrono::high_resolution_clock::now();
 
   std::chrono::duration<double> elapsed1 = finish1 - start1;
-  std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+  std::cout << "Elapsed time: " << elapsed1.count() << " s\n";
 
 
   auto start2 = std::chrono::high_resolution_clock::now();
@@ -35,5 +35,5 @@ int main (){
   auto finish2 = std::chrono::high_resolution_clock::now();
   printf("UV Index reading: %f \n", UV_calc);
   std::chrono::duration<double> elapsed2 = finish2 - start2;
-  std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+  std::cout << "Elapsed time: " << elapsed2.count() << " s\n";
 }
