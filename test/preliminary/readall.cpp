@@ -372,7 +372,7 @@ int main (int argc, char *argv[]){
 	float uv_val = light.get();
 	float temp = envir.get().temp;
 	float pressure = envir.get().pressure;
-	float humidtiy = envir.get().humidity;
+	float humidity = envir.get().humidity;
 	float air_quality = envir.get().airQual;
 
 	/* Send measurements to MYSQL database */
