@@ -149,25 +149,7 @@ int main(int argc, char *argv[] ) {
 
 	int delay = 3;
 	int nMeas = 1;
-	char *outputFile = NULL;
-
-	// Input argument parser
-	if( argc == 2 ) {
-		delay = strtol(argv[1], NULL, 10);
-
-	}
-
-	else if( argc == 3 ) {
-		delay = strtol(argv[1], NULL, 10);
-		nMeas = strtol(argv[2], NULL, 10);
-	}
-
-	else if( argc == 4 ) {
-		delay = strtol(argv[1], NULL, 10);
-		nMeas = strtol(argv[2], NULL, 10);
-		outputFile = argv[3];
-	}
-
+	
 	printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
 
 	time_t t = time(NULL);
