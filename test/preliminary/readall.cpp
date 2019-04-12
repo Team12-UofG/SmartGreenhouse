@@ -370,6 +370,7 @@ int main (int argc, char *argv[]){
 	// Get the values from sensors
 	int soil_val = soil.get();
 	float uv_val = light.get();
+	envir.wait():
 	float temp = envir.get().temp;
 	float pressure = envir.get().pressure;
 	float humidity = envir.get().humidity;
