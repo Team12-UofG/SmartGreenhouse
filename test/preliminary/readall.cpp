@@ -32,8 +32,17 @@ UV_sensor lightSensor; // create sensor
  * @brief Initialise variables to be used
  */
 int Soil_configData = 0;
-int readData();
-int sample_no = 10;
+int water_pump = 23;
+int LED_pin = 26;
+
+int dry_threshold = 60;
+int UV_threshold = 3;
+int temp_threshold = 15;
+/*!
+ * @brief Funxtions to read the sensors
+ */
+int checkSoil();
+int checkUV();
 
 /*!
  * @brief Main progam.
@@ -43,35 +52,80 @@ int main (){
   printf("Reading the soil moisture sensor and UV light sensor \n");
   lightSensor.uvConfigure(); // configure sensor
   Soil_configData = soilSensor.configure();
-  uint8_t value = readData();
+
+  wiringPiSetup();
+  pinMode (water_pump, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
+
+  while(1){
+  std::thread soil (checkSoil);
+  std::thread light (checkUV);
+
+  soil.join();
+  light.join();
+  }
 }
 
 /*!
- * @brief Function to read data from soil moisture sensor and average 100 samples
+ * @brief Function to read data from soil moisture sensor and check against threshold
  */
-int readData() {
-  uint8_t soilSum = 0;
-  float UVsum = 0;
-    for(int i=0;i<sample_no;i++){
-      uint8_t soilData = 0;
-      soilSensor.startConversion(Soil_configData); // Start conversion
-      soilData = soilSensor.checkforResult(&soilData); // Read converted value
-      printf("Soil reading = %d \n", soilData);
-      soilSum += soilData;
-      printf("Soil Sum = %d \n", soilSum);
-    }
 
-    uint8_t averageSoil = soilSum / sample_no;
-    printf("Average soil moisture reading: %d \n", averageSoil);
+int checkSoil() {
+  uint8_t soilData = 0;
+  soilSensor.startConversion(Soil_configData); // Start conversion
+  soilData = soilSensor.checkforResult(&soilData); // Read converted value
+  printf("Soil reading = %d \n", soilData);
 
-    for(int i=0;i<sample_no;i++){
-      float UV_calc = 0;
-      UV_calc = lightSensor.readUVI();  // Read converted value
-      UVsum += UV_calc;
-    }
+  if(soilData < dry_threshold){
+    digitalWrite(water_pump, HIGH);
+    sleep(5);
+  }
 
-    float averageUV = UVsum / sample_no;
-    printf("Average UV Index reading: %f \n", averageUV);
-
-    return 1;
+  return 1;
 }
+
+/*!
+ * @brief Function to read data from UV sensor and check against the threshold
+ */
+int checkUV() {
+  float UV_calc = 0;
+  UV_calc = lightSensor.readUVI();  // Read converted value
+  printf("UV Index reading: %f \n", UV_calc);
+
+  if(UV_calc < UV_threshold){
+    digitalWrite(LED_pin, HIGH);
+  }
+  else {
+    digitalWrite(LED_pin, LOW);
+  }
+  return 1;
+}
+
+
+
+/*
+void foo()
+{
+  // do stuff...
+}
+
+void bar(int x)
+{
+  // do stuff...
+}
+
+int main()
+{
+  std::thread first (foo);     // spawn new thread that calls foo()
+  std::thread second (bar,0);  // spawn new thread that calls bar(0)
+
+  std::cout << "main, foo and bar now execute concurrently...\n";
+
+  // synchronize threads:
+  first.join();                // pauses until first finishes
+  second.join();               // pauses until second finishes
+
+  std::cout << "foo and bar completed.\n";
+
+  return 0;
+}
+*/
