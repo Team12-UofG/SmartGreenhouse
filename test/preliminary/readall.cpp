@@ -174,32 +174,36 @@ void readBME();
  */
 int main (int argc, char *argv[]){
 
-  readBME();
-
-/*
   printf("Test to read all of the sensor values \n");
 
   lightSensor.uvConfigure(); // configure sensor
   Soil_configData = soilSensor.configure();
 
   wiringPiSetup();
-  pinMode (water_pump, OUTPUT); // Setup pin 22 (GPIO 6) as output pin
+  pinMode(water_pump, OUTPUT);
+  pinMode(LED_pin, OUTPUT);
+  pinMode(heat_pin, OUTPUT);
 
-  while(1){
   std::thread soil (checkSoil);
   std::thread light (checkUV);
+  std::thread envir (readBME);
 
   soil.join();
   light.join();
-  }
-*/
+  envir.join();
+
+  printf("Threads complete \n");
+  sleep(1);
+  digitalWrite(water_pump, LOW);
+  digitalWrite(LED_pin, LOW);
+  digitalWrite(heat_pin, LOW);
 }
 
 
 void readBME(){
   int delay = 3;
   int nMeas = 1;
-  
+
   printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
 
   time_t t = time(NULL);
@@ -285,12 +289,21 @@ void readBME(){
     user_delay_ms(meas_period); /* Wait for the measurement to complete */
       backupCounter++;
   }
+  float temp = data.temperature;
+  if (temp < temp_threshold){
+    digitalWrite(heat_pin, HIGH);
+  }
+  else {
+    digitalWrite(heat_pin, LOW);
+  }
 
   printf("** End of measurement **\n");
 
     // close Linux I2C device
   i2cClose();
 }
+
+
 
 /*!
  * @brief Function to read data from soil moisture sensor and check against threshold
@@ -309,6 +322,8 @@ int checkSoil() {
 
   return 1;
 }
+
+
 
 /*!
  * @brief Function to read data from UV sensor and check against the threshold
