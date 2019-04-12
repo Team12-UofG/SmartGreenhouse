@@ -10,8 +10,6 @@
  *
 */
 
-#include <wiringPi.h>
-#include <wiringPiI2C.h> // add "-lwiringPi" to compile
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
@@ -175,6 +173,7 @@ int main(int argc, char *argv[] ) {
 	// set address of the BME680
 	i2cSetAddress(0x76);
 
+	auto start = std::chrono::high_resolution_clock::now();
 	// init device
 	struct bme680_dev gas_sensor;
 	gas_sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
@@ -227,6 +226,11 @@ int main(int argc, char *argv[] ) {
 	int i=0;
 	int backupCounter = 0;
 
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+
+	auto start = std::chrono::high_resolution_clock::now();
 	while(i<nMeas && backupCounter < nMeas+3) {
 		// Get sensor data
 		rslt = bme680_get_sensor_data(&data, &gas_sensor);
@@ -251,6 +255,11 @@ int main(int argc, char *argv[] ) {
 		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
 	   	backupCounter++;
 	}
+
+	auto finish = std::chrono::high_resolution_clock::now();
+
+ 	std::chrono::duration<double> elapsed = finish - start;
+ 	std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 
 	printf("** End of measurement **\n");
 
