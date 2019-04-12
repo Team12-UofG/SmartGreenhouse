@@ -50,11 +50,12 @@ int main (){
  * @brief Function to read data from soil moisture sensor and average 100 samples
  */
 int readData() {
+  uint8_t soilSum = 0;
+  float UVsum = 0;
     for(int i=0;i<sample_no;i++){
       uint8_t soilData = 0;
-      uint8_t soilSum = 0;
       soilSensor.startConversion(Soil_configData); // Start conversion
-      soilData = soilSensor.getResult(&result); // Read converted value
+      soilData = soilSensor.getResult(&soilData); // Read converted value
       soilSum += soilData;
     }
 
@@ -63,7 +64,6 @@ int readData() {
 
     for(int i=0;i<sample_no;i++){
       float UV_calc = 0;
-      float UVsum = 0;
       UV_calc = lightSensor.readUVI();  // Read converted value
       UVsum += UV_calc;
     }
