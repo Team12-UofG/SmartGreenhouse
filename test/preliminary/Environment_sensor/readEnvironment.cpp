@@ -27,6 +27,9 @@
 #include "../../../include/UV_sensor/VEML6075.h"
 #include "../../../include/UV_sensor/VEML6075.cpp"
 
+
+using namespace std;
+
 /*! @brief Our destination time zone */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
 
