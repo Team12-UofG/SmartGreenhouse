@@ -10,7 +10,7 @@
 */
 #include "../../../include/UV_sensor/VEML6075.h"
 #include "../../../include/UV_sensor/VEML6075.cpp"
-
+#include <chrono>
 /*!
  * @brief UV sensor object.
  */
@@ -22,12 +22,18 @@ UV_sensor lightSensor; // create UV sensor object
 int main (){
 
   printf("VEML6075 Simple Test \n");
+  auto start1 = std::chrono::high_resolution_clock::now();
   lightSensor.uvConfigure(); // configure sensor
+  auto finish1 = std::chrono::high_resolution_clock::now();
 
-  float UVA_calc = lightSensor.readUVA(); // additional
-  float UVB_calc = lightSensor.readUVB(); // additional
+  std::chrono::duration<double> elapsed1 = finish1 - start1;
+  std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+
+
+  auto start2 = std::chrono::high_resolution_clock::now();
   float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
-  printf("UVA Index reading: %f \n", UVA_calc);
-  printf("UVB Index reading: %f \n", UVB_calc);
+  auto finish2 = std::chrono::high_resolution_clock::now();
   printf("UV Index reading: %f \n", UV_calc);
+  std::chrono::duration<double> elapsed2 = finish2 - start2;
+  std::cout << "Elapsed time: " << elapsed.count() << " s\n";
 }
