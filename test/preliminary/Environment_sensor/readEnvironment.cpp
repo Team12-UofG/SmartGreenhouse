@@ -10,7 +10,8 @@
  * @author Anton Saikia (based on example by twartzek and Boschsensortech)
  *
  **/
-
+#include <wiringPi.h>
+#include <wiringPiI2C.h> // add "-lwiringPi" to compile
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
