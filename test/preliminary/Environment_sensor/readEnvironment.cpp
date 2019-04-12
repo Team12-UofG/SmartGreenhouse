@@ -158,16 +158,6 @@ int main(int argc, char *argv[] ) {
 
 	char buff[1024];
 
-	// create lock file first
-	FILE *f = fopen("~bme680i2c.lock", "w");
-	if (f == NULL)
-	{
-		printf("Error opening file!\n");
-		exit(1);
-	}
-	fprintf(f,"I2C locked by BME680 readout. \r\n");
-	fclose(f);
-
 	int delay = 3;
 	int nMeas = 1;
 	char *outputFile = NULL;
@@ -243,7 +233,7 @@ int main(int argc, char *argv[] ) {
 	bme680_get_profile_dur(&meas_period, &gas_sensor);
 	user_delay_ms(meas_period + delay*1000); /* Delay till the measurement is ready */
 
-    struct bme680_field_data data;
+  struct bme680_field_data data;
 
 	struct tm tm = *localtime(&t);
 
@@ -279,9 +269,6 @@ int main(int argc, char *argv[] ) {
 
   	// close Linux I2C device
 	i2cClose();
-
-	// delete lock file
-	remove("~bme680i2c.lock");
 
 	return 0;
 }
