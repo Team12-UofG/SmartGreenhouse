@@ -73,7 +73,7 @@ void configureBME(int delay, int nMeas);
 /*!
  * @brief Main progam.
  */
-int main (){
+int main (int argc, char *argv[]){
   // Input argument parser
   if( argc == 2 ) {
     delay = strtol(argv[1], NULL, 10);
