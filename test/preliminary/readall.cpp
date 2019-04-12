@@ -65,9 +65,10 @@ int checkUV();
 struct checkEnv{
 	float temp;
 	float pressure;
-	float humidty;
+	float humidity;
 	float airQual;
 }
+checkEnv readBME680();
 
 /******************************************************************************
  * Functions for communicating with the BME680 sensor over i2cClose           *
@@ -195,7 +196,11 @@ int main (int argc, char *argv[]){
 	MYSQL_RES result;
 	MYSQL_ROW row;
 	mysqlConn = mysql_init(NULL);
+	char buff[1024];
+
+	/* Initialise time */
 	struct tm tm = *localtime(&t);
+	time_t t = time(NULL);
 
 /*
 ]
@@ -206,7 +211,7 @@ int i = ret.get();
 
 	/* Read sensor values */
   std::future<int> soil = std::async(checkSoil);
-  std::future<float> light = std::async(checkUV);
+  std::future<int> light = std::async(checkUV);
   std::future<checkEnv> envir = std::async(readBME680);
 
   //soil.join();
