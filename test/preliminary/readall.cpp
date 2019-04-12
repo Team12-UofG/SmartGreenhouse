@@ -35,6 +35,7 @@
 #include "../../include/UV_sensor/VEML6075.h"
 #include "../../include/UV_sensor/VEML6075.cpp"
 
+
 using namespace std;
 
 /*! @brief Our destination time zone */
@@ -331,7 +332,9 @@ int checkUV() {
 
 
 
-
+/*!
+ * @brief Structure to contain the readings from the sensor
+ */
 struct all_data
 {
 	int soil_moisture;
@@ -343,9 +346,12 @@ struct all_data
 };
 
 std::atomic<all_data> sensor_data;
-
 std::atomic_bool flag {true};
 
+/*!
+ * @brief This thread reads the sensor values and updates the atomic variable
+ * sensor data with the results.
+ */
 void thread_fn()
 {
 	while (flag){
@@ -367,7 +373,6 @@ void thread_fn()
 		sensor_data = data;
 
 		std::this_thread::sleep_for(std::chrono::seconds(1));
-
 	}
 }
 
@@ -387,7 +392,7 @@ int main (int argc, char *argv[]){
 
 	/* Read sensor values */
 	std::thread sensors_thread(&thread_fn);
-	
+
 	/* Setup water pump, LEDs and heat mat */
   wiringPiSetup();
   pinMode(water_pump, OUTPUT);
@@ -404,12 +409,10 @@ int main (int argc, char *argv[]){
 	/* Initialise time */
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
-
-	sensors_thread.join();
+	flag = false;
 
 	auto data = sensor_data.load();
 
-	flag = false;
 
 	/* Send measurements to MYSQL database */
 	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
@@ -424,4 +427,6 @@ int main (int argc, char *argv[]){
   digitalWrite(water_pump, LOW);
   digitalWrite(LED_pin, LOW);
   digitalWrite(heat_pin, LOW);
+
+	sensors_thread.join();
 }
