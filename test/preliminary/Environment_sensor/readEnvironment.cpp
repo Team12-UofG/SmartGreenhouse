@@ -22,8 +22,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <mysql/mysql.h>
-#include "bme680.h"
+#include "../../include/Environment_Sensor/bme680.h"
 
 /*! @brief Our destination time zone */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
