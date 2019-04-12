@@ -15,41 +15,61 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
+#include <thread>
 #include "../../include/Soil_sensor/MCP342X.h"
 #include "../../include/Soil_sensor/MCP342X.cpp"
 #include "../../include/UV_sensor/VEML6075.h"
 #include "../../include/UV_sensor/VEML6075.cpp"
 
+using namespace std;
 /*!
  * @brief Instantiate objects used in this project.
  */
 MCP342X soilSensor;
-int Soil_configData = 0;
 UV_sensor lightSensor; // create sensor
+
+/*!
+ * @brief Initialise variables to be used
+ */
+int Soil_configData = 0;
 int readData();
+int sample_no = 100;
 
 /*!
  * @brief Main progam.
  */
 int main (){
 
-  printf("Simple Test \n");
+  printf("Reading the soil moisture sensor and UV light sensor \n");
   lightSensor.uvConfigure(); // configure sensor
   Soil_configData = soilSensor.configure();
   uint8_t value = readData();
 }
 
 /*!
- * @brief Function to read data from soil moisture and UV light sensor.
+ * @brief Function to read data from soil moisture sensor and average 100 samples
  */
 int readData() {
-    uint8_t result;
-    soilSensor.startConversion(Soil_configData); // Start conversion
-    result = soilSensor.getResult(&result); // Read converted value
-    printf("Soil moisture reading: %d \n", result);
+    for(int i=0;i<sample_no;i++){
+      uint8_t soilData = 0;
+      uint8_t soilSum = 0;
+      soilSensor.startConversion(Soil_configData); // Start conversion
+      soilData = soilSensor.getResult(&result); // Read converted value
+      soilSum += soilData;
+    }
 
-    float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
-    printf("UV Index reading: %f \n", UV_calc);
+    uint8_t averageSoil = soilSum / sample_no;
+    printf("Average soil moisture reading: %d \n", averageSoil);
+
+    for(int i=0;i<sample_no;i++){
+      float UV_calc = 0;
+      float UVsum = 0;
+      UV_calc = lightSensor.readUVI();  // Read converted value
+      UVsum += UV_calc;
+    }
+
+    float averageUV = UVsum / sample_no;
+    printf("Average UV Index reading: %f \n", averageUV);
 
     return 1;
 }
