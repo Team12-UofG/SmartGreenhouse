@@ -47,7 +47,7 @@
 
 /*! @file bme680.c
  @brief Sensor driver for BME680 sensor - non header file. */
-#include "../../include/Environment_sensor/bme680.h"
+#include "../../../include/Environment_sensor/bme680.h"
 
 /*!
  * @brief This internal API is used to read the calibrated data from the sensor.
