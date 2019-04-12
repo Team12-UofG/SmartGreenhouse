@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include <mysql/mysql.h> // add "-lmysqlclient" to compile
 #include <stdlib.h>
 #include <time.h>
 #include <linux/i2c-dev.h>
@@ -146,13 +145,10 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 int main(int argc, char *argv[] ) {
 
-	printf("Simple Test \n");
-
 	lightSensor.uvConfigure(); // configure sensor
-
 	Soil_configData = soilSensor.configure();
 
-        uint8_t SM;
+  uint8_t SM;
 	soilSensor.startConversion(Soil_configData); // Start conversion
 	SM = soilSensor.getResult(&SM); // Read converted value
 	printf("Soil moisture reading: %d \n", SM);
@@ -160,11 +156,6 @@ int main(int argc, char *argv[] ) {
 	float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
 	printf("UV Index reading: %f \n", UV_calc);
 
-	// initialize connection to MySQL database
-        MYSQL *mysqlConn;
-        MYSQL_RES result;
-        MYSQL_ROW row;
-        mysqlConn = mysql_init(NULL);
 	char buff[1024];
 
 	// create lock file first
@@ -201,8 +192,6 @@ int main(int argc, char *argv[] ) {
 	printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
 
 	time_t t = time(NULL);
-	putenv(DESTZONE);               // Switch to destination time zone
-
 	// open Linux I2C device
 	i2cOpen();
 
@@ -278,13 +267,6 @@ int main(int argc, char *argv[] ) {
 			i++;
 	}
 
-		// Measurement to MYSQL database
-		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
-		{
-                        snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",SM, UV_calc, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
-	                mysql_query(mysqlConn, buff);
-		}
-
 		// Trigger a meausurement
 		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
@@ -294,9 +276,6 @@ int main(int argc, char *argv[] ) {
 	}
 
 	printf("** End of measurement **\n");
-
-	// close MySQL
-	mysql_close(mysqlConn);
 
   	// close Linux I2C device
 	i2cClose();

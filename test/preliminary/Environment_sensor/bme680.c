@@ -47,7 +47,7 @@
 
 /*! @file bme680.c
  @brief Sensor driver for BME680 sensor - non header file. */
-#include "bme680.h"
+#include "../../../include/Environment_sensor/bme680.h"
 
 /*!
  * @brief This internal API is used to read the calibrated data from the sensor.
@@ -103,7 +103,7 @@ static uint8_t calc_heater_dur(uint16_t dur);
  * @brief This internal API is used to calculate the temperature value.
  *
  * @param[in] dev	:Structure instance of bme680_dev
- * @param[in] temp_adc	:Contains the temperature ADC value 
+ * @param[in] temp_adc	:Contains the temperature ADC value
  *
  * @return uint32_t calculated temperature
  */
@@ -113,7 +113,7 @@ static int16_t calc_temperature(uint32_t temp_adc, struct bme680_dev *dev);
  * @brief This internal API is used to calculate the pressure value.
  *
  * @param[in] dev	:Structure instance of bme680_dev
- * @param[in] pres_adc	:Contains the pressure ADC value 
+ * @param[in] pres_adc	:Contains the pressure ADC value
  *
  * @return uint32_t calculated pressure
  */
@@ -156,7 +156,7 @@ static uint8_t calc_heater_res(uint16_t temp, const struct bme680_dev *dev);
  * temperature value value in float format.
  *
  * @param[in] dev	:Structure instance of bme680_dev
- * @param[in] temp_adc	:Contains the temperature ADC value 
+ * @param[in] temp_adc	:Contains the temperature ADC value
  *
  * @return Calculated temperature in float
  */
@@ -167,7 +167,7 @@ static float calc_temperature(uint32_t temp_adc, struct bme680_dev *dev);
  * pressure value value in float format.
  *
  * @param[in] dev	:Structure instance of bme680_dev
- * @param[in] pres_adc	:Contains the pressure ADC value 
+ * @param[in] pres_adc	:Contains the pressure ADC value
  *
  * @return Calculated pressure in float
  */
