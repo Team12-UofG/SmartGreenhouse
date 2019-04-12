@@ -208,7 +208,7 @@ int i = ret.get();
   envir.join();
 
 	int soil_val = soil.get();
-	int uv_val = light.get():
+	int uv_val = light.get();
 
 	printf("Soil val = %d   UV val = %d \n", soil_val, uv_val)
 	/* Send measurements to MYSQL database
