@@ -51,7 +51,7 @@ MCP342X soilSensor;
 UV_sensor lightSensor;
 
 /*!
- * @brief Initialise variables to be used.
+ * @brief Initiate the Soil_configData variable to zero.
  */
 int Soil_configData = 0;
 /** @brief GPIO pin of water pump. */
