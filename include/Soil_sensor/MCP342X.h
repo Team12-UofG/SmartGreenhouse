@@ -131,19 +131,19 @@ class MCP342X {
 
         /*!
 	* @brief Starts a conversion.
-	* @param[] configData : Structure instance to hold the configured data
+	* @param configData : Structure instance to hold the configured data
 	*/
         bool startConversion(uint8_t configData);
 
         /*!
 	* @brief Read the ADC result.
-	* @param[] data : Structure instance to hold the data
+	* @param data : Structure instance to hold the data
 	*/
         uint8_t getResult(uint8_t *data);
 
         /*!
 	* @brief Non-blocking read the ADC result.
-	* @param[] data : Structure instance to hold the data
+	* @param data : Structure instance to hold the data
 	*/
         uint8_t checkforResult(uint8_t *data);
 
