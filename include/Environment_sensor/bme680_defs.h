@@ -308,7 +308,11 @@
 #define BME680_RUN_GAS_SEL		UINT16_C(64)
 /** @brief Settings selector. */
 #define BME680_NBCONV_SEL		UINT16_C(128)
-/** @brief Settings selector. */
+/** @brief Settings selector. 
+* @param[in] BME680_GAS_MEAS_SEL : Settings selector for gas measurement
+* @param[in] BME680_RUN_GAS_SEL : Settings selector for running the gas sensor
+* @param[in] BME680_NBCONV_SEL : Settings selector for number of conversions
+*/
 #define BME680_GAS_SENSOR_SEL		(BME680_GAS_MEAS_SEL | BME680_RUN_GAS_SEL | BME680_NBCONV_SEL)
 
 /** @brief Number of conversion settings. */
@@ -463,7 +467,9 @@
 #define BME680_MAX_OVERFLOW_VAL      INT32_C(0x40000000)
 
 
-/** @brief Macro to combine two 8 bit datas to form a 16 bit data. */
+/** @brief Macro to combine two 8 bit datas to form a 16 bit data. 
+* @param[in] msb : Data
+* @param[in] lsb : Data */
 #define BME680_CONCAT_BYTES(msb, lsb)	(((uint16_t)msb << 8) | (uint16_t)lsb)
 
 
@@ -514,7 +520,8 @@
 typedef int8_t (*bme680_com_fptr_t)(uint8_t dev_id, uint8_t reg_addr, uint8_t *data, uint16_t len);
 
 /*!
- * @brief Delay function pointer.
+ * @brief Delay function pointer with given period.
+ * @param[in] bme680_delay_fptr_t : Delay function pointer
  * @param[in] period : Time period in milliseconds
  */
 typedef void (*bme680_delay_fptr_t)(uint32_t period);
