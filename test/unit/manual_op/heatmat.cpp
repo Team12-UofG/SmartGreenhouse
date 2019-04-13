@@ -2,7 +2,7 @@
 /*!
  *  @file heatmat.cpp
  *  @author A. Saikia
- *  @brief turns on heat mat
+ *  @brief Turns on heat mat.
  *  @version 0.1
  *  @date 2019-04-12
  *  @copyright Copyright (c) 2019
@@ -15,7 +15,9 @@
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
 
+/** @brief GPIO pin of heat mat. */
 int heat_pad = 27;
+/** @brief Main function. */
 int main (){
   wiringPiSetup();
   pinMode(heat_pad, OUTPUT);
