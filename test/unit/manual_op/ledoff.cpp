@@ -3,7 +3,7 @@
 /*!
  *  @file ledoff.cpp
  *  @author A. Saikia
- *  @brief turns off led matrix
+ *  @brief Turns off the LED matrix.
  *  @version 0.1
  *  @date 2019-04-12
  *  @copyright Copyright (c) 2019
@@ -16,7 +16,9 @@
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
 
+/** @brief GPIO pin of LED panels. */
 int LEDs = 26;
+/** Main function. */
 int main (){
   wiringPiSetup();
   pinMode(LEDs, OUTPUT);
