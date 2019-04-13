@@ -70,10 +70,25 @@ int temp_threshold = 15;
 
 int checkSoil();
 int checkUV();
+/*!
+* @brief Struct to read data from environment sensor.
+*/
 struct checkEnv{
+/*!
+* @brief Temperature reading from environment sensor.
+*/
 	float temp;
+/*!
+* @brief Pressure reading from environment sensor.
+*/
 	float pressure;
+/*!
+* @brief Humidity reading from environment sensor.
+*/
 	float humidity;
+/*!
+* @brief Air quality reading from environment sensor.
+*/
 	float airQual;
 };
 
@@ -186,7 +201,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 
 /*!
- * @brief Structure initialises BME680 sensors anr performs a reading.
+ * @brief Structure initialises BME680 sensors and performs a reading.
  * @return A structure containing the temperature, humidty, air pressure
  * and air quality reading.
 */
