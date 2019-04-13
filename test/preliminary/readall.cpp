@@ -60,11 +60,11 @@ int water_pump = 23;
 int LED_pin = 26;
 /** @brief GPIO pin of heat mat. */
 int heat_pin = 27;
-/** @brief The UVI value at which the motor will turn on.*/
+/** @brief The soil moisture value at which the motor will turn on.*/
 int dry_threshold = 60;
 /** @brief The UVI value at which the LEDs will turn on.*/
 int UV_threshold = 3;
-/** @brief The UVI value at which the heat mat will turn on.*/
+/** @brief The temperature value at which the heat mat will turn on.*/
 int temp_threshold = 15;
 
 /*!
