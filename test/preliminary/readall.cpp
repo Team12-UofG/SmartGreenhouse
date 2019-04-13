@@ -60,7 +60,7 @@ int water_pump = 23;
 int LED_pin = 26;
 /** @brief GPIO pin of heat mat. */
 int heat_pin = 27;
-
+/** @brief The UVI value at which the motor will turn on.*/
 int dry_threshold = 60;
 /** @brief The UVI value at which the LEDs will turn on.*/
 int UV_threshold = 3;
@@ -366,8 +366,9 @@ struct all_data
 	float air_pressure;
 	float air_quality;
 };
-
+/** @brief Atomic variable visible by all threads, ensures sensor data is available.*/
 std::atomic<all_data> sensor_data;
+/** @brief Atomic variable visible by all threads, ensures thread runs whilst true.*/
 std::atomic_bool flag {true};
 
 /*!
