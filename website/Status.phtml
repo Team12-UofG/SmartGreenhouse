@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <?php
+/*! @file Status.phtml
+* @brief File that allows for current sensor reading displays.
+/*!
+* @brief Log in for mysqli server.
+**/
  $db = mysqli_connect('localhost','UOG_SGH','test','SGH_TPAQ')
  or die('Error connecting to MySQL server.');
 ?>
@@ -224,9 +229,14 @@ h1,h2 { display: inline;}
 
       
 <?php
-
+/*!
+* @brief Indicates which table to select data from.
+**/
 $query = "SELECT * FROM TPAQ ORDER BY ID DESC LIMIT 1" ;
 mysqli_query($db, $query) or die('Error querying database.');
+/*!
+* @brief Accesses mysqli_query. 
+**/
 $result = mysqli_query($db, $query);
 if($result->num_rows > 0)
 {
