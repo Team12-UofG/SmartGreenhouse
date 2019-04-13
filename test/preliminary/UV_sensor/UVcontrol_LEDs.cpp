@@ -18,10 +18,18 @@
 #include "../../../include/UV_sensor/VEML6075.h"
 #include "../../../include/UV_sensor/VEML6075.cpp"
 
+/**
+@brief LED panel object. */
 UV_sensor lightSensor;
+/**
+@brief GPIO pin of LED panels. */
 int LED_pin = 26;       // GPIO 27 is pin 32
+/**
+@brief The UVI value at which the LEDs will turn on. */
 int UVI_threshold = 3;  // This is the UVI value at which the LEDs will turn on
 
+/**
+* @brief Main function. */
 int main (){
 
   printf("UV Sensor with LED matrix test \n");
