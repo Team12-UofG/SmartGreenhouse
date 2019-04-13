@@ -39,14 +39,14 @@
  * No license is granted by implication or otherwise under any patent or
  * patent rights of the copyright holder.
  *
- * @file		bme680.c
+ * @file	
  * @date	19 Jun 2018
  * @version	3.5.9
  * @brief       Sensor driver for BME680 sensor - non-header file.
  *
  */
 
-/*! @file bme680.c
+/*! @file 
  @brief Sensor driver for BME680 sensor - non header file. 
  */
 #include "../../include/Environment_sensor/bme680.h"
