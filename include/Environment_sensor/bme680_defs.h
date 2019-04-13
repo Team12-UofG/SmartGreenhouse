@@ -105,7 +105,6 @@
 /** C standard macros */
 #ifndef NULL
 #ifdef __cplusplus
-/** C standard macros */
 #define NULL   0
 #else
 /** C standard macros */
@@ -156,24 +155,24 @@
 /** @brief Error code definitions. */
 #define BME680_OK		INT8_C(0)
 
-/* @brief Error. */
+/** @brief Error. */
 #define BME680_E_NULL_PTR		    INT8_C(-1)
-/* @brief Error. */
+/** @brief Error. */
 #define BME680_E_COM_FAIL		    INT8_C(-2)
-/* @brief Error. */
+/** @brief Error. */
 #define BME680_E_DEV_NOT_FOUND		INT8_C(-3)
-/* @brief Error. */
+/** @brief Error. */
 #define BME680_E_INVALID_LENGTH		INT8_C(-4)
 
 
-/* @brief Warning. */
+/** @brief Warning. */
 #define BME680_W_DEFINE_PWR_MODE	INT8_C(1)
-/* @brief Warning. */
+/** @brief Warning. */
 #define BME680_W_NO_NEW_DATA        INT8_C(2)
 
-/* @brief Info's. */
+/** @brief Info's. */
 #define BME680_I_MIN_CORRECTION		UINT8_C(1)
-/* @brief Info's. */
+/** @brief Info's. */
 #define BME680_I_MAX_CORRECTION		UINT8_C(2)
 
 /**  @brief Register map other coefficient's address. */
@@ -440,19 +439,19 @@
 #define BME680_GH3_REG		(38)
 
 
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_FILTER_INDEX		UINT8_C(5)
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_TEMP_INDEX		UINT8_C(4)
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_PRES_INDEX		UINT8_C(4)
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_HUM_INDEX		UINT8_C(2)
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_NBCONV_INDEX		UINT8_C(1)
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_RUN_GAS_INDEX	UINT8_C(1)
-/** BME680 register buffer index settings. */
+/** @brief BME680 register buffer index settings. */
 #define BME680_REG_HCTRL_INDEX		UINT8_C(0)
 
 
