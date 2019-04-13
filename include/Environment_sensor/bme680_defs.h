@@ -486,20 +486,20 @@
 
 /** Type definitions. */
 /*!
- * Generic communication function pointer.
- * @param dev_id[in] : Place holder to store the ID of the device structure,
+ * @brief Generic communication function pointer.
+ * @param[in] dev_id : Place holder to store the ID of the device structure,
  *                    can be used to store the index of the chip select or
  *                    I2C address of the device
- * @param reg_addr[in] :	Used to select the register the where data needs to
+ * @param[in] reg_addr :	Used to select the register the where data needs to
  *                      be read from or written to
- * @param reg_data[in,out] : Data array to read/write
- * @param len[in] : Length of the data array
+ * @param[in,out] reg_data : Data array to read/write
+ * @param[in] len : Length of the data array
  */
 typedef int8_t (*bme680_com_fptr_t)(uint8_t dev_id, uint8_t reg_addr, uint8_t *data, uint16_t len);
 
 /*!
- * Delay function pointer.
- * @param period[in] : Time period in milliseconds
+ * @brief Delay function pointer.
+ * @param[in] period : Time period in milliseconds
  */
 typedef void (*bme680_delay_fptr_t)(uint32_t period);
 
