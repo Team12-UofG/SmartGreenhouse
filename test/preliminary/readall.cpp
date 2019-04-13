@@ -2,7 +2,7 @@
 /*!
  *  @file readall.cpp
  *  @author Isla Mitchell
- *  @brief Takes one reading of the all the sensors and prints the values
+ *  @brief Takes one reading of the all the sensors and prints the values.
  *  @version 0.1
  *  @date 2019-04-07
  *  @copyright Copyright (c) 2019
@@ -38,32 +38,49 @@
 
 using namespace std;
 
-/*! @brief Our destination time zone */
+/*! @brief Our destination time zone. */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
 
 /*!
- * @brief Instantiate objects for the soil sensor and light sensor.
+ * @brief Instantiate object for the soil sensor.
  */
 MCP342X soilSensor;
+/*!
+ * @brief Instantiate object for the light sensor.
+ */
 UV_sensor lightSensor;
 
 /*!
  * @brief Initialise variables to be used.
  */
 int Soil_configData = 0;
+/** @brief GPIO pin of water pump. */
 int water_pump = 23;
+/** @brief GPIO pin of LED panels. */
 int LED_pin = 26;
+/** @brief GPIO pin of heat mat. */
 int heat_pin = 27;
 
 int dry_threshold = 60;
+/** @brief The UVI value at which the LEDs will turn on.*/
 int UV_threshold = 3;
+/** @brief The UVI value at which the heat mat will turn on.*/
 int temp_threshold = 15;
 
 /*!
  * @brief Declaration of functions to read the sensors.
  */
+/*!
+ * @brief Function to read the soil sensor.
+ */
 int checkSoil();
+/*!
+ * @brief Function to read the UV light sensor.
+ */
 int checkUV();
+/*!
+ * @brief Function to read the environment sensor (temperature, pressure, humidity and air quality).
+ */
 struct checkEnv{
 	float temp;
 	float pressure;
@@ -114,7 +131,7 @@ void i2cSetAddress(int address)
 
 /*!
     @brief Set the user delay in milliseconds.
-    @param period[in]
+    @param[in] period : Time period in milliseconds
 */
 void user_delay_ms(uint32_t period)
 {
@@ -123,10 +140,13 @@ void user_delay_ms(uint32_t period)
 
 /*!
     @brief Read I2C information.
-    @param  dev_id
-    @param  reg_addr
-    @param  reg_data
-    @param  len
+ * @param[in] dev_id : Place holder to store the ID of the device structure,
+ *                    can be used to store the index of the chip select or
+ *                    I2C address of the device
+ * @param[in] reg_addr :	Used to select the register the where data needs to
+ *                      be read from or written to
+ * @param[in,out] reg_data : Data array to read/write
+ * @param[in] len : Length of the data array
 */
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
@@ -148,10 +168,13 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
 
 /*!
     @brief Write I2C information.
-    @param  dev_id
-    @param  reg_addr
-    @param  reg_data
-    @param  len
+ * @param[in] dev_id : Place holder to store the ID of the device structure,
+ *                    can be used to store the index of the chip select or
+ *                    I2C address of the device
+ * @param[in] reg_addr :	Used to select the register the where data needs to
+ *                      be read from or written to
+ * @param[in,out] reg_data : Data array to read/write
+ * @param[in] len : Length of the data array
 */
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
@@ -175,7 +198,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 /*!
  * @brief Structure initialises BME680 sensors anr performs a reading.
- * @return Returns a structure containing the temperature, humidty, air pressurie
+ * @return Returns a structure containing the temperature, humidty, air pressure
  * and air quality reading.
 */
 checkEnv readBME680(){
@@ -289,11 +312,10 @@ checkEnv readBME680(){
 
 
 /*!
- * @brief Function to read data from soil moisture sensor and checks against
- * the dry level threshold.
+* @brief Function to read data from soil moisture sensor and checks against
+* the dry level threshold.
 * @return Returns the soil moisture reading.
- */
-
+*/
 int checkSoil() {
   uint8_t soilData = 0;
   soilSensor.startConversion(Soil_configData); // Start conversion
@@ -333,7 +355,7 @@ int checkUV() {
 
 
 /*!
- * @brief Structure to contain the readings from the sensor
+ * @brief Structure to contain the readings from the sensor.
  */
 struct all_data
 {
@@ -381,6 +403,8 @@ void thread_fn()
 
 /*!
  * @brief Main progam.
+   @param[in]  argc : Used in input arguement parser, determines output file
+   @param[in]  argv : Used input arguement parser, to specify output file
  */
 int main (int argc, char *argv[]){
 
