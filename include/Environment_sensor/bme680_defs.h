@@ -71,142 +71,148 @@
 /******************************************************************************/
 
 #if !defined(UINT8_C) && !defined(INT8_C)
+/*! @brief Common macros.					      */
 #define INT8_C(x)       S8_C(x)
+/*! @brief Common macros.					      */
 #define UINT8_C(x)      U8_C(x)
 #endif
 
 #if !defined(UINT16_C) && !defined(INT16_C)
+/*! @brief Common macros.					      */
 #define INT16_C(x)      S16_C(x)
+/*! @brief Common macros.					      */
 #define UINT16_C(x)     U16_C(x)
 #endif
 
 #if !defined(INT32_C) && !defined(UINT32_C)
+/*! @brief Common macros.					      */
 #define INT32_C(x)      S32_C(x)
+/*! @brief Common macros.					      */
 #define UINT32_C(x)     U32_C(x)
 #endif
 
 #if !defined(INT64_C) && !defined(UINT64_C)
+/*! @brief Common macros.					      */
 #define INT64_C(x)      S64_C(x)
+/*! @brief Common macros.					      */
 #define UINT64_C(x)     U64_C(x)
 #endif
 ///@}
 
 /**@}*/
 
-///@{
+
 /** C standard macros */
 #ifndef NULL
 #ifdef __cplusplus
+/** C standard macros */
 #define NULL   0
 #else
+/** C standard macros */
 #define NULL   ((void *) 0)
 #endif
 #endif
-///@}
 
-///@{
+
 /** BME680 configuration macros. */
 /** Enable or un-comment the macro to provide floating point data output. */
 #ifndef BME680_FLOAT_POINT_COMPENSATION
 /* #define BME680_FLOAT_POINT_COMPENSATION */
 #endif
-///@}
+
 
 /** @brief BME680 General configuration. */
 #define BME680_POLL_PERIOD_MS		UINT8_C(10)
 
 /**
- * @defgroup group-1 
- * 
  * @brief BME680 I2C addresses.
- *
  */
-/** @addtogroup group-1
-* @{
-*/
 #define BME680_I2C_ADDR_PRIMARY		UINT8_C(0x76)
+/**
+ * @brief BME680 I2C addresses.
+ */
 #define BME680_I2C_ADDR_SECONDARY	UINT8_C(0x77)
-/** @}*/
 
 /** @brief BME680 unique chip identifier. */
 #define BME680_CHIP_ID  UINT8_C(0x61)
 
-///@{
 /** @brief BME680 coefficients related defines. */
 #define BME680_COEFF_SIZE		UINT8_C(41)
+/** @brief BME680 coefficients related defines. */
 #define BME680_COEFF_ADDR1_LEN		UINT8_C(25)
+/** @brief BME680 coefficients related defines. */
 #define BME680_COEFF_ADDR2_LEN		UINT8_C(16)
-///@}
 
-///@{
+
 /** @brief BME680 field_x related defines. */
 #define BME680_FIELD_LENGTH		UINT8_C(15)
+/** @brief BME680 field_x related defines. */
 #define BME680_FIELD_ADDR_OFFSET	UINT8_C(17)
-///@}
 
-///@{
+
 /** @brief Soft reset command. */
 #define BME680_SOFT_RESET_CMD   UINT8_C(0xb6)
-//@}
 
-///@{
 /** @brief Error code definitions. */
 #define BME680_OK		INT8_C(0)
-///@}
 
-///@{
 /* @brief Error. */
 #define BME680_E_NULL_PTR		    INT8_C(-1)
+/* @brief Error. */
 #define BME680_E_COM_FAIL		    INT8_C(-2)
+/* @brief Error. */
 #define BME680_E_DEV_NOT_FOUND		INT8_C(-3)
+/* @brief Error. */
 #define BME680_E_INVALID_LENGTH		INT8_C(-4)
-///@}
 
-///@{
+
 /* @brief Warning. */
 #define BME680_W_DEFINE_PWR_MODE	INT8_C(1)
+/* @brief Warning. */
 #define BME680_W_NO_NEW_DATA        INT8_C(2)
-///@}
 
-///@{
 /* @brief Info's. */
 #define BME680_I_MIN_CORRECTION		UINT8_C(1)
+/* @brief Info's. */
 #define BME680_I_MAX_CORRECTION		UINT8_C(2)
-///@}
 
-///@{
 /**  @brief Register map other coefficient's address. */
 #define BME680_ADDR_RES_HEAT_VAL_ADDR	UINT8_C(0x00)
+/**  @brief Register map other coefficient's address. */
 #define BME680_ADDR_RES_HEAT_RANGE_ADDR	UINT8_C(0x02)
+/**  @brief Register map other coefficient's address. */
 #define BME680_ADDR_RANGE_SW_ERR_ADDR	UINT8_C(0x04)
+/**  @brief Register map other coefficient's address. */
 #define BME680_ADDR_SENS_CONF_START	UINT8_C(0x5A)
+/**  @brief Register map other coefficient's address. */
 #define BME680_ADDR_GAS_CONF_START	UINT8_C(0x64)
-///@}
 
 /** @brief Field settings. */
 #define BME680_FIELD0_ADDR		UINT8_C(0x1d)
 
-///@{
 /** @brief Heater settings. */
 #define BME680_RES_HEAT0_ADDR		UINT8_C(0x5a)
+/** @brief Heater settings. */
 #define BME680_GAS_WAIT0_ADDR		UINT8_C(0x64)
-///@}
 
-///@{
 /** @brief Sensor configuration registers. */
 #define BME680_CONF_HEAT_CTRL_ADDR		UINT8_C(0x70)
+/** @brief Sensor configuration registers. */
 #define BME680_CONF_ODR_RUN_GAS_NBC_ADDR	UINT8_C(0x71)
+/** @brief Sensor configuration registers. */
 #define BME680_CONF_OS_H_ADDR			UINT8_C(0x72)
+/** @brief Sensor configuration registers. */
 #define BME680_MEM_PAGE_ADDR			UINT8_C(0xf3)
+/** @brief Sensor configuration registers. */
 #define BME680_CONF_T_P_MODE_ADDR		UINT8_C(0x74)
+/** @brief Sensor configuration registers. */
 #define BME680_CONF_ODR_FILT_ADDR		UINT8_C(0x75)
-///@}
 
-///@{
 /** @brief Coefficient's address. */
 #define BME680_COEFF_ADDR1	UINT8_C(0x89)
+/** @brief Coefficient's address. */
 #define BME680_COEFF_ADDR2	UINT8_C(0xe1)
-///@}
+
 
 /** @brief Chip identifier. */
 #define BME680_CHIP_ID_ADDR	UINT8_C(0xd0)
@@ -214,172 +220,240 @@
 /** @brief Soft reset register. */
 #define BME680_SOFT_RESET_ADDR		UINT8_C(0xe0)
 
-///@{
 /** @brief Heater control settings. */
 #define BME680_ENABLE_HEATER		UINT8_C(0x00)
+/** @brief Heater control settings. */
 #define BME680_DISABLE_HEATER		UINT8_C(0x08)
-///@}
 
-///@{
 /** @brief Gas measurement settings. */
 #define BME680_DISABLE_GAS_MEAS		UINT8_C(0x00)
+/** @brief Gas measurement settings. */
 #define BME680_ENABLE_GAS_MEAS		UINT8_C(0x01)
-///@}
 
-///@{
+
 /** @brief Over-sampling settings. */
 #define BME680_OS_NONE		UINT8_C(0)
+/** @brief Over-sampling settings. */
 #define BME680_OS_1X		UINT8_C(1)
+/** @brief Over-sampling settings. */
 #define BME680_OS_2X		UINT8_C(2)
+/** @brief Over-sampling settings. */
 #define BME680_OS_4X		UINT8_C(3)
+/** @brief Over-sampling settings. */
 #define BME680_OS_8X		UINT8_C(4)
+/** @brief Over-sampling settings. */
 #define BME680_OS_16X		UINT8_C(5)
-///@}
 
-///@{
 /** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_0	UINT8_C(0)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_1	UINT8_C(1)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_3	UINT8_C(2)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_7	UINT8_C(3)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_15	UINT8_C(4)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_31	UINT8_C(5)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_63	UINT8_C(6)
+/** @brief IIR filter settings. */
 #define BME680_FILTER_SIZE_127	UINT8_C(7)
-///@}
 
-///@{
 /** @brief Power mode settings. */
 #define BME680_SLEEP_MODE	UINT8_C(0)
+/** @brief Power mode settings. */
 #define BME680_FORCED_MODE	UINT8_C(1)
-///@}
 
 /** @brief Delay related macro declaration. */
 #define BME680_RESET_PERIOD	UINT32_C(10)
 
-///@{
 /** @brief SPI memory page settings. */
 #define BME680_MEM_PAGE0	UINT8_C(0x10)
+/** @brief SPI memory page settings. */
 #define BME680_MEM_PAGE1	UINT8_C(0x00)
-///@}
+
 
 /** @brief Ambient humidity shift value for compensation. */
 #define BME680_HUM_REG_SHIFT_VAL	UINT8_C(4)
 
-///@{
 /** @brief Run gas enable and disable settings. */
 #define BME680_RUN_GAS_DISABLE	UINT8_C(0)
+/** @brief Run gas enable and disable settings. */
 #define BME680_RUN_GAS_ENABLE	UINT8_C(1)
-///@}
 
-///@{
+
 /** @brief Buffer length macro declaration. */
 #define BME680_TMP_BUFFER_LENGTH	UINT8_C(40)
+/** @brief Buffer length macro declaration. */
 #define BME680_REG_BUFFER_LENGTH	UINT8_C(6)
+/** @brief Buffer length macro declaration. */
 #define BME680_FIELD_DATA_LENGTH	UINT8_C(3)
+/** @brief Buffer length macro declaration. */
 #define BME680_GAS_REG_BUF_LENGTH	UINT8_C(20)
-///@}
 
-///@{
+
 /** @brief Settings selector. */
 #define BME680_OST_SEL			UINT16_C(1)
+/** @brief Settings selector. */
 #define BME680_OSP_SEL			UINT16_C(2)
+/** @brief Settings selector. */
 #define BME680_OSH_SEL			UINT16_C(4)
+/** @brief Settings selector. */
 #define BME680_GAS_MEAS_SEL		UINT16_C(8)
+/** @brief Settings selector. */
 #define BME680_FILTER_SEL		UINT16_C(16)
+/** @brief Settings selector. */
 #define BME680_HCNTRL_SEL		UINT16_C(32)
+/** @brief Settings selector. */
 #define BME680_RUN_GAS_SEL		UINT16_C(64)
+/** @brief Settings selector. */
 #define BME680_NBCONV_SEL		UINT16_C(128)
+/** @brief Settings selector. */
 #define BME680_GAS_SENSOR_SEL		(BME680_GAS_MEAS_SEL | BME680_RUN_GAS_SEL | BME680_NBCONV_SEL)
-///@}
 
-///@{
 /** @brief Number of conversion settings. */
 #define BME680_NBCONV_MIN		UINT8_C(0)
+/** @brief Number of conversion settings. */
 #define BME680_NBCONV_MAX		UINT8_C(10)
-///@}
 
-///@{
 /** @brief Mask definitions. */
 #define BME680_GAS_MEAS_MSK	UINT8_C(0x30)
+/** @brief Mask definitions. */
 #define BME680_NBCONV_MSK	UINT8_C(0X0F)
+/** @brief Mask definitions. */
 #define BME680_FILTER_MSK	UINT8_C(0X1C)
+/** @brief Mask definitions. */
 #define BME680_OST_MSK		UINT8_C(0XE0)
+/** @brief Mask definitions. */
 #define BME680_OSP_MSK		UINT8_C(0X1C)
+/** @brief Mask definitions. */
 #define BME680_OSH_MSK		UINT8_C(0X07)
+/** @brief Mask definitions. */
 #define BME680_HCTRL_MSK	UINT8_C(0x08)
+/** @brief Mask definitions. */
 #define BME680_RUN_GAS_MSK	UINT8_C(0x10)
+/** @brief Mask definitions. */
 #define BME680_MODE_MSK		UINT8_C(0x03)
+/** @brief Mask definitions. */
 #define BME680_RHRANGE_MSK	UINT8_C(0x30)
+/** @brief Mask definitions. */
 #define BME680_RSERROR_MSK	UINT8_C(0xf0)
+/** @brief Mask definitions. */
 #define BME680_NEW_DATA_MSK	UINT8_C(0x80)
+/** @brief Mask definitions. */
 #define BME680_GAS_INDEX_MSK	UINT8_C(0x0f)
+/** @brief Mask definitions. */
 #define BME680_GAS_RANGE_MSK	UINT8_C(0x0f)
+/** @brief Mask definitions. */
 #define BME680_GASM_VALID_MSK	UINT8_C(0x20)
+/** @brief Mask definitions. */
 #define BME680_HEAT_STAB_MSK	UINT8_C(0x10)
+/** @brief Mask definitions. */
 #define BME680_MEM_PAGE_MSK	UINT8_C(0x10)
+/** @brief Mask definitions. */
 #define BME680_SPI_RD_MSK	UINT8_C(0x80)
+/** @brief Mask definitions. */
 #define BME680_SPI_WR_MSK	UINT8_C(0x7f)
+/** @brief Mask definitions. */
 #define	BME680_BIT_H1_DATA_MSK	UINT8_C(0x0F)
-///@}
 
-///@{
 /** @brief Bit position definitions for sensor settings. */
 #define BME680_GAS_MEAS_POS	UINT8_C(4)
+/** @brief Bit position definitions for sensor settings. */
 #define BME680_FILTER_POS	UINT8_C(2)
+/** @brief Bit position definitions for sensor settings. */
 #define BME680_OST_POS		UINT8_C(5)
+/** @brief Bit position definitions for sensor settings. */
 #define BME680_OSP_POS		UINT8_C(2)
+/** @brief Bit position definitions for sensor settings. */
 #define BME680_RUN_GAS_POS	UINT8_C(4)
-///@}
 
-/**@{*/ 
 /** @brief Array index to Field data mapping for calibration data. */
 #define BME680_T2_LSB_REG	(1)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_T2_MSB_REG	(2)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_T3_REG		(3)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P1_LSB_REG	(5)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P1_MSB_REG	(6)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P2_LSB_REG	(7)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P2_MSB_REG	(8)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P3_REG		(9)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P4_LSB_REG	(11)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P4_MSB_REG	(12)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P5_LSB_REG	(13)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P5_MSB_REG	(14)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P7_REG		(15)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P6_REG		(16)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P8_LSB_REG	(19)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P8_MSB_REG	(20)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P9_LSB_REG	(21)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P9_MSB_REG	(22)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_P10_REG		(23)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H2_MSB_REG	(25)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H2_LSB_REG	(26)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H1_LSB_REG	(26)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H1_MSB_REG	(27)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H3_REG		(28)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H4_REG		(29)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H5_REG		(30)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H6_REG		(31)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_H7_REG		(32)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_T1_LSB_REG	(33)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_T1_MSB_REG	(34)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_GH2_LSB_REG	(35)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_GH2_MSB_REG	(36)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_GH1_REG		(37)
+/** @brief Array index to Field data mapping for calibration data. */
 #define BME680_GH3_REG		(38)
-/**@}*/ 
 
-//@{
+
 /** BME680 register buffer index settings. */
 #define BME680_REG_FILTER_INDEX		UINT8_C(5)
+/** BME680 register buffer index settings. */
 #define BME680_REG_TEMP_INDEX		UINT8_C(4)
+/** BME680 register buffer index settings. */
 #define BME680_REG_PRES_INDEX		UINT8_C(4)
+/** BME680 register buffer index settings. */
 #define BME680_REG_HUM_INDEX		UINT8_C(2)
+/** BME680 register buffer index settings. */
 #define BME680_REG_NBCONV_INDEX		UINT8_C(1)
+/** BME680 register buffer index settings. */
 #define BME680_REG_RUN_GAS_INDEX	UINT8_C(1)
+/** BME680 register buffer index settings. */
 #define BME680_REG_HCTRL_INDEX		UINT8_C(0)
-//@}
 
 
 /** @brief BME680 pressure calculation macros. */
