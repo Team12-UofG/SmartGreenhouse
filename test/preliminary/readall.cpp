@@ -318,7 +318,6 @@ checkEnv readBME680(){
 /*!
 * @brief Function to read data from soil moisture sensor and checks against
 * the dry level threshold.
-* @return Returns the soil moisture reading
 */
 int checkSoil() {
   uint8_t soilData = 0;
