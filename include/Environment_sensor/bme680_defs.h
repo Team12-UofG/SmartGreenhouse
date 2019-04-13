@@ -538,30 +538,30 @@ enum bme680_intf {
  * @brief Sensor field data structure.
  */
 struct	bme680_field_data {
-	/*! Contains new_data, gasm_valid & heat_stab */
+	/*! @brief Contains new_data, gasm_valid & heat_stab. */
 	uint8_t status;
-	/*! The index of the heater profile used */
+	/*! @brief The index of the heater profile used. */
 	uint8_t gas_index;
-	/*! Measurement index to track order */
+	/*! @brief Measurement index to track order. */
 	uint8_t meas_index;
 
 #ifndef BME680_FLOAT_POINT_COMPENSATION
-	/*! Temperature in degree celsius x100 */
+	/*! @brief Temperature in degree celsius x100. */
 	int16_t temperature;
-	/*! Pressure in Pascal */
+	/*! @brief Pressure in Pascal. */
 	uint32_t pressure;
-	/*! Humidity in % relative humidity x1000 */
+	/*! @brief Humidity in % relative humidity x1000. */
 	uint32_t humidity;
-	/*! Gas resistance in Ohms */
+	/*! @brief Gas resistance in Ohms. */
 	uint32_t gas_resistance;
 #else
-	/*! Temperature in degree celsius */
+	/*! @brief Temperature in degree celsius. */
 	float temperature;
-	/*! Pressure in Pascal */
+	/*! @brief Pressure in Pascal. */
 	float pressure;
-	/*! Humidity in % relative humidity x1000 */
+	/*! @brief Humidity in % relative humidity x1000. */
 	float humidity;
-	/*! Gas resistance in Ohms */
+	/*! @brief Gas resistance in Ohms. */
 	float gas_resistance;
 
 #endif
@@ -572,65 +572,65 @@ struct	bme680_field_data {
  * @brief Structure to hold the calibration data.
  */
 struct	bme680_calib_data {
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	uint16_t par_h1;
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	uint16_t par_h2;
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	int8_t par_h3;
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	int8_t par_h4;
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	int8_t par_h5;
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	uint8_t par_h6;
-	/*! Variable to store calibrated humidity data */
+	/*! @brief Variable to store calibrated humidity data. */
 	int8_t par_h7;
-	/*! Variable to store calibrated gas data */
+	/*! @brief Variable to store calibrated gas data. */
 	int8_t par_gh1;
-	/*! Variable to store calibrated gas data */
+	/*! @brief Variable to store calibrated gas data. */
 	int16_t par_gh2;
-	/*! Variable to store calibrated gas data */
+	/*! @brief Variable to store calibrated gas data. */
 	int8_t par_gh3;
-	/*! Variable to store calibrated temperature data */
+	/*! @brief Variable to store calibrated temperature data. */
 	uint16_t par_t1;
-	/*! Variable to store calibrated temperature data */
+        /*! @brief Variable to store calibrated temperature data. */
 	int16_t par_t2;
-	/*! Variable to store calibrated temperature data */
+	/*! @brief Variable to store calibrated temperature data. */
 	int8_t par_t3;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	uint16_t par_p1;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int16_t par_p2;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int8_t par_p3;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int16_t par_p4;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int16_t par_p5;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int8_t par_p6;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int8_t par_p7;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int16_t par_p8;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	int16_t par_p9;
-	/*! Variable to store calibrated pressure data */
+	/*! @brief Variable to store calibrated pressure data. */
 	uint8_t par_p10;
 
 #ifndef BME680_FLOAT_POINT_COMPENSATION
-	/*! Variable to store t_fine size */
+	/*! @brief Variable to store t_fine size. */
 	int32_t t_fine;
 #else
-	/*! Variable to store t_fine size */
+	/*! @ brief Variable to store t_fine size. */
 	float t_fine;
 #endif
-	/*! Variable to store heater resistance range */
+	/*! @brief Variable to store heater resistance range. */
 	uint8_t res_heat_range;
-	/*! Variable to store heater resistance value */
+	/*! @brief Variable to store heater resistance value. */
 	int8_t res_heat_val;
-	/*! Variable to store error range */
+	/*! @brief Variable to store error range. */
 	int8_t range_sw_err;
 };
 
@@ -639,13 +639,13 @@ struct	bme680_calib_data {
  * over-sampling and filter settings.
  */
 struct	bme680_tph_sett {
-	/*! Humidity oversampling */
+	/*! @brief Humidity oversampling. */
 	uint8_t os_hum;
-	/*! Temperature oversampling */
+	/*! @brief Temperature oversampling. */
 	uint8_t os_temp;
-	/*! Pressure oversampling */
+	/*! @brief Pressure oversampling. */
 	uint8_t os_pres;
-	/*! Filter coefficient */
+	/*! @brief Filter coefficient. */
 	uint8_t filter;
 };
 
@@ -654,15 +654,15 @@ struct	bme680_tph_sett {
  *  and status parameters.
  */
 struct	bme680_gas_sett {
-	/*! Variable to store nb conversion */
+	/*! @brief Variable to store nb conversion. */
 	uint8_t nb_conv;
-	/*! Variable to store heater control */
+	/*! @brief Variable to store heater control. */
 	uint8_t heatr_ctrl;
-	/*! Run gas enable value */
+	/*! @brief Run gas enable value. */
 	uint8_t run_gas;
-	/*! Heater temperature value */
+	/*! @brief Heater temperature value. */
 	uint16_t heatr_temp;
-	/*! Duration profile value */
+	/*! @brief Duration profile value. */
 	uint16_t heatr_dur;
 };
 
@@ -670,35 +670,35 @@ struct	bme680_gas_sett {
  * @brief BME680 sensor device structure.
  */
 struct	bme680_dev {
-	/*! Chip Id */
+	/*! @brief Chip Id. */
 	uint8_t chip_id;
-	/*! Device Id */
+	/*! @brief Device Id. */
 	uint8_t dev_id;
-	/*! SPI/I2C interface */
+	/*! @brief SPI/I2C interface. */
 	enum bme680_intf intf;
-	/*! Memory page used */
+	/*! @brief Memory page used. */
 	uint8_t mem_page;
-	/*! Ambient temperature in Degree C */
+	/*! @brief Ambient temperature in degrees celcius. */
 	int8_t amb_temp;
-	/*! Sensor calibration data */
+	/*! @brief Sensor calibration data. */
 	struct bme680_calib_data calib;
-	/*! Sensor settings */
+	/*! @brief Sensor settings. */
 	struct bme680_tph_sett tph_sett;
-	/*! Gas Sensor settings */
+	/*! @brief Gas Sensor settings. */
 	struct bme680_gas_sett gas_sett;
-	/*! Sensor power modes */
+	/*! @brief Sensor power modes. */
 	uint8_t power_mode;
-	/*! New sensor fields */
+	/*! @brief New sensor fields. */
 	uint8_t new_fields;
-	/*! Store the info messages */
+	/*! @brief Store the info messages. */
 	uint8_t info_msg;
-	/*! Bus read function pointer */
+	/*! @brief Bus read function pointer. */
 	bme680_com_fptr_t read;
-	/*! Bus write function pointer */
+	/*! @brief Bus write function pointer. */
 	bme680_com_fptr_t write;
-	/*! delay function pointer */
+	/*! @brief delay function pointer. */
 	bme680_delay_fptr_t delay_ms;
-	/*! Communication function result */
+	/*! @brief Communication function result. */
 	int8_t com_rslt;
 };
 
