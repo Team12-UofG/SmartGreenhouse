@@ -109,7 +109,7 @@ void i2cClose()
 
 /*!
     @brief Set the I2C slave address for all subsequent I2C device transfers.
-    @param address[in] : 12C slave address
+    @param[in] address : 12C slave address
 */
 void i2cSetAddress(int address)
 {
