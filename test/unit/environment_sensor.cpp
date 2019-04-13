@@ -3,7 +3,7 @@
  *
  * @brief I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor
  *
- * 
+ *
  * Sensor Data is exported to MySQL database
  * Application Note
  * @version 0.2
@@ -23,7 +23,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <mysql/mysql.h>
-#include "bme680.h"
+#include "../../include/Environment_sensor/bme680.h"
 
 /*! @brief Our destination time zone */
 
@@ -131,7 +131,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 /*!
     @brief Main function.
     @param argc
-    @param argv 
+    @param argv
 */
 
 int main(int argc, char *argv[] )
@@ -172,7 +172,7 @@ int main(int argc, char *argv[] )
 	else if( argc == 4 ) {
 		delay = strtol(argv[1], NULL, 10);
 		nMeas = strtol(argv[2], NULL, 10);
-		outputFile = argv[3]; 
+		outputFile = argv[3];
 	}
 
 	printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
@@ -213,10 +213,10 @@ int main(int argc, char *argv[] )
 
 	/* Select the power mode */
 	/* Must be set before writing the sensor configuration */
-	gas_sensor.power_mode = BME680_FORCED_MODE; 
+	gas_sensor.power_mode = BME680_FORCED_MODE;
 
 	/* Set the required sensor settings needed */
-	set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL 
+	set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL
 		| BME680_GAS_SENSOR_SEL;
 
 	/* Set the desired sensor configuration */
@@ -242,7 +242,7 @@ int main(int argc, char *argv[] )
 		// Get sensor data
 		rslt = bme680_get_sensor_data(&data, &gas_sensor);
 
-		// Avoid using measurements from an unstable heating setup 
+		// Avoid using measurements from an unstable heating setup
 		if(data.status & BME680_HEAT_STAB_MSK)
 		{
 			t = time(NULL);
@@ -254,7 +254,7 @@ int main(int argc, char *argv[] )
 			printf("\r\n");
 			i++;
 	}
-    	
+
 		// Measurement to MYSQL database
 		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 		{
@@ -266,7 +266,7 @@ int main(int argc, char *argv[] )
 		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
-		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */			
+		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
 	   	backupCounter++;
 	}
 

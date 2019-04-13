@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.7)
 project(SmartGreenhouse)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -7,7 +7,7 @@ include_directories(include)
 include_directories(include/Environment_sensor)
 include_directories(include/Soil_sensor)
 include_directories(include/UV_sensor)
-include_directories(test)
+include_directories(test -lwiringPi -lstdc++ -latomic -lpthread -lmysqlclient)
 
 add_executable(SmartGreenhouse
     include/Environment_sensor/bme680.h
