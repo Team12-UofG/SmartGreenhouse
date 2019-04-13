@@ -15,10 +15,6 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include "LEDMATRIX.h"
-#include "LEDMATRIX.cpp"
-
-LED_matrix led_panel;   // create LED matrix panel object
 
 int LEDs = 26;
 int main (){
