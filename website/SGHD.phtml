@@ -1,5 +1,13 @@
+/**
+* @file 
+* @brief Code for webpage that displays historical data.
+**/
+
 <!DOCTYPE html>
 <?php
+/*!
+* @brief Log in for mysqli server.
+**/
  $db = mysqli_connect('localhost','UOG_SGH','test','SGH_TPAQ')
  or die('Error connecting to MySQL server.');
 ?>
@@ -217,9 +225,15 @@ input[type=text]:focus {
     &nbsp;&nbsp;<h1>HISTORICAL DATA</h1><br/>
 
 <?php
-
+	
+/*!
+* @brief Indicates which table to select data from.
+**/
 $query = "SELECT * FROM TPAQ";
 mysqli_query($db, $query) or die('Error querying database.');
+/*!
+* @brief Accesses mysqli_query. 
+**/
 $result = mysqli_query($db, $query);
 if($result->num_rows > 0)
 {
