@@ -1,3 +1,13 @@
+/*!
+ *  @file 
+ *  @author Isla Mitchell
+ *  @brief Sets up LED panels.
+ *  @version 0.1
+ *  @date 2019-04-07
+ *  @copyright Copyright (c) 2019
+ *
+*/
+
 #include <stdio.h>
 #include <cstdlib>
 #include <wiringPi.h>
@@ -5,15 +15,15 @@
 
 /**************************************************************************/
 /*!
-    @brief Sets up the wiringPi to communicate with GPIO pins
+    @brief Sets up the wiringPi to communicate with GPIO pins.
 */
 /**************************************************************************/
 static int setup_ledpanel = wiringPiSetup();
 
 /**************************************************************************/
 /*!
-    @brief Set the GPIO pin of the LED panel
-    @param LED_pin The GPIO pin used to turn the panel on/off
+    @brief Set the GPIO pin of the LED panel.
+    @param LED_pin : The GPIO pin used to turn the panel on/off
 */
 /**************************************************************************/
 void LED_matrix::configurePanel(int LED_pin1, int LED_pin2) {
@@ -23,7 +33,7 @@ void LED_matrix::configurePanel(int LED_pin1, int LED_pin2) {
 
 /**************************************************************************/
 /*!
-    @brief Turns the LED growth matrix on
+    @brief Turns the LED growth matrix on.
 */
 /**************************************************************************/
 void LED_matrix::on(void){
@@ -33,7 +43,7 @@ void LED_matrix::on(void){
 
 /**************************************************************************/
 /*!
-    @brief Turns the LED growth matrix off
+    @brief Turns the LED growth matrix off.
 */
 /**************************************************************************/
 void LED_matrix::off(void){
