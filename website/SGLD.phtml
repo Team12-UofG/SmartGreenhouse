@@ -279,7 +279,7 @@ $table['cols'] = array(
  )
 );
 /*!
-* @brief Used to specify the number of rows needed.
+* @brief Used to specify the number of rows needed for the temperature table.
 **/
 while($row = mysqli_fetch_array($result))
 {
@@ -353,6 +353,9 @@ $table1['cols'] = array(
   'type' => 'number'
  )
 );
+/*!
+* @brief Used to specify the number of rows needed for the humidity table.
+**/
 while($row = mysqli_fetch_array($result))
 {
  $sub_array = array();
@@ -418,6 +421,9 @@ $table2['cols'] = array(
   'type' => 'number'
  )
 );
+/*!
+* @brief Used to specify the number of rows needed for the air quality table.
+**/
 while($row = mysqli_fetch_array($result))
 {
  $sub_array = array();
@@ -486,6 +492,9 @@ $table3['cols'] = array(
   'type' => 'number'
  )
 );
+/*!
+* @brief Used to specify the number of rows needed for the UV light table.
+**/
 while($row = mysqli_fetch_array($result))
 {
  $sub_array = array();
@@ -537,7 +546,13 @@ $jsonTable3 = json_encode($table3);
 $query = 'SELECT ID, SM FROM TPAQ';
 $result = mysqli_query($db, $query);
 $rows = array();
+/*!
+* @brief Used to create soil moisture table.
+**/
 $table4 = array();
+/*!
+* @brief Used to specify the data or labels for columns in a soil moisture table.
+**/
 $table4['cols'] = array(
  array(
   'label' => 'Reading no. ', 
@@ -548,6 +563,9 @@ $table4['cols'] = array(
   'type' => 'number'
  )
 );
+/*!
+* @brief Used to specify the number of rows needed for the soil moisture table.
+**/
 while($row = mysqli_fetch_array($result))
 {
  
