@@ -363,7 +363,7 @@
 ///@}
 
 ///@{
-/** @brief BME680 register buffer index settings. */
+/** BME680 register buffer index settings. */
 #define BME680_REG_FILTER_INDEX		UINT8_C(5)
 #define BME680_REG_TEMP_INDEX		UINT8_C(4)
 #define BME680_REG_PRES_INDEX		UINT8_C(4)
@@ -373,7 +373,7 @@
 #define BME680_REG_HCTRL_INDEX		UINT8_C(0)
 ///@}
 
-///@{
+
 /** @brief BME680 pressure calculation macros. */
 /*! This maximum value is used to provide precedence to multiplication or division
  * in pressure compensation equation to achieve least loss of precision and
@@ -381,26 +381,29 @@
  * i.e Comparing value, BME680_MAX_OVERFLOW_VAL = INT32_C(1 << 30)
  */
 #define BME680_MAX_OVERFLOW_VAL      INT32_C(0x40000000)
-///@}
+
 
 /** @brief Macro to combine two 8 bit datas to form a 16 bit data. */
 #define BME680_CONCAT_BYTES(msb, lsb)	(((uint16_t)msb << 8) | (uint16_t)lsb)
 
-///@{
-/** @brief Macro to SET and GET BITS of a register. */
+
+/** @brief Macro to SET BITS of a register. */
 #define BME680_SET_BITS(reg_data, bitname, data) \
 		((reg_data & ~(bitname##_MSK)) | \
 		((data << bitname##_POS) & bitname##_MSK))
+/** @brief Macro to GET BITS of a register. */
 #define BME680_GET_BITS(reg_data, bitname)	((reg_data & (bitname##_MSK)) >> \
 	(bitname##_POS))
-///@}
-///@{
-/** @brief Macro variant to handle the bitname position if it is zero. */
+
+
+/** @brief Macro variant to set the bitname position if it is zero. */
 #define BME680_SET_BITS_POS_0(reg_data, bitname, data) \
 				((reg_data & ~(bitname##_MSK)) | \
 				(data & bitname##_MSK))
+
+/** @brief Macro variant to get the bitname position if it is zero. */
 #define BME680_GET_BITS_POS_0(reg_data, bitname)  (reg_data & (bitname##_MSK))
-///@}
+
 /** Type definitions. */
 /*!
  * Generic communication function pointer.
