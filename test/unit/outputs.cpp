@@ -2,7 +2,7 @@
 /*!
  *  @file outputs.cpp
  *  @author I. Mitchell
- *  @brief turns each of the outputs on in turn to check connection
+ *  @brief Turns each of the outputs on in turn to check connection.
  *  @version 0.1
  *  @date 2019-04-11
  *  @copyright Copyright (c) 2019
