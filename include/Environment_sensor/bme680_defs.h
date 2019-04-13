@@ -106,7 +106,7 @@
 #ifdef __cplusplus
 #define NULL   0
 #else
-/** C standard macros */
+/** @brief C standard macros */
 #define NULL   ((void *) 0)
 #endif
 #endif
