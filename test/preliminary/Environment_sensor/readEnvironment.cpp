@@ -3,7 +3,7 @@
 /*!
  *  @file readEnvironment.cpp
  *  @authors A. Saikia and I. Mitchell
- *  @brief takes one reading of the environment sensor and prints the values
+ *  @brief Takes one reading of the environment sensor and prints the values.
  *  @version 0.1
  *  @date 2019-04-11
  *  @copyright Copyright (c) 2019
@@ -31,14 +31,16 @@
 
 using namespace std;
 
-/*! @brief Our destination time zone */
+/*! @brief Our destination time zone. */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
 
 /*!
- * @brief Instantiate objects used in this project
+ * @brief Instantiate objects used in this project.
  */
 MCP342X soilSensor;
+/*! @brief Resets the configuration data, initiate to zero */
 int Soil_configData = 0;;
+/*! @brief Light sensor variable */
 UV_sensor lightSensor; // create sensor
 int readData();
 
@@ -68,7 +70,7 @@ void i2cClose()
 
 /*!
     @brief Set the I2C slave address for all subsequent I2C device transfers.
-    @param address[in] : 12C slave address
+    @param[in] address : I2C slave address
 */
 void i2cSetAddress(int address)
 {
@@ -81,7 +83,7 @@ void i2cSetAddress(int address)
 
 /*!
     @brief Set the user delay in milliseconds.
-    @param period[in]
+    @param[in] period : Time period in milliseconds
 */
 void user_delay_ms(uint32_t period)
 {
@@ -90,10 +92,10 @@ void user_delay_ms(uint32_t period)
 
 /*!
     @brief Read I2C information.
-    @param  dev_id
-    @param  reg_addr
-    @param  reg_data
-    @param  len
+    @param[in]  dev_id : Place holder to store the ID of the device structure, can be used to store the index of the chip select or I2C address of the device
+    @param[in]  reg_addr : Used to select the register where the data needs to be read from or written to
+    @param[in, out]  reg_data : Data array to read/write
+    @param[in]  len : Length of the data array
 */
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
@@ -116,10 +118,10 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
 
 /*!
     @brief Write I2C information.
-    @param  dev_id
-    @param  reg_addr
-    @param  reg_data
-    @param  len
+   @param[in]  dev_id : Place holder to store the ID of the device structure, can be used to store the index of the chip select or I2C address of the device
+    @param[in]  reg_addr : Used to select the register where the data needs to be read from or written to
+    @param[in, out]  reg_data : Data array to read/write
+    @param[in]  len : Length of the data array
 */
 
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
@@ -142,7 +144,10 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 }
 
 /*!
- * @brief main progam
+ * @brief Main progam.
+   @param[in]  argc : Used in input arguement parser, determines output file
+   @param[in]  argv : Used input arguement parser, to specify output file
+
  */
 
 int main(int argc, char *argv[] ) {

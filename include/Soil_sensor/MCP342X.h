@@ -43,13 +43,14 @@
 #include <math.h>
 #endif
 
-/** I2C Address of device */
-/** MCP3421, MCP3425 & MCP3426 are factory programed for any of 0x68 thru 0x6F */
+/** @brief I2C Address of device.
+* MCP3421, MCP3425 & MCP3426 are factory programed for any of 0x68 thru 0x6F. */
 #define MCP342X_DEFAULT_ADDRESS	0x68
 
 //@{
-/** MCP3422, MCP3423, MCP3424, MCP3427 & MCP3428 addresses are controlled by address lines A0 and A1
- each address line can be low (GND), high (VCC) or floating (FLT) */
+/** @brief Address and controls definition.
+* MCP3422, MCP3423, MCP3424, MCP3427 & MCP3428 addresses are controlled by address lines A0 and A1
+ each address line can be low (GND), high (VCC) or floating (FLT). */
 #define MCP342X_A0GND_A1GND		0x68
 #define MCP342X_A0GND_A1FLT		0x69
 #define MCP342X_A0GND_A1VCC		0x6A
@@ -61,13 +62,13 @@
 //@}
 
 //@{
-/** Conversion mode definitions */
+/** @brief Conversion mode definition. */
 #define MCP342X_MODE_ONESHOT	0x00
 #define MCP342X_MODE_CONTINUOUS	0x10
 //@}
 
 //@{
-/** Channel definitions */
+/** @brief Channel definition. */
 /** MCP3421 & MCP3425 have only the one channel and ignore this parameter
 * MCP3422, MCP3423, MCP3426 & MCP3427 have two channels and treat 3 & 4 as repeats of 1 & 2, respectively,
 * MCP3424 & MCP3428 have all four channels */
@@ -79,8 +80,8 @@
 //@}
 
 //@{
-/** Sample size definitions - these also affect the sampling rate */
-/** 12-bit has a max sample rate of 240sps
+/** @brief Sample size definition - also affects the sampling rate. 
+* 12-bit has a max sample rate of 240sps
 * 14-bit has a max sample rate of  60sps
 * 16-bit has a max sample rate of  15sps
 * 18-bit has a max sample rate of   3.75sps (MCP3421, MCP3422, MCP3423, MCP3424 only) */
@@ -92,7 +93,7 @@
 //@}
 
 //@{
-/** Programmable gain definitions*/
+/** @brief Programmable gain definition. */
 #define MCP342X_GAIN_1X	0x00
 #define MCP342X_GAIN_2X	0x01
 #define MCP342X_GAIN_4X	0x02
@@ -100,7 +101,7 @@
 #define MCP342X_GAIN_MASK 0x03
 //@}
 
-/** /RDY bit definition */
+/** @brief /RDY bit definition. */
 #define MCP342X_RDY	0x80
 
 /*! @class MCP342X

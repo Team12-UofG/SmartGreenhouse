@@ -20,15 +20,21 @@
 #include <wiringPiI2C.h>
 #include "VEML6075.h"
 
-//@{
+
 /**************************************************************************/
 /*!
     @brief Sets up the wiringPi I2C comms to the VEML6075 device.
 */
 /**************************************************************************/
 static int setupI2C_veml6075 = wiringPiSetup();
+/**************************************************************************/
+/*!
+    @brief Sets up the wiringPi I2C comms to the VEML6075 device.
+    @param[in] VEML6075_ADDR : VEML6075 slave address
+*/
+/**************************************************************************/
 static int fd_uv = wiringPiI2CSetup(VEML6075_ADDR);
-//@}
+
 
 /**************************************************************************/
 /*!

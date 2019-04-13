@@ -36,7 +36,8 @@ static int setupI2C_MCP3426 = wiringPiSetup();
 /**************************************************************************/
 /*!
     @brief Sets up the wiringPi I2C comms to the MCP3426 device
-    @param[] MCP342X_DEFAULT_ADDRESS :
+    @param[in] MCP342X_DEFAULT_ADDRESS : I2C Address of device
+
 */
 /**************************************************************************/
 static int fd_soil = wiringPiI2CSetup(MCP342X_DEFAULT_ADDRESS);
