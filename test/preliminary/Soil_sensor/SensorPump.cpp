@@ -2,7 +2,7 @@
 /*!
  *  @file SensorPump.cpp
  *  @author I. Mitchell
- *  @brief Soil moisture sensor is read and water pump is controlled using GPIO pins
+ *  @brief Soil moisture sensor is read and water pump is controlled using GPIO pins.
  *  @version 0.1
  *  @date 2019-04-11
  *  @copyright Copyright (c) 2019
@@ -20,19 +20,25 @@
 #include "../../../include/Soil_sensor/MCP342X.cpp"
 
 /*!
- * @brief Instantiate objects used in this project
+ * @brief Instantiate objects used in this project.
  */
 MCP342X soil_sensor;
 using namespace std;
+/** @brief Reset data configuration. */
 int configData = 0;
+/** @brief GPIO pin of water pump. */
 int water_pump = 23;
+/** @brief The soil moisture value at which the motor will turn on.*/
 int dry_threshold = 60;
 
 
 /*!
- * @brief main progam configures the sensor and reads data from the soil
+ * @brief Main progam configures the sensor and reads data from the soil
  * moisture sensor. If the reading falls below the threshold then the plant is
  * watered.
+ * @param[in]  argc : Used in input arguement parser, determines output file
+ * @param[in]  argv : Used input arguement parser, to specify output file
+
  */
 int main(int argc, char** argv) {
   printf("Testing the soil moisture sensor and water pump together \n");
