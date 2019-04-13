@@ -1,6 +1,6 @@
 /**************************************************************************/
 /*!
- *  @file readall.cpp
+ *  @file readallv2.cpp
  *  @author Isla Mitchell
  *  @brief Takes one reading of the all the sensors and prints the values.
  *  @version 0.1
