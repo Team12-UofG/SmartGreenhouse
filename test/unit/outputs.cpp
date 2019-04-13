@@ -15,10 +15,15 @@
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
 
+/** @brief GPIO pin of the LEDs. */
 int LEDs = 26;
+/** @brief GPIO pin of the heat mat. */
 int heat_pad  = 27;
+/** @brief GPIO pin of the motor. */
 int water_pump = 23;
 
+/** @brief Main function.
+*/
 int main (){
   wiringPiSetup();
   printf("Testing the outputs \n");
