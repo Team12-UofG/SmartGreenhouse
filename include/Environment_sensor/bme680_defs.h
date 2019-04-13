@@ -309,9 +309,6 @@
 /** @brief Settings selector. */
 #define BME680_NBCONV_SEL		UINT16_C(128)
 /** @brief Settings selector. 
-* @param[in] BME680_GAS_MEAS_SEL : Settings selector for gas measurement
-* @param[in] BME680_RUN_GAS_SEL : Settings selector for running the gas sensor
-* @param[in] BME680_NBCONV_SEL : Settings selector for number of conversions
 */
 #define BME680_GAS_SENSOR_SEL		(BME680_GAS_MEAS_SEL | BME680_RUN_GAS_SEL | BME680_NBCONV_SEL)
 
