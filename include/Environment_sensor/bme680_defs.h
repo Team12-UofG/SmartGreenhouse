@@ -324,7 +324,7 @@
 #define BME680_RUN_GAS_POS	UINT8_C(4)
 ///@}
 
-///@{
+/**@{*/ 
 /** @brief Array index to Field data mapping for calibration data. */
 #define BME680_T2_LSB_REG	(1)
 #define BME680_T2_MSB_REG	(2)
@@ -360,9 +360,9 @@
 #define BME680_GH2_MSB_REG	(36)
 #define BME680_GH1_REG		(37)
 #define BME680_GH3_REG		(38)
-///@}
+/**@}*/ 
 
-///@{
+//@{
 /** BME680 register buffer index settings. */
 #define BME680_REG_FILTER_INDEX		UINT8_C(5)
 #define BME680_REG_TEMP_INDEX		UINT8_C(4)
@@ -371,7 +371,7 @@
 #define BME680_REG_NBCONV_INDEX		UINT8_C(1)
 #define BME680_REG_RUN_GAS_INDEX	UINT8_C(1)
 #define BME680_REG_HCTRL_INDEX		UINT8_C(0)
-///@}
+//@}
 
 
 /** @brief BME680 pressure calculation macros. */
