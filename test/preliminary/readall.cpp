@@ -70,13 +70,7 @@ int temp_threshold = 15;
 /*!
  * @brief Declaration of functions to read the sensors.
  */
-/*!
- * @brief Function to read the soil sensor.
- */
 int checkSoil();
-/*!
- * @brief Function to read the UV light sensor.
- */
 int checkUV();
 /*!
  * @brief Function to read the environment sensor (temperature, pressure, humidity and air quality).
