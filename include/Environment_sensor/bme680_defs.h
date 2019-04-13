@@ -467,21 +467,37 @@
 #define BME680_CONCAT_BYTES(msb, lsb)	(((uint16_t)msb << 8) | (uint16_t)lsb)
 
 
-/** @brief Macro to SET BITS of a register. */
+/** @brief Macro to SET BITS of a register. 
+* @param[in] reg_data : Data array to read/write
+* @param[in[ bitname : Identifier
+* @param[in] data : Structure instance to hold the data
+* @param[in] bitname##_MSK : Mask identifier
+* param[in] bitname##_POS : Position identifier*/
 #define BME680_SET_BITS(reg_data, bitname, data) \
 		((reg_data & ~(bitname##_MSK)) | \
 		((data << bitname##_POS) & bitname##_MSK))
-/** @brief Macro to GET BITS of a register. */
+/** @brief Macro to GET BITS of a register. 
+* @param[in] reg_data : Data array to read/write
+* @param[in[ bitname : Identifier
+* @param[in] bitname##_MSK : Mask identifier 
+* param[in] bitname##_POS : Position identifier */
 #define BME680_GET_BITS(reg_data, bitname)	((reg_data & (bitname##_MSK)) >> \
 	(bitname##_POS))
 
 
-/** @brief Macro variant to set the bitname position if it is zero. */
+/** @brief Macro variant to set the bitname position if it is zero. 
+* @param[in] reg_data : Data array to read/write
+* @param[in[ bitname : Identifier
+* @param[in] data : Structure instance to hold the data
+* @param[in] bitname##_MSK : Mask identifier */
 #define BME680_SET_BITS_POS_0(reg_data, bitname, data) \
 				((reg_data & ~(bitname##_MSK)) | \
 				(data & bitname##_MSK))
 
-/** @brief Macro variant to get the bitname position if it is zero. */
+/** @brief Macro variant to get the bitname position if it is zero.
+* @param[in] reg_data : Data array to read/write
+* @param[in[ bitname : Identifier
+* @param[in] bitname##_MSK : Mask identifier*/
 #define BME680_GET_BITS_POS_0(reg_data, bitname)  (reg_data & (bitname##_MSK))
 
 /** Type definitions. */
