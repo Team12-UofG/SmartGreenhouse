@@ -50,6 +50,7 @@
 */
 /*!
  * @defgroup BME680 SENSOR API
+ * @brief Sensor API for BME680 environment sensor.
  * @{*/
 #ifndef BME680_DEFS_H_
 #define BME680_DEFS_H_
@@ -120,7 +121,7 @@
  * @brief BME680 I2C addresses.
  *
  */
-/** @add to group group-1
+/** @addtogroup group-1
 * @{
 */
 #define BME680_I2C_ADDR_PRIMARY		UINT8_C(0x76)
