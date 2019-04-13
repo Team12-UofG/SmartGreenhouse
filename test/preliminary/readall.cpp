@@ -72,9 +72,6 @@ int temp_threshold = 15;
  */
 int checkSoil();
 int checkUV();
-/*!
- * @brief Function to read the environment sensor (temperature, pressure, humidity and air quality).
- */
 struct checkEnv{
 	float temp;
 	float pressure;
@@ -192,7 +189,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 /*!
  * @brief Structure initialises BME680 sensors anr performs a reading.
- * @return Returns a structure containing the temperature, humidty, air pressure
+ * @return A structure containing the temperature, humidty, air pressure
  * and air quality reading.
 */
 checkEnv readBME680(){
@@ -308,7 +305,7 @@ checkEnv readBME680(){
 /*!
 * @brief Function to read data from soil moisture sensor and checks against
 * the dry level threshold.
-* @return Returns the soil moisture reading.
+* @return Returns the soil moisture reading
 */
 int checkSoil() {
   uint8_t soilData = 0;
@@ -328,7 +325,7 @@ int checkSoil() {
 
 /*!
  * @brief Function to read data from UV sensor and check against the threshold.
- * @return Returns the UV Index.
+ * @return The UV Index
  */
 int checkUV() {
   float UV_calc = 0;
