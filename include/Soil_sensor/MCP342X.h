@@ -115,7 +115,7 @@ class MCP342X {
         MCP342X();
 	/*!
 	* @brief Specific I2C device address constructor.
-	* @param[in] address
+	* @param[in] address : I2C slave address
 	*/
         MCP342X(uint8_t address);
 
@@ -131,31 +131,29 @@ class MCP342X {
 
         /*!
 	* @brief Starts a conversion.
-	* @param[] configData :
+	* @param[] configData : Structure instance to hold the configured data
 	*/
         bool startConversion(uint8_t configData);
 
         /*!
 	* @brief Read the ADC result.
-	* @param[] data :
+	* @param[] data : Structure instance to hold the data
 	*/
         uint8_t getResult(uint8_t *data);
 
         /*!
 	* @brief Non-blocking read the ADC result.
-	* @param[] data :
+	* @param[] data : Structure instance to hold the data
 	*/
         uint8_t checkforResult(uint8_t *data);
 
     private:
 	/*!
-	* @brief .
-	* @param[]  :
+	* @brief Address of the device.
 	*/
         uint8_t devAddr;
 	/*!
-	* @brief .
-	* @param[]  :
+	* @brief Data configured according to settings.
 	*/
         uint8_t configData;
 	//float	stepSizeTbl[];
