@@ -426,34 +426,34 @@ void thread_web()
 int main (int argc, char *argv[]){
 
   printf("Test to read all of the sensor values \n");
-	/* Configure the UV and Soil Sensor */
+  /* Configure the UV and Soil Sensor */
   lightSensor.uvConfigure(); // configure UV sensor
   Soil_configData = soilSensor.configure(); // configure soil sensor
 
-	/* Setup water pump, LEDs and heat mat */
+  /* Setup water pump, LEDs and heat mat */
   wiringPiSetup();
   pinMode(water_pump, OUTPUT);
   pinMode(LED_pin, OUTPUT);
   pinMode(heat_pin, OUTPUT);
 
-	int main_flag = true;
-	while(main_flag){
-		/* Create and launch thread for reading the sensor values */
-		std::thread sensors_thread(&thread_fn);
+  int main_flag = true;
+  while(main_flag){
+	/* Create and launch thread for reading the sensor values */
+	std::thread sensors_thread(&thread_fn);
 
-		/* Create and launch thread for updating the website with readings */
-		std::thread website_thread(&thread_web);
-	}
+	/* Create and launch thread for updating the website with readings */
+	std::thread website_thread(&thread_web);
+  }
 
-	/* Just for testing - turn outputs off */
+  /* Just for testing - turn outputs off */
   sleep(1);
   digitalWrite(water_pump, LOW);
   digitalWrite(LED_pin, LOW);
   digitalWrite(heat_pin, LOW);
 
-	sensor_flag = false;
-	web_flag = false;
+  sensor_flag = false;
+  web_flag = false;
 
-	sensors_thread.join();
-	website_thread.join();
+  sensors_thread.join();
+  website_thread.join();
 }
