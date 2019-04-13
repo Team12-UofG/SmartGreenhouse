@@ -34,8 +34,8 @@ int readData();
 /*!
  * @brief Main progam configures the sensor and calls function to read data from
  * the soil moisture sensor.
- * @param argc
- * @param argv
+   @param[in]  argc : Used in input arguement parser, determines output file
+   @param[in]  argv : Used input arguement parser, to specify output file
  */
 int main(int argc, char** argv) {
    configData = soil_sensor.configure();
