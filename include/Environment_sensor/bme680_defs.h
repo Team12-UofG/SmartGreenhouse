@@ -114,11 +114,18 @@
 /** @brief BME680 General configuration. */
 #define BME680_POLL_PERIOD_MS		UINT8_C(10)
 
-///@{
-/** @brief BME680 I2C addresses. */
+/**
+ * @defgroup group-1 
+ * 
+ * @brief BME680 I2C addresses.
+ *
+ */
+/** @add to group group-1
+* @{
+*/
 #define BME680_I2C_ADDR_PRIMARY		UINT8_C(0x76)
 #define BME680_I2C_ADDR_SECONDARY	UINT8_C(0x77)
-///@}
+/** @}*/
 
 /** @brief BME680 unique chip identifier. */
 #define BME680_CHIP_ID  UINT8_C(0x61)
