@@ -1,5 +1,13 @@
+/*! 
+* @file @SGLD.phtml
+* @brief Webpage that displays sensor readings graphically. 
+*/
+
 <!DOCTYPE html>
 <?php
+/*!
+* @brief Log in for mysqli server.
+**/
  $db = mysqli_connect('localhost','UOG_SGH','test','SGH_TPAQ')
  or die('Error connecting to MySQL server.');
 ?>
@@ -241,10 +249,25 @@ while ($row = mysqli_fetch_array($result)) {
 }
 ?>
 <?php
+/*!
+* @brief Indicates which table to select data from.
+**/
 $query = 'SELECT D,H, TEMP FROM TPAQ';
+/*!
+* @brief Accesses mysqli_query. 
+**/
 $result = mysqli_query($db, $query);
+/*!
+* @brief Used to specify rows. 
+**/
 $rows = array();
+/*!
+* @brief Used to create temperature table.
+**/
 $table = array();
+/*!
+* @brief Used to specify the data or labels for columns in a temperature table.
+**/
 $table['cols'] = array(
  array(
   'label' => 'Date ', 
@@ -255,6 +278,9 @@ $table['cols'] = array(
   'type' => 'number'
  )
 );
+/*!
+* @brief Used to specify the number of rows needed.
+**/
 while($row = mysqli_fetch_array($result))
 {
  $sub_array = array();
@@ -269,6 +295,9 @@ while($row = mysqli_fetch_array($result))
     );
 }
 $table['rows'] = $rows;
+/*!
+* @brief Graphs of temperature sensor readings.
+**/
 $jsonTable = json_encode($table);
 ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -307,7 +336,13 @@ $jsonTable = json_encode($table);
 $query = 'SELECT D,H, HUM FROM TPAQ';
 $result = mysqli_query($db, $query);
 $rows = array();
+/*!
+* @brief Used to create humidity table.
+**/
 $table1 = array();
+/*!
+* @brief Used to specify the data or labels for columns in a humidity table.
+**/
 $table1['cols'] = array(
  array(
   'label' => 'Date ', 
@@ -332,6 +367,9 @@ while($row = mysqli_fetch_array($result))
     );
 }
 $table1['rows'] = $rows;
+/*!
+* @brief Graphs of humidity sensor readings.
+**/
 $jsonTable1 = json_encode($table1);
 ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -363,7 +401,13 @@ $jsonTable1 = json_encode($table1);
 $query = 'SELECT D,H, GASR FROM TPAQ';
 $result = mysqli_query($db, $query);
 $rows = array();
+/*!
+* @brief Used to create air quality table.
+**/
 $table2 = array();
+/*!
+* @brief Used to specify the data or labels for columns in a air quality table.
+**/
 $table2['cols'] = array(
  array(
   'label' => 'Date ', 
@@ -388,6 +432,9 @@ while($row = mysqli_fetch_array($result))
     );
 }
 $table2['rows'] = $rows;
+/*!
+* @brief Graphs of air quality sensor readings.
+**/
 $jsonTable2 = json_encode($table2);
 ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -422,7 +469,13 @@ $jsonTable2 = json_encode($table2);
 $query = 'SELECT ID, UV FROM TPAQ';
 $result = mysqli_query($db, $query);
 $rows = array();
+/*!
+* @brief Used to create UV light table.
+**/
 $table3 = array();
+/*!
+* @brief Used to specify the data or labels for columns in a UV light table.
+**/
 $table3['cols'] = array(
  array(
   'label' => 'Date ', 
@@ -447,6 +500,9 @@ while($row = mysqli_fetch_array($result))
     );
 }
 $table3['rows'] = $rows;
+	/*!
+* @brief Graphs of UV Light sensor readings.
+**/
 $jsonTable3 = json_encode($table3);
 ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -507,6 +563,9 @@ while($row = mysqli_fetch_array($result))
     );
 }
 $table4['rows'] = $rows;
+	/*!
+* @brief Graphs of soil moisture sensor readings.
+**/
 $jsonTable4 = json_encode($table4);
 ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
