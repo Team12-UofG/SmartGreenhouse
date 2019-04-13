@@ -28,12 +28,19 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <chrono>
-#include <atomic>
+#include <atomic>  // add "-atomic" to compile
+/*
 #include "../../include/Environment_sensor/bme680.h"
 #include "../../include/Soil_sensor/MCP342X.h"
 #include "../../include/Soil_sensor/MCP342X.cpp"
 #include "../../include/UV_sensor/VEML6075.h"
 #include "../../include/UV_sensor/VEML6075.cpp"
+*/
+#include "bme680.h"
+#include "MCP342X.h"
+#include "MCP342X.cpp"
+#include "VEML6075.h"
+#include "VEML6075.cpp"
 
 
 using namespace std;
@@ -346,7 +353,8 @@ struct all_data
 };
 
 std::atomic<all_data> sensor_data;
-std::atomic_bool flag {true};
+std::atomic_bool sensor_flag {true};
+std::atomic_bool web_flag {true};
 
 /*!
  * @brief This thread reads the sensor values and updates the atomic variable
@@ -354,7 +362,7 @@ std::atomic_bool flag {true};
  */
 void thread_fn()
 {
-	while (flag){
+	while (sensor_flag){
 		int soilVal = checkSoil();
 		float uvVal = checkUV();
 		checkEnv environment = readBME680();
@@ -377,6 +385,39 @@ void thread_fn()
 }
 
 
+void thread_web()
+{
+	while(web_flag){
+		/* Initialise connection to MySQL database */
+		MYSQL *mysqlConn;
+		MYSQL_RES result;
+		MYSQL_ROW row;
+		mysqlConn = mysql_init(NULL);
+		char buff[1024];
+
+		/* Initialise time */
+		time_t t = time(NULL);
+		struct tm tm = *localtime(&t);
+		sensor_flag = false;
+
+		auto data = sensor_data.load();
+
+		/* Send measurements to MYSQL database */
+		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
+		{
+			printf("Sending values to website \n");
+			snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', \
+			'%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",	\
+			 data.soil_moisture, data.uv_index, tm.tm_year + 1900, tm.tm_mon + 1, \
+			 tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature, 			\
+			 data.air_pressure, data.humidity, data.air_quality);
+			mysql_query(mysqlConn, buff);
+		}
+		sensor_flag = true;
+		std::this_thread::sleep_for(std::chrono::minutes(15)); // Updates every 15 minutes
+	}
+}
+
 
 
 /*!
@@ -385,48 +426,34 @@ void thread_fn()
 int main (int argc, char *argv[]){
 
   printf("Test to read all of the sensor values \n");
-
-	/* Configure the UV and Soil Sensor */
+  /* Configure the UV and Soil Sensor */
   lightSensor.uvConfigure(); // configure UV sensor
   Soil_configData = soilSensor.configure(); // configure soil sensor
 
-	/* Read sensor values */
-	std::thread sensors_thread(&thread_fn);
-
-	/* Setup water pump, LEDs and heat mat */
+  /* Setup water pump, LEDs and heat mat */
   wiringPiSetup();
   pinMode(water_pump, OUTPUT);
   pinMode(LED_pin, OUTPUT);
   pinMode(heat_pin, OUTPUT);
 
-	/* Initialise connection to MySQL database */
-	MYSQL *mysqlConn;
-	MYSQL_RES result;
-	MYSQL_ROW row;
-	mysqlConn = mysql_init(NULL);
-	char buff[1024];
+  int main_flag = true;
+  while(main_flag){
+	/* Create and launch thread for reading the sensor values */
+	std::thread sensors_thread(&thread_fn);
 
-	/* Initialise time */
-	time_t t = time(NULL);
-	struct tm tm = *localtime(&t);
-	flag = false;
+	/* Create and launch thread for updating the website with readings */
+	std::thread website_thread(&thread_web);
+  }
 
-	auto data = sensor_data.load();
-
-
-	/* Send measurements to MYSQL database */
-	if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
-	{
-		printf("Sending values to website \n");
-		snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",data.soil_moisture, data.uv_index, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature, data.air_pressure, data.humidity, data.air_quality);
-		mysql_query(mysqlConn, buff);
-	}
-
-	/* Just for testing - turn outputs off */
+  /* Just for testing - turn outputs off */
   sleep(1);
   digitalWrite(water_pump, LOW);
   digitalWrite(LED_pin, LOW);
   digitalWrite(heat_pin, LOW);
 
-	sensors_thread.join();
+  sensor_flag = false;
+  web_flag = false;
+
+  sensors_thread.join();
+  website_thread.join();
 }

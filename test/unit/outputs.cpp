@@ -14,10 +14,6 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include "../../include/UV_sensor/LEDMATRIX.h"
-#include "../../include/UV_sensor/LEDMATRIX.cpp"
-
-LED_matrix led_panel;   // create LED matrix panel object
 
 int LEDs = 26;
 int heat_pad  = 27;

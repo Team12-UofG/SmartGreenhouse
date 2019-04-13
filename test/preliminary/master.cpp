@@ -25,11 +25,11 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "bme680.h"
-#include "MCP342X.h"
-#include "MCP342X.cpp"
-#include "VEML6075.h"
-#include "VEML6075.cpp"
+#include "../../include/Environment_sensor/bme680.h"
+#include "../../include/Soil_sensor/MCP342X.h"
+#include "../../include/Soil_sensor/MCP342X.cpp"
+#include "../../include/UV_sensor/VEML6075.h"
+#include "../../include/UV_sensor/VEML6075.cpp"
 
 /*! @brief Our destination time zone. */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
@@ -154,7 +154,7 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
  */
 
 int main(int argc, char *argv[] ) {
-	
+
 	printf("Simple Test \n");
 
 	lightSensor.uvConfigure(); // configure sensor
@@ -168,7 +168,7 @@ int main(int argc, char *argv[] ) {
 
 	float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
 	printf("UV Index reading: %f \n", UV_calc);
-		
+
 	// initialize connection to MySQL database
         MYSQL *mysqlConn;
         MYSQL_RES result;
@@ -204,7 +204,7 @@ int main(int argc, char *argv[] ) {
 	else if( argc == 4 ) {
 		delay = strtol(argv[1], NULL, 10);
 		nMeas = strtol(argv[2], NULL, 10);
-		outputFile = argv[3]; 
+		outputFile = argv[3];
 	}
 
 	printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
@@ -245,10 +245,10 @@ int main(int argc, char *argv[] ) {
 
 	/* Select the power mode */
 	/* Must be set before writing the sensor configuration */
-	gas_sensor.power_mode = BME680_FORCED_MODE; 
+	gas_sensor.power_mode = BME680_FORCED_MODE;
 
 	/* Set the required sensor settings needed */
-	set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL 
+	set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL
 		| BME680_GAS_SENSOR_SEL;
 
 	/* Set the desired sensor configuration */
@@ -274,7 +274,7 @@ int main(int argc, char *argv[] ) {
 		// Get sensor data
 		rslt = bme680_get_sensor_data(&data, &gas_sensor);
 
-		// Avoid using measurements from an unstable heating setup 
+		// Avoid using measurements from an unstable heating setup
 		if(data.status & BME680_HEAT_STAB_MSK)
 		{
 			t = time(NULL);
@@ -286,7 +286,7 @@ int main(int argc, char *argv[] ) {
 			printf("\r\n");
 			i++;
 	}
-    	
+
 		// Measurement to MYSQL database
 		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 		{
@@ -298,7 +298,7 @@ int main(int argc, char *argv[] ) {
 		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
-		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */			
+		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
 	   	backupCounter++;
 	}
 
@@ -315,4 +315,3 @@ int main(int argc, char *argv[] ) {
 
 	return 0;
 }
-
