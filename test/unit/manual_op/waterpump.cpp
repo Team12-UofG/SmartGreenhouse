@@ -2,7 +2,7 @@
 /*!
  *  @file waterpump.cpp
  *  @author A. Saikia
- *  @brief turns water pump on for 10 seconds
+ *  @brief Turns water motor on for 10 seconds.
  *  @version 0.1
  *  @date 2019-04-12
  *  @copyright Copyright (c) 2019
@@ -15,7 +15,9 @@
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
 
+/** @brief GPIO pin of motor. */
 int water_pump = 23;
+/** Main function. */
 int main (){
   wiringPiSetup();
   pinMode(water_pump, OUTPUT);
