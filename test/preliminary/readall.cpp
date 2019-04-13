@@ -67,9 +67,7 @@ int UV_threshold = 3;
 /** @brief The temperature value at which the heat mat will turn on.*/
 int temp_threshold = 15;
 
-/*!
- * @brief Declaration of functions to read the sensors.
- */
+
 int checkSoil();
 int checkUV();
 struct checkEnv{
