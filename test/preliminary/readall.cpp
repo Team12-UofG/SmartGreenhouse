@@ -362,11 +362,17 @@ int checkUV() {
  */
 struct all_data
 {
+	/** @brief Soil moisture sensor reading. */
 	int soil_moisture;
+	/** @brief UV index sensor reading. */
 	float uv_index;
+	/** @brief Temperature sensor reading. */
 	float temperature;
+	/** @brief Humidity sensor reading. */
 	float humidity;
+	/** @brief Air pressure sensor reading. */
 	float air_pressure;
+	/** @brief Air quality sensor reading. */
 	float air_quality;
 };
 /** @brief Atomic variable visible by all threads, ensures sensor data is available.*/
