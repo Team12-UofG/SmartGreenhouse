@@ -1,4 +1,15 @@
-/**\mainpage
+/**************************************************************************/
+/*!
+		@file bme680.c
+ 		@brief Sensor driver for BME680 sensor - non header file.
+		@author   Bosch Sensortec GmbH
+    @copyright
+    Copyright (c) 2017 -2018 Bosch Sensortec GmbH
+    * @date	19 Jun 2018
+    * @version	3.5.9
+*/
+
+/*
  * Copyright (C) 2017 - 2018 Bosch Sensortec GmbH
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,15 +49,8 @@
  * other rights of third parties which may result from its use.
  * No license is granted by implication or otherwise under any patent or
  * patent rights of the copyright holder.
- *
- * @file		
- * @date	19 Jun 2018
- * @version	3.5.9
- * @brief Sensor driver for BME680 sensor - non header file.
  */
 
-/*! @file bme680.c
- @brief Sensor driver for BME680 sensor - non header file. */
 #include "../../../include/Environment_sensor/bme680.h"
 
 /*!

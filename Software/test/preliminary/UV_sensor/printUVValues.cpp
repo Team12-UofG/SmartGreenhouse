@@ -24,9 +24,9 @@ int main (){
   printf("VEML6075 Simple Test \n");
   lightSensor.uvConfigure(); // configure sensor
 
-  float UVA_calc = lightSensor.readUVA(); // additional
-  float UVB_calc = lightSensor.readUVB(); // additional
-  float UV_calc = lightSensor.readUVI(); // UV value - this is the output we want
+  float UVA_calc = lightSensor.readUVA();
+  float UVB_calc = lightSensor.readUVB();
+  float UV_calc = lightSensor.readUVI();
   printf("UVA Index reading: %f \n", UVA_calc);
   printf("UVB Index reading: %f \n", UVB_calc);
   printf("UV Index reading: %f \n", UV_calc);

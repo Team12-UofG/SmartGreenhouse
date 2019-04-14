@@ -3,7 +3,7 @@
  *  @file printSoilValues.cpp
  *  @author I. Mitchell
  *  @brief Prints output sensor readings.
- *  @brief Test of soil mositure sensor with the sampling rate and sampling
+ *  @details Test of soil mositure sensor with the sampling rate and sampling
  *    frequency set by the user. Samples the sensor and prints the values.
 */
 
@@ -34,7 +34,7 @@ int readData();
 /*!
  * @brief Main progam configures the sensor and calls function to read data from
  * the soil moisture sensor.
-   @param[in]  argc : Used in input arguement parser, determines output file
+   @param[in]  argc : Used in input arguement parser, determines number of samples and sampling frequency
    @param[in]  argv : Used input arguement parser, to specify output file
  */
 int main(int argc, char** argv) {

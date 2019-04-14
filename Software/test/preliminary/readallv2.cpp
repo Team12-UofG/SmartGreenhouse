@@ -1,9 +1,9 @@
 /**************************************************************************/
-
 /*!
 *  @file readallv2.cpp
 *  @authors I.Mitchell and A. Saikia
-*  @brief Takes readings from all of the sensors every 500ms, updates the website with these values every 10 seconds.
+*  @brief Takes readings from all of the sensors every 500ms and updates
+    the website with these values every 10 seconds.
 *  @version 0.1
 *  @date 2019-04-11
 *  @copyright Copyright (c) 2019
@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include <mysql/mysql.h> // add "-lmysqlclient" to compile
 #include <stdlib.h>
-#include <time.h>
+#include <time.h>       // add "-lrt"
 #include <linux/i2c-dev.h>
 #include <fcntl.h>
 #include <string.h>
@@ -31,7 +31,7 @@
 #include "MCP342X.cpp"
 #include "VEML6075.h"
 #include "VEML6075.cpp"
-#include "CppTimer.h" // add "-lrt"
+#include "CppTimer.h"
 
 
 
