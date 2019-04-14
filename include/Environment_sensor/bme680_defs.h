@@ -1,4 +1,15 @@
-/**
+/**************************************************************************/
+/*!
+    @file      bme680_defs.h
+    @brief    Sensor driver for BME680 sensor.
+    @author   Bosch Sensortec GmbH
+    @copyright
+    Copyright (c) 2017 -2018 Bosch Sensortec GmbH
+    * @date	19 Jun 2018
+    * @version	3.5.9
+*/
+
+/*
  * Copyright (C) 2017 - 2018 Bosch Sensortec GmbH
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,14 +50,10 @@
  * No license is granted by implication or otherwise under any patent or
  * patent rights of the copyright holder.
  *
- * @file	bme680_defs.h
- * @date	19 Jun 2018
- * @version	3.5.9
- * @brief 	Definitions for BME680 sensor.
  */
 
 /*! @file bme680_defs.h
-    @brief Definitions for BME680 sensor. 
+    @brief Definitions for BME680 sensor.
 */
 /*!
  * @defgroup BME680 SENSOR API
@@ -308,7 +315,7 @@
 #define BME680_RUN_GAS_SEL		UINT16_C(64)
 /** @brief Settings selector. */
 #define BME680_NBCONV_SEL		UINT16_C(128)
-/** @brief Settings selector. 
+/** @brief Settings selector.
 */
 #define BME680_GAS_SENSOR_SEL		(BME680_GAS_MEAS_SEL | BME680_RUN_GAS_SEL | BME680_NBCONV_SEL)
 
@@ -464,34 +471,34 @@
 #define BME680_MAX_OVERFLOW_VAL      INT32_C(0x40000000)
 
 
-/** @brief Macro to combine two 8 bit datas to form a 16 bit data. 
+/** @brief Macro to combine two 8 bit datas to form a 16 bit data.
 * @param[in] msb : Data
 * @param[in] lsb : Data */
 #define BME680_CONCAT_BYTES(msb, lsb)	(((uint16_t)msb << 8) | (uint16_t)lsb)
 
 
-/** @brief Macro to SET BITS of a register. 
-* @param[in] reg_data : Data array to read/write  
-* @param[in] bitname : Identifier  
-* @param[in] data : Structure instance to hold the data  
-* @param[in] bitname ##_MSK : Mask identifier  
+/** @brief Macro to SET BITS of a register.
+* @param[in] reg_data : Data array to read/write
+* @param[in] bitname : Identifier
+* @param[in] data : Structure instance to hold the data
+* @param[in] bitname ##_MSK : Mask identifier
 * param[in] bitname ##_POS : Position identifier  */
 #define BME680_SET_BITS(reg_data, bitname, data) \
 		((reg_data & ~(bitname##_MSK)) | \
 		((data << bitname##_POS) & bitname##_MSK))
-/** @brief Macro to GET BITS of a register. 
+/** @brief Macro to GET BITS of a register.
 * @param[in] reg_data : Data array to read/write
 * @param[in] bitname : Identifier
-* @param[in] bitname ##_MSK : Mask identifier 
+* @param[in] bitname ##_MSK : Mask identifier
 * param[in] bitname ##_POS : Position identifier */
 #define BME680_GET_BITS(reg_data, bitname)	((reg_data & (bitname##_MSK)) >> \
 	(bitname##_POS))
 
 
-/** @brief Macro variant to set the bitname position if it is zero. 
+/** @brief Macro variant to set the bitname position if it is zero.
 * @param[in] reg_data : Data array to read/write
-* @param[in] bitname : Identifier  
-* @param[in] data : Structure instance to hold the data  
+* @param[in] bitname : Identifier
+* @param[in] data : Structure instance to hold the data
 * @param[in] bitname ##_MSK : Mask identifier */
 #define BME680_SET_BITS_POS_0(reg_data, bitname, data) \
 				((reg_data & ~(bitname##_MSK)) | \

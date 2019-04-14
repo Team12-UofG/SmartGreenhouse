@@ -1,18 +1,17 @@
-/**
- * @file VEML6075.cpp
- *
- * @brief File for the operation of Vishay VEML6075 UVA/UVB I2C sensor
+/**************************************************************************/
+/*!
 
- * Designed specifically to work with the VEML6075 sensor from Adafruit
- * ----> https://www.adafruit.com/products/3964
- *
- * These sensors use I2C to communicate, 2 pins (SCL+SDA) are required
- * to interface with the breakout.
- *
- *
- * @author Isla Mitchell
- *
- */
+    @file     VEML6075.cpp
+    @brief    Class for the operation of the Vishay VEML6075 UVA/UVB I2C sensor.
+      Based on the Vishay VEML6075 application notes and Adafruit Industries
+    @author   I. Mitchell
+		@license  GNU
+    @copyright
+    Copyright (c) 2019 I. Mitchell
+
+    @section  History
+    2019-Apr-15  - First release, I. Mitchell
+*/
 
 #include <stdio.h>
 #include <cstdlib>

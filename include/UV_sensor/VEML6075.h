@@ -1,11 +1,19 @@
-/**
- * @file VEML6075.h
- *
- * @brief Header for the Vishay VEML6075 UVA/UVB I2C sensor using the Vishay
- * VEML6075 application notes and Adafruit_VEML6075.h
- *
- *
- * file Adafruit_VEML6075.h
+/**************************************************************************/
+/*!
+
+    @file     VEML6075.cpp
+    @brief    Header for the Vishay VEML6075 UVA/UVB I2C sensor.
+      Based on the Vishay VEML6075 application notes and Adafruit VEML6075 header.
+    @author   I. Mitchell, Limor Fried/Ladyada
+		@license  MIT license (see below) and GNU
+    @copyright
+    Copyright (c) 2019 I. Mitchell
+
+    @section  History
+    2019-Apr-15  - First release, I. Mitchell
+*/
+/*
+ * File: Adafruit_VEML6075.h
  *
  * Designed specifically to work with the VEML6075 sensor from Adafruit
  * ----> https://www.adafruit.com/products/3964
@@ -17,10 +25,9 @@
  * please support Adafruit and open-source hardware by purchasing
  * products from Adafruit!
  *
- * @author: Isla Mitchell, (Limor Fried/Ladyada for Adafruit Industries)
  * Written by Limor Fried/Ladyada for Adafruit Industries.
  *
- * @license MIT license, all text here must be included in any redistribution.
+ * License: MIT license, all text here must be included in any redistribution.
  *
  */
 
@@ -98,7 +105,8 @@
 
 /**************************************************************************/
 /*!
-    @brief  Class that stores state and functions for interacting with VEML6075 sensor IC.
+    @brief  Class that stores state and functions for interacting with
+    VEML6075 sensor IC.
 */
 /**************************************************************************/
 class UV_sensor {

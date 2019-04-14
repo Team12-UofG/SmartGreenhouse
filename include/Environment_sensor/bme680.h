@@ -1,4 +1,15 @@
-/**
+/**************************************************************************/
+/*!
+    @file      bme680.h
+    @brief    Sensor driver for BME680 sensor.
+    @author   Bosch Sensortec GmbH
+    @copyright
+    Copyright (c) 2017 -2018 Bosch Sensortec GmbH
+    * @date	19 Jun 2018
+    * @version	3.5.9
+*/
+
+/*
  * Copyright (C) 2017 - 2018 Bosch Sensortec GmbH
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,14 +50,8 @@
  * No license is granted by implication or otherwise under any patent or
  * patent rights of the copyright holder.
  *
- * @file	bme680.h
- * @date	19 Jun 2018
- * @version	3.5.9
- * @brief
- *
  */
-/*! @file bme680.h
- @brief Sensor driver for BME680 sensor */
+
 /*!
  * @defgroup BME680 SENSOR API
  * @{*/
