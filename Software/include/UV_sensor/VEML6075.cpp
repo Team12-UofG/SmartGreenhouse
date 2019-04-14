@@ -3,7 +3,9 @@
 
     @file     VEML6075.cpp
     @brief    Class for the operation of the Vishay VEML6075 UVA/UVB I2C sensor.
-      Based on the Vishay VEML6075 application notes and Adafruit Industries
+      
+    
+    @details Based on the Vishay VEML6075 application notes and Adafruit Industries.
     @author   I. Mitchell
 		@license  GNU
     @copyright
