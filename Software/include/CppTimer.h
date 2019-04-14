@@ -8,7 +8,7 @@
  *
  * This is inspired by the timer_create man page.
  **/
-*/
+
 
 #ifndef __CPP_TIMER_H_
 #define __CPP_TIMER_H_
