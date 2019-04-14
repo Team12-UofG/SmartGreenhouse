@@ -1,9 +1,11 @@
 /**************************************************************************/
 /*!
 
-    @file     VEML6075.cpp
+    @file     VEML6075.h
     @brief    Header for the Vishay VEML6075 UVA/UVB I2C sensor.
-      Based on the Vishay VEML6075 application notes and Adafruit VEML6075 header.
+    
+    @details Based on the Vishay VEML6075 application notes and Adafruit VEML6075 header.
+    
     @author   I. Mitchell, Limor Fried/Ladyada
 		@license  MIT license (see below) and GNU
     @copyright
@@ -58,13 +60,13 @@
 #endif
 
 //@{
-/** VEML6075 slave address */
+/** @brief VEML6075 slave address. */
 #define VEML6075_ADDR                   0x10 // I2C address
 #define VEML6075_DEVID                  0x26 // Manufacture ID
 //@}
 
 //@{
-/** Register definitions */
+/** @brief Register definition. */
 #define VEML6075_CONF_REG               0x00 // Configuration register
 #define VEML6075_UVA_DATA_REG           0x07 // UVA raw measurement register
 #define VEML6075_REG_DUMMY              0x08 // Dark current register
@@ -75,7 +77,7 @@
 //@}
 
 //@{
-/** Register value define : UV_CONF */
+/** @brief Register value define : UV_CONF. */
 #define VEML6075_CONF_SD_OFF            0x00 // Power up
 #define VEML6075_CONF_SD_ON             0x01 // Power down
 #define VEML6075_CONF_UV_AF_AUTO        0x00 // Active force mode disabled (default)
@@ -94,7 +96,7 @@
 //@}
 
 //@{
-/** Definition of coefficients used to calculate UV Index */
+/** @brief Definition of coefficients used to calculate UV Index. */
 #define VEML6075_DEFAULT_UVA_A_COEFF      2.22 // Default for no coverglass: "A"
 #define VEML6075_DEFAULT_UVA_B_COEFF      1.33 // Default for no coverglass: "B"
 #define VEML6075_DEFAULT_UVB_C_COEFF      2.95 // Default for no coverglass: "C"
