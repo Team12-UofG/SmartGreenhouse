@@ -1,11 +1,16 @@
+/**
+* @file CppTimer.h
+* @brief Timer for C++.
+*/
+
 #ifndef __CPP_TIMER_H_
 #define __CPP_TIMER_H_
 
 /**
- * GNU GENERAL PUBLIC LICENSE
+ * @license GNU GENERAL PUBLIC LICENSE
  * Version 3, 29 June 2007
  *
- * (C) 2018, Bernd Porr <mail@bernporr.me.uk>
+ * @details (C) 2018, Bernd Porr <mail@bernporr.me.uk>
  *
  * This is inspired by the timer_create man page.
  **/
@@ -16,9 +21,14 @@
 #include <signal.h>
 #include <time.h>
 
+/** @brief ID of the clock connection.*/
 #define CLOCKID CLOCK_MONOTONIC
+/** @brief Signal instances.*/
 #define SIG SIGRTMIN
 
+/**
+* @brief C++ timer class.
+**/
 class CppTimer {
 
 private:
@@ -44,7 +54,7 @@ public:
 		// Create the timer
 		sev.sigev_notify = SIGEV_SIGNAL;
 		sev.sigev_signo = SIG;
-		// Cruical is that the signal carries the pointer to this class instance here
+		// Crucial is that the signal carries the pointer to this class instance here
 		// because the handler just handles anything that comes in!
 		sev.sigev_value.sival_ptr = this;
 		// create the timer
