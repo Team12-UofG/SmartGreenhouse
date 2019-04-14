@@ -2,7 +2,8 @@
 /*!
     @file     MCP342X.h
     @brief    This is a driver for the MCP472X series of Analog-to-Digital
-     converters. Based on the Microchip datasheet for MCP3426 and the Arduino
+     converters. 
+    @details Based on the Microchip datasheet for MCP3426 and the Arduino
      library by C. Schnarel.
     @author   C. Schnarel, I. Mitchell
     @license  BSD and GNU
