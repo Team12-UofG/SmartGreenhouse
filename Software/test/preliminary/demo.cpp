@@ -26,11 +26,11 @@
 #include <sys/stat.h>
 #include <chrono>
 #include <atomic>
-#include "bme680.h"
-#include "MCP342X.h"
-#include "MCP342X.cpp"
-#include "VEML6075.h"
-#include "VEML6075.cpp"
+#include "../../include/Environment_sensor/bme680.h"
+#include "../../include/Soil_sensor/MCP342X.h"
+#include "../../include/Soil_sensor/MCP342X.cpp"
+#include "../../include/UV_sensor/VEML6075.h"
+#include "../../include/UV_sensor/VEML6075.cpp"
 #include "CppTimer.h"
 
 
