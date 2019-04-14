@@ -1,8 +1,8 @@
 /**************************************************************************/
 /*!
-		@file bme680.c
- 		@brief Sensor driver for BME680 sensor - non header file.
-		@author   Bosch Sensortec GmbH
+   @file bme680.cpp
+   @brief Sensor driver for BME680 sensor - non header file.
+   @author   Bosch Sensortec GmbH
     @copyright
     Copyright (c) 2017 -2018 Bosch Sensortec GmbH
     * @date	19 Jun 2018
