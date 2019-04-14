@@ -1,12 +1,6 @@
 /**
 * @file CppTimer.h
 * @brief Timer for C++.
-*/
-
-#ifndef __CPP_TIMER_H_
-#define __CPP_TIMER_H_
-
-/**
  * @license GNU GENERAL PUBLIC LICENSE
  * Version 3, 29 June 2007
  *
@@ -14,6 +8,10 @@
  *
  * This is inspired by the timer_create man page.
  **/
+*/
+
+#ifndef __CPP_TIMER_H_
+#define __CPP_TIMER_H_
 
 #include <stdlib.h>
 #include <unistd.h>
