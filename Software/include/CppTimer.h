@@ -1,13 +1,13 @@
 /**
 * @file CppTimer.h
 * @brief Timer for C++.
- * @license GNU GENERAL PUBLIC LICENSE
- * Version 3, 29 June 2007
- *
- * @details (C) 2018, Bernd Porr <mail@bernporr.me.uk>
- *
- * This is inspired by the timer_create man page.
- **/
+* @license GNU GENERAL PUBLIC LICENSE
+* Version 3, 29 June 2007 
+*
+* @details (C) 2018, Bernd Porr <mail@bernporr.me.uk>
+*
+* This is inspired by the timer_create man page.
+**/
 
 
 #ifndef __CPP_TIMER_H_
