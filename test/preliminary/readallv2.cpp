@@ -1,12 +1,13 @@
 /**************************************************************************/
+
 /*!
- *  @file readallv2.cpp
- *  @author Isla Mitchell
- *  @brief Takes one reading of the all the sensors and prints the values.
- *  @version 0.1
- *  @date 2019-04-07
- *  @copyright Copyright (c) 2019
- *
+*  @file readllv2.cpp
+*  @authors I.Mitchell and A. Saikia
+*  @brief Takes readings from all of the sensors every 500ms, updates the website with these values every 10 seconds.
+*  @version 0.1
+*  @date 2019-04-11
+*  @copyright Copyright (c) 2019
+*
 */
 
 #include <wiringPi.h>
@@ -14,10 +15,7 @@
 #include <stdio.h>
 #include <iostream>      // add "-lstdc++" to compile
 #include <unistd.h>
-#include <thread>       // add "-lpthread" to compile
-#include <future>
 #include <mysql/mysql.h> // add "-lmysqlclient" to compile
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <linux/i2c-dev.h>
@@ -26,24 +24,17 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
 #include <chrono>
-#include <atomic>  // add "-atomic" to compile
-/*
-#include "../../include/Environment_sensor/bme680.h"
-#include "../../include/Soil_sensor/MCP342X.h"
-#include "../../include/Soil_sensor/MCP342X.cpp"
-#include "../../include/UV_sensor/VEML6075.h"
-#include "../../include/UV_sensor/VEML6075.cpp"
-*/
+#include <atomic>
 #include "bme680.h"
 #include "MCP342X.h"
 #include "MCP342X.cpp"
 #include "VEML6075.h"
 #include "VEML6075.cpp"
+#include "CppTimer.h" // add "-lrt"
 
 
-using namespace std;
+
 
 /*! @brief Our destination time zone. */
 #define     DESTZONE    "TZ=Europe/London"       // Our destination time zone
@@ -52,12 +43,13 @@ using namespace std;
  * @brief Instantiate objects for the soil sensor.
  */
 MCP342X soilSensor;
+
 /*!
  * @brief Instantiate object for the light sensor.
  */
-UV_sensor lightSensor;
+UV_sensor lightSensor; // create sensor
 
-/*!
+ /*!
  * @brief Initiate the Soil_configData variable to zero.
  */
 int Soil_configData = 0;
@@ -67,71 +59,75 @@ int water_pump = 23;
 int LED_pin = 26;
 /** @brief GPIO pin of heat mat. */
 int heat_pin = 27;
+
+/** @brief Flag to control when the sensor data is sent to the web server */
+int web_flag = 0;
+
 /** @brief The soil moisture value at which the motor will turn on.*/
 int dry_threshold = 60;
 /** @brief The UVI value at which the LEDs will turn on.*/
-int UV_threshold = 3;
+int UV_threshold = 3;   	// UVI of 3
 /** @brief The temperature value at which the heat mat will turn on.*/
-int temp_threshold = 15;
+int temp_threshold = 20; 	// 20 deg C
 
+/*!
+ * @brief Class for signalling the timing event for updating the website
+ */
+class WebTimer : public CppTimer {
 
-int checkSoil();
-int checkUV();
-struct checkEnv{
-	float temp;
-	float pressure;
-	float humidity;
-	float airQual;
+ void timerEvent() {
+	 printf("Setting the web_flag true \n");
+	 web_flag = 1;
+ }
 };
 
 /******************************************************************************
  * Functions for communicating with the BME680 sensor over i2cClose           *
  *****************************************************************************/
-
 /*! @brief I2C Linux device handle.
 */
 int g_i2cFid;
 
 /*!
-    @brief Open the Linux device.
+	 @brief Open the Linux device.
 */
 void i2cOpen()
 {
-	g_i2cFid = open("/dev/i2c-1", O_RDWR);
-	if (g_i2cFid < 0) {
-		perror("i2cOpen");
-		exit(1);
-	}
+ g_i2cFid = open("/dev/i2c-1", O_RDWR);
+ if (g_i2cFid < 0) {
+	 perror("i2cOpen");
+	 exit(1);
+ }
 }
 
 /*!
-    @brief Close the Linux device.
+	 @brief Close the Linux device.
 */
 void i2cClose()
 {
-	close(g_i2cFid);
+ close(g_i2cFid);
 }
 
 /*!
-    @brief Set the I2C slave address for all subsequent I2C device transfers.
-    @param[in] address : I2C slave address
+	 @brief Set the I2C slave address for all subsequent I2C device transfers.
+	 @param address[in] : I2C slave address
 */
 void i2cSetAddress(int address)
 {
-	if (ioctl(g_i2cFid, I2C_SLAVE, address) < 0) {
-		perror("i2cSetAddress");
-		exit(1);
-	}
+ if (ioctl(g_i2cFid, I2C_SLAVE, address) < 0) {
+	 perror("i2cSetAddress");
+	 exit(1);
+ }
 }
 
 
 /*!
-    @brief Set the user delay in milliseconds.
-    @param[in] period : Time period in milliseconds
+	 @brief Set the user delay in milliseconds.
+	 @param period[in] :
 */
 void user_delay_ms(uint32_t period)
 {
-    sleep(period/1000);
+	 sleep(period/1000);
 }
 
 /*!
@@ -146,20 +142,21 @@ void user_delay_ms(uint32_t period)
 */
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
-  int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
-  uint8_t reg[1];
-	reg[0]=reg_addr;
+	 int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
+	 uint8_t reg[1];
+ reg[0]=reg_addr;
 
- 	if (write(g_i2cFid, reg, 1) != 1) {
-		perror("user_i2c_read_reg");
-		rslt = 1;
-	}
+ if (write(g_i2cFid, reg, 1) != 1) {
+	 perror("user_i2c_read_reg");
+	 rslt = 1;
+ }
 
-	if (read(g_i2cFid, reg_data, len) != len) {
-		perror("user_i2c_read_data");
-		rslt = 1;
-	}
-    return rslt;
+ if (read(g_i2cFid, reg_data, len) != len) {
+	 perror("user_i2c_read_data");
+	 rslt = 1;
+ }
+
+	 return rslt;
 }
 
 /*!
@@ -172,304 +169,204 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
  * @param[in,out] reg_data : Data array to read/write
  * @param[in] len : Length of the data array
 */
+
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
-    int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
+	 int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
 
-	uint8_t reg[16];
-    reg[0]=reg_addr;
+ uint8_t reg[16];
+	 reg[0]=reg_addr;
 
-    for (int i=1; i<len+1; i++)
-       reg[i] = reg_data[i-1];
+	 for (int i=1; i<len+1; i++)
+			reg[i] = reg_data[i-1];
 
-    if (write(g_i2cFid, reg, len+1) != len+1) {
-		perror("user_i2c_write");
-		rslt = 1;
-	        exit(1);
-	}
+	 if (write(g_i2cFid, reg, len+1) != len+1) {
+	 perror("user_i2c_write");
+	 rslt = 1;
+				 exit(1);
+ }
 
-    return rslt;
+	 return rslt;
 }
 
 
+
+
 /*!
- * @brief Structure initialises BME680 sensors anr performs a reading.
- * @return A structure containing the temperature, humidty, air pressurie
- * and air quality reading.
+* @brief Main progam.
+* @param argc[in] :
+* @param argv[in] :
 */
-checkEnv readBME680(){
-	checkEnv environment_data;
-  int delay = 3;
-  int nMeas = 1;
 
-  time_t t = time(NULL);
-  // open Linux I2C device
-  i2cOpen();
+int main(int argc, char *argv[] ) {
 
-  // set address of the BME680
-  i2cSetAddress(0x76);
+ printf("System is configuring ...\n");
+ lightSensor.uvConfigure(); // configure sensor
+ Soil_configData = soilSensor.configure();
 
-  // init device
-  struct bme680_dev gas_sensor;
-  gas_sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
-  gas_sensor.intf = BME680_I2C_INTF;
-  gas_sensor.read = user_i2c_read;
-  gas_sensor.write = user_i2c_write;
-  gas_sensor.delay_ms = user_delay_ms;
+ // initialize connection to MySQL database
+ MYSQL *mysqlConn;
+ MYSQL_RES result;
+ MYSQL_ROW row;
+ mysqlConn = mysql_init(NULL);
+ char buff[1024];
 
-  int8_t rslt = BME680_OK;
-  rslt = bme680_init(&gas_sensor);
-  uint8_t set_required_settings;
+ int delay = 3;
+ int nMeas = 1;
 
-  /* Set the temperature, pressure and humidity settings */
-  gas_sensor.tph_sett.os_hum = BME680_OS_2X;
-  gas_sensor.tph_sett.os_pres = BME680_OS_4X;
-  gas_sensor.tph_sett.os_temp = BME680_OS_8X;
-  gas_sensor.tph_sett.filter = BME680_FILTER_SIZE_3;
+ time_t t = time(NULL);
 
-  /* Set the remaining gas sensor settings and link the heating profile */
-  gas_sensor.gas_sett.run_gas = BME680_ENABLE_GAS_MEAS;
+ /* Setup water pump, LEDs and heat mat */
+ wiringPiSetup();
+ pinMode(water_pump, OUTPUT);
+ pinMode(LED_pin, OUTPUT);
+ pinMode(heat_pin, OUTPUT);
 
-  /* Create a ramp heat waveform in 3 steps */
-  gas_sensor.gas_sett.heatr_temp = 320; /* degree Celsius */
-  gas_sensor.gas_sett.heatr_dur = 150; /* milliseconds */
+ // open Linux I2C device
+ i2cOpen();
 
-  /* Select the power mode */
-  /* Must be set before writing the sensor configuration */
-  gas_sensor.power_mode = BME680_FORCED_MODE;
+ // set address of the BME680
+ i2cSetAddress(0x76);
 
-  /* Set the required sensor settings needed */
-  set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL
-    | BME680_GAS_SENSOR_SEL;
+ // init device
+ struct bme680_dev gas_sensor;
+ gas_sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
+ gas_sensor.intf = BME680_I2C_INTF;
+ gas_sensor.read = user_i2c_read;
+ gas_sensor.write = user_i2c_write;
+ gas_sensor.delay_ms = user_delay_ms;
 
-  /* Set the desired sensor configuration */
-  rslt = bme680_set_sensor_settings(set_required_settings,&gas_sensor);
+ int8_t rslt = BME680_OK;
+ rslt = bme680_init(&gas_sensor);
+ uint8_t set_required_settings;
 
-  /* Set the power mode */
-  rslt = bme680_set_sensor_mode(&gas_sensor);
+ /* Set the temperature, pressure and humidity settings */
+ gas_sensor.tph_sett.os_hum = BME680_OS_2X;
+ gas_sensor.tph_sett.os_pres = BME680_OS_4X;
+ gas_sensor.tph_sett.os_temp = BME680_OS_8X;
+ gas_sensor.tph_sett.filter = BME680_FILTER_SIZE_3;
 
-  /* Get the total measurement duration so as to sleep or wait till the
-   * measurement is complete */
-  uint16_t meas_period;
-  bme680_get_profile_dur(&meas_period, &gas_sensor);
-  user_delay_ms(meas_period); /* Delay till the measurement is ready */
+ /* Set the remaining gas sensor settings and link the heating profile */
+ gas_sensor.gas_sett.run_gas = BME680_ENABLE_GAS_MEAS;
 
-  struct bme680_field_data data;
+ /* Create a ramp heat waveform in 3 steps */
+ gas_sensor.gas_sett.heatr_temp = 320; /* degree Celsius */
+ gas_sensor.gas_sett.heatr_dur = 150; /* milliseconds */
 
-  struct tm tm = *localtime(&t);
+ /* Select the power mode */
+ /* Must be set before writing the sensor configuration */
+ gas_sensor.power_mode = BME680_FORCED_MODE;
 
-  int i=0;
-  int backupCounter = 0;
+ /* Set the required sensor settings needed */
+ set_required_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL
+	 | BME680_GAS_SENSOR_SEL;
 
-  while(i<nMeas && backupCounter < nMeas+3) {
-    // Get sensor data
-    rslt = bme680_get_sensor_data(&data, &gas_sensor);
+ /* Set the desired sensor configuration */
+ rslt = bme680_set_sensor_settings(set_required_settings,&gas_sensor);
 
-    // Avoid using measurements from an unstable heating setup
-    if(data.status & BME680_HEAT_STAB_MSK)
-    {
-      t = time(NULL);
-      tm = *localtime(&t);
-      printf("%d-%02d-%02d %02d:%02d:%02d ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-      printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH", data.temperature / 100.0f,
-          data.pressure / 100.0f, data.humidity / 1000.0f );
-      printf(", G: %d Ohms", data.gas_resistance);
-      printf("\r\n");
-      i++;
-  }
-
-    // Trigger a meausurement
-    rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
-
-    // Wait for a measurement to complete
-    user_delay_ms(meas_period); /* Wait for the measurement to complete */
-      backupCounter++;
-  }
-
-	environment_data.temp = data.temperature;
-	environment_data.humidity = data.humidity;
-	environment_data.pressure = data.pressure;
-	environment_data.airQual = data.gas_resistance;
+ /* Set the power mode */
+ rslt = bme680_set_sensor_mode(&gas_sensor);
 
 
-  float temp = data.temperature;
-  if (temp < temp_threshold){
-    digitalWrite(heat_pin, HIGH);
-  }
-  else {
-    digitalWrite(heat_pin, LOW);
-  }
-    // close Linux I2C device
-  i2cClose();
+ WebTimer webtimer;
+ webtimer.start(1000); // Update the website every 10 seconds
 
-	return environment_data;
-}
+ while(1){
+	 /* Get the total measurement duration so as to sleep or wait till the
+	 * measurement is complete */
+	 uint16_t meas_period;
+	 bme680_get_profile_dur(&meas_period, &gas_sensor);
+	 user_delay_ms(meas_period + delay*100); /* Delay till the measurement is ready */
 
+	 struct bme680_field_data data;
 
+	 struct tm tm = *localtime(&t);
 
-/*!
- * @brief Function to read data from soil moisture sensor and checks against
- * the dry level threshold.
-* @return The soil moisture reading
- */
+	 int i=0;
+	 int backupCounter = 0;
 
-int checkSoil() {
-  uint8_t soilData = 0;
-  soilSensor.startConversion(Soil_configData); // Start conversion
-  soilData = soilSensor.checkforResult(&soilData); // Read converted value
-  printf("Soil reading = %d \n", soilData);
+   /*
+   * Read the soil sensor data
+   */
+	 uint8_t soilData;
+	 soilSensor.startConversion(Soil_configData); // Start conversion
+	 soilData = soilSensor.getResult(&soilData); // Read converted value
+	 printf("Soil: %d ", soilData);
+	 if(soilData > dry_threshold){
+		 digitalWrite(water_pump, HIGH);
+		 sleep(1);
+	 }
 
-  if(soilData > dry_threshold){
-    digitalWrite(water_pump, HIGH);
-    sleep(5);
-  }
-
-  return soilData;
-}
-
-
-
-/*!
- * @brief Function to read data from UV sensor and check against the threshold.
- * @return The UV Index
- */
-int checkUV() {
-  float UV_calc = 0;
-  UV_calc = lightSensor.readUVI();  // Read converted value
-  printf("UV Index reading: %f \n", UV_calc);
-
-  if(UV_calc < UV_threshold){
-    digitalWrite(LED_pin, HIGH);
-  }
-  else {
-    digitalWrite(LED_pin, LOW);
-  }
-  return UV_calc;
-}
+   /*
+   * Read the UV sensor data
+   */
+	 float UV_calc = lightSensor.readUVI();
+	 printf("UVI: %f", UV_calc);
+	 if(UV_calc < UV_threshold){
+		 digitalWrite(LED_pin, HIGH);
+	 }
+	 else {
+		 digitalWrite(LED_pin, LOW);
+	 }
 
 
+   /*
+    * Read the Environment sensor
+   */
+	 while(i<nMeas && backupCounter < nMeas+3) {
+		 rslt = bme680_get_sensor_data(&data, &gas_sensor);  // Get sensor data
+		 if(data.status & BME680_HEAT_STAB_MSK) // Avoid using measurements from an unstable heating setup
+		 {
+			 t = time(NULL);
+			 tm = *localtime(&t);
+			 printf("%d-%02d-%02d %02d:%02d:%02d ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+			 printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH", data.temperature / 100.0f,
+				 data.pressure / 100.0f, data.humidity / 1000.0f );
+				 printf(", G: %d Ohms", data.gas_resistance);
+				 printf("\r\n");
+				 i++;
+		 }
 
+		 rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
+		 user_delay_ms(meas_period); /* Wait for the measurement to complete */
+		 backupCounter++;
+		 }
 
-
-/*!
- * @brief Structure to contain the readings from the sensor.
- */
-struct all_data
-{
-	int soil_moisture;
-	float uv_index;
-	float temperature;
-	float humidity;
-	float air_pressure;
-	float air_quality;
-};
-/** @brief Atomic variable visible by all threads, ensures sensor data is available.*/
-std::atomic<all_data> sensor_data;
-/** @brief Atomic variable visible by all threads, ensures thread runs whilst true.*/
-std::atomic_bool sensor_flag {true};
-/** @brief Atomic variable visible by all threads, ensures thread runs whilst true.*/
-std::atomic_bool web_flag {true};
-
-/*!
- * @brief This thread reads the sensor values and updates the atomic variable
- * sensor data with the results, then sleeps for 1 second.
- */
-void thread_fn()
-{
-	while (sensor_flag){
-		int soilVal = checkSoil();
-		float uvVal = checkUV();
-		checkEnv environment = readBME680();
-
-
-		all_data data;
-
-		// fill in sensor_data with values
-		data.soil_moisture = soilVal;
-		data.uv_index = uvVal;
-		data.temperature = environment.temp;
-		data.humidity = environment.humidity;
-		data.air_pressure = environment.pressure;
-		data.air_quality = environment.airQual;
-
-		sensor_data = data;
-
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
-}
-
-/** @brief This thread initialises connection to the database and time, pauses sensor readings, sends the atomic variable data to the database and displays values, reinstates sensor readings and then sleeps for a given time.*/
-void thread_web()
-{
-	while(web_flag){
-		/* Initialise connection to MySQL database */
-		MYSQL *mysqlConn;
-		MYSQL_RES result;
-		MYSQL_ROW row;
-		mysqlConn = mysql_init(NULL);
-		char buff[1024];
-
-		/* Initialise time */
-		time_t t = time(NULL);
-		struct tm tm = *localtime(&t);
-		sensor_flag = false;
-
-		auto data = sensor_data.load();
-
-		/* Send measurements to MYSQL database */
-		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
-		{
-			printf("Sending values to website \n");
-			snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', \
-			'%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",	\
-			 data.soil_moisture, data.uv_index, tm.tm_year + 1900, tm.tm_mon + 1, \
-			 tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature, 			\
-			 data.air_pressure, data.humidity, data.air_quality);
-			mysql_query(mysqlConn, buff);
+	 if (data.temperature / 100.0f < temp_threshold){
+			digitalWrite(heat_pin, HIGH);
 		}
-		sensor_flag = true;
-		std::this_thread::sleep_for(std::chrono::minutes(15)); // Updates every 15 minutes
-	}
-}
+	 else {
+			digitalWrite(heat_pin, LOW);
+		}
+
+	 printf("Web flag is %d \n", web_flag);
+
+   /*
+   * Send measurement to MYSQL database
+   */
+	 if(web_flag > 0 && mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", \
+		0, NULL, 0)!=NULL){
+		;
+			 printf("Updating website \n");
+
+			 snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('', '%d', '%f', \
+			 '%02d', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f', \
+			 '%d');", soilData, UV_calc, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, \
+			 tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, \
+			 data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
+			 mysql_query(mysqlConn, buff);
+
+			 web_flag = 0;
+
+			 mysqlConn = mysql_init(NULL);
+		 }
+ }
+ printf("** End of measurement **\n");
+
+ mysql_close(mysqlConn); // close MySQL
+
+ i2cClose(); // close Linux I2C device
 
 
-
-/*!
- * @brief Main progam.
-   @param[in]  argc : Used in input arguement parser, determines output file
-   @param[in]  argv : Used input arguement parser, to specify output file
- */
-int main (int argc, char *argv[]){
-
-  printf("Test to read all of the sensor values \n");
-  /* Configure the UV and Soil Sensor */
-  lightSensor.uvConfigure(); // configure UV sensor
-  Soil_configData = soilSensor.configure(); // configure soil sensor
-
-  /* Setup water pump, LEDs and heat mat */
-  wiringPiSetup();
-  pinMode(water_pump, OUTPUT);
-  pinMode(LED_pin, OUTPUT);
-  pinMode(heat_pin, OUTPUT);
-
-  int main_flag = true;
-  while(main_flag){
-	/* Create and launch thread for reading the sensor values */
-	std::thread sensors_thread(&thread_fn);
-
-	/* Create and launch thread for updating the website with readings */
-	std::thread website_thread(&thread_web);
-  }
-
-  /* Just for testing - turn outputs off */
-  sleep(1);
-  digitalWrite(water_pump, LOW);
-  digitalWrite(LED_pin, LOW);
-  digitalWrite(heat_pin, LOW);
-
-  sensor_flag = false;
-  web_flag = false;
-
-  sensors_thread.join();
-  website_thread.join();
+ return 0;
 }
