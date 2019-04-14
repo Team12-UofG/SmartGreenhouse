@@ -1,7 +1,7 @@
 /**************************************************************************/
 /*!
 
-    @file     VEML6075.cpp
+    @file     VEML6075.h
     @brief    Header for the Vishay VEML6075 UVA/UVB I2C sensor.
       Based on the Vishay VEML6075 application notes and Adafruit VEML6075 header.
     @author   I. Mitchell, Limor Fried/Ladyada
