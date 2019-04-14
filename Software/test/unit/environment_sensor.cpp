@@ -2,13 +2,13 @@
  * @file environment_sensor.cpp
  *
  * @brief I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor.
- *
- *
- * Sensor Data is exported to MySQL database
- * Application Note
+ * @details Sensor Data is exported to MySQL database.
+ * Based on example by twartzek and Boschsensortech)
  * @version 0.2
  * @date 2019-04-11
- * @author Anton Saikia (based on example by twartzek and Boschsensortech)
+ * @author A. Saikia and I. Mitchell
+ * @license  GNU
+ * @copyright Copyright (c) 2019 I. Mitchell
  *
  */
 
@@ -136,49 +136,18 @@ int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 
 int main(int argc, char *argv[] )
 {
-
 	// initialize connection to MySQL database
-        MYSQL *mysqlConn;
-        MYSQL_RES result;
-        MYSQL_ROW row;
-        mysqlConn = mysql_init(NULL);
+  MYSQL *mysqlConn;
+  MYSQL_RES result;
+  MYSQL_ROW row;
+  mysqlConn = mysql_init(NULL);
 	char buff[1024];
-
-	// create lock file first
-	FILE *f = fopen("~bme680i2c.lock", "w");
-	if (f == NULL)
-	{
-		printf("Error opening file!\n");
-		exit(1);
-	}
-	fprintf(f,"I2C locked by BME680 readout. \r\n");
-	fclose(f);
 
 	int delay = 3;
 	int nMeas = 1;
 	char *outputFile = NULL;
 
-	// Input argument parser
-	if( argc == 2 ) {
-		delay = strtol(argv[1], NULL, 10);
-
-	}
-
-	else if( argc == 3 ) {
-		delay = strtol(argv[1], NULL, 10);
-		nMeas = strtol(argv[2], NULL, 10);
-	}
-
-	else if( argc == 4 ) {
-		delay = strtol(argv[1], NULL, 10);
-		nMeas = strtol(argv[2], NULL, 10);
-		outputFile = argv[3];
-	}
-
-	printf("** UofG Smartgreenhouse Environment measurements using BME680 **\n");
-
 	time_t t = time(NULL);
-	putenv(DESTZONE);               // Switch to destination time zone
 
 	// open Linux I2C device
 	i2cOpen();
@@ -231,7 +200,7 @@ int main(int argc, char *argv[] )
 	bme680_get_profile_dur(&meas_period, &gas_sensor);
 	user_delay_ms(meas_period + delay*1000); /* Delay till the measurement is ready */
 
-    struct bme680_field_data data;
+  struct bme680_field_data data;
 
 	struct tm tm = *localtime(&t);
 
@@ -258,28 +227,72 @@ int main(int argc, char *argv[] )
 		// Measurement to MYSQL database
 		if(mysql_real_connect(mysqlConn,"localhost", "UOG_SGH", "test", "SGH_TPAQ", 0, NULL, 0)!=NULL)
 		{
-                        snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('','%d', '%02d', '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, data.humidity / 1000.0f, data.gas_resistance );
-	                mysql_query(mysqlConn, buff);
+    	snprintf(buff, sizeof buff, "INSERT INTO TPAQ VALUES ('','%d', '%02d',   \
+			 '%02d', '%02d', '%02d', '%02d', '%.2f','%.2f','%.2f','%d');",					 \
+			 tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min,    \
+			 tm.tm_sec, data.temperature / 100.0f, data.pressure / 100.0f, 				   \
+			 data.humidity / 1000.0f, data.gas_resistance );
+	  	mysql_query(mysqlConn, buff);
 		}
 
 		// Trigger a meausurement
 		rslt = bme680_set_sensor_mode(&gas_sensor); /* Trigger a measurement */
 
 		// Wait for a measurement to complete
-		user_delay_ms(meas_period + delay*1000); /* Wait for the measurement to complete */
-	   	backupCounter++;
+		user_delay_ms(meas_period); /* Wait for the measurement to complete */
+	  backupCounter++;
 	}
 
-	printf("** End of measurement **\n");
+	/* Check that measurements are sensible values */
+  float temp_reading = data.temperature / 100.0f;
+  float pressure_reading = data.pressure / 100.0f;
+  float humidty_reading = data.humidity / 1000.0f;
+  float air_quality = data.gas_resistance;
 
-	// close MySQL
-	mysql_close(mysqlConn);
+  if (0 < temp_reading < 32){
+    printf("Temperature: %.2f degC ", temp_reading);
+  } else {
+    printf("Error reading temperature");
+    exit(1);
+  }
 
-  	// close Linux I2C device
-	i2cClose();
+  if (800 < pressure_reading < 1100){
+    printf("Air pressure: %.2f hPa ", pressure_reading);
+  } else {
+    printf("Error reading air pressure");
+    exit(1);
+   }
 
-	// delete lock file
-	remove("~bme680i2c.lock");
+  if (0 < humidty_reading < 100){
+    printf("Humidity: %.2f %%rH ", humidty_reading);
+  } else {
+    printf("Error reading humidty");
+    exit(1);
+  }
 
+  if (431331 < air_quality < 521177){
+    printf("Air quality is good");
+  } else if(213212 < air_quality < 297625){
+    printf("Air quality is average ");
+  }
+  else if(108042 < air_quality < 148977){
+    printf("Air quality is low ");
+  }
+  else if(54586 < air_quality < 75010){
+    printf("Air quality is poor ");
+  }
+  else if(13591 < air_quality < 37395){
+    printf("Air quality is terrible ");
+  }
+  else {
+    printf("Error reading air quality");
+    exit(1);
+  }
+
+	printf("** SUCCESS! Test passed successfully **\n");
+
+	mysql_close(mysqlConn); // close MySQL
+
+	i2cClose(); // close Linux I2C device
 	return 0;
 }

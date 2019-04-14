@@ -5,6 +5,7 @@
  *  @brief Test for checking the VEML6075 class for the UV light sensor.
  *  @version 0.1
  *  @date 2019-04-07
+ *  @license  GNU
  *  @copyright Copyright (c) 2019
  *
 */
@@ -29,7 +30,6 @@ int configData = 0;
  * and taking a reading.
  */
 int main() {
-
   UV_sensor lightSensor; // create UV sensor object
 
   // Test the connection to the VEML6075

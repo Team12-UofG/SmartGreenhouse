@@ -6,6 +6,7 @@
  *   sensor.
  *  @version 0.1
  *  @date 2019-04-07
+ *  @license  GNU
  *  @copyright Copyright (c) 2019
  *
 */

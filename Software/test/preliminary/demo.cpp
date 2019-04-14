@@ -1,7 +1,7 @@
 /**************************************************************************/
 /*!
-*  @file readallv2.cpp
-*  @authors I.Mitchell and A. Saikia
+*  @file demo.cpp
+*  @authors I.Mitchell
 *  @brief Takes readings from all of the sensors every 500ms and updates
     the website with these values every 10 seconds.
 *  @version 0.1

@@ -2,9 +2,10 @@
 /*!
  *  @file outputs.cpp
  *  @author I. Mitchell
- *  @brief Turns each of the outputs on in turn to check connection.
+ *  @brief Turns each of the outputs on in turn
  *  @version 0.1
  *  @date 2019-04-11
+ *  @license  GNU
  *  @copyright Copyright (c) 2019
  *
 */
