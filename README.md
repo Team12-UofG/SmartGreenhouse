@@ -20,11 +20,16 @@ _With include file path bug fix._
 * Vishay VEML6075 UVA & UVB sensor
 * Bosch Sensortec BME 680 sensor 
 * SmartGreenhouse soil moisture sensor
-* Decdeal brushless DC motor & 12V power supply 
+     * MCP6291T-E/OT Microchip OpAmp
+     * MCP3426 ADC
+* Decdeal brushless DC motor & 12V power supply plug 
 * Water resevoir tank & piping
-* SmartGreenhouse LED panels
+* LED panels (16 blue LEDs, 40 red LEDs)
 * Wire Kinetics stainless steel heat mat
-* Greenhouse & planter  
+* Response system control circuits
+    * STP36NF06L Nchannel MOSFET (x3)
+* Greenhouse & planter 
+* Soil and plant seeds/bulb/sprouts
 
 More information can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Hardware/ "here.")  
 
