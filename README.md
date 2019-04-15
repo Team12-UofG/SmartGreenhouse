@@ -37,20 +37,32 @@ Packages can be downloaded to your Raspberry pi using `sudo apt install <package
 * `php 7.0`
 
 ### Software
+* Binary files, access from the SmartGreenhouse [release page.](https://github.com/Team12-UofG/SmartGreenhouse/releases "release page.")  
+
 More information can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Software/ "here.")
 
 
-## Build & Install 
+## Build & Install   
+1. Check you have the necessary hardware components and have installed the necessary packages. 
+1. Assemble the greenhouse structure.
+1. Plant the seeds/bulbs/sprouts in the planter.
+1. Position the sensors and response systems and feed the connection cables out of the greenhouse. 
+1. Connect the components to the RaspberryPi.
+1. Download the software files from GitHub.
+1. Run the system.  
+
 A more detailed walkthrough can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Build-and-Install-Guides/ "here.")
 
 
 ## Documentation
-Documentation for all methods can be found at [here.](https://team12-uofg.github.io/SmartGreenhouse/ "here.")
+Documentation for all methods can be found [here.](https://team12-uofg.github.io/SmartGreenhouse/ "here.")  
+User Stories and State Diagram can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/User-Stories-and-State-Diagram "here.")
 
 ## Contributing 
 This project is for the assessment of Real Time Embedded Programming 5 at University of Glasgow. Prior to course completion contributions will be welcome however, please draw your attention to our [license.](LICENSE "license.")
 
 ## Progress
+This project has a complete prototype product and functional software release. 
 Details of project progress and evaluation can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Evaluation/ "here.")
 
 ## Team Members
