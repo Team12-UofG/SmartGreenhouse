@@ -1,3 +1,4 @@
+
 /**************************************************************************/
 /*!
 *  @file demo.cpp
@@ -75,8 +76,7 @@ int temp_threshold = 20; 	// 20 deg C
  */
 class WebTimer : public CppTimer {
 
- void timerEvent() {
-	 printf("Setting the web_flag true \n");
+ void timerEvent(){
 	 web_flag = 1;
  }
 };
@@ -284,6 +284,9 @@ int main(int argc, char *argv[] ) {
 
 	 int i=0;
 	 int backupCounter = 0;
+   t = time(NULL);
+   tm = *localtime(&t);
+   printf("%d-%02d-%02d %02d:%02d:%02d ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
    /*
    * Read the soil sensor data
@@ -294,14 +297,15 @@ int main(int argc, char *argv[] ) {
 	 printf("Soil: %d ", soilData);
 	 if(soilData > dry_threshold){
 		 digitalWrite(water_pump, HIGH);
-		 sleep(1);
+		 sleep(5);
+     digitalWrite(water_pump, LOW);
 	 }
 
    /*
    * Read the UV sensor data
    */
 	 float UV_calc = lightSensor.readUVI();
-	 printf("UVI: %f", UV_calc);
+	 printf("UVI: %f  ", UV_calc);
 	 if(UV_calc < UV_threshold){
 		 digitalWrite(LED_pin, HIGH);
 	 }
@@ -317,9 +321,6 @@ int main(int argc, char *argv[] ) {
 		 rslt = bme680_get_sensor_data(&data, &gas_sensor);  // Get sensor data
 		 if(data.status & BME680_HEAT_STAB_MSK) // Avoid using measurements from an unstable heating setup
 		 {
-			 t = time(NULL);
-			 tm = *localtime(&t);
-			 printf("%d-%02d-%02d %02d:%02d:%02d ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 			 printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH", data.temperature / 100.0f,
 				 data.pressure / 100.0f, data.humidity / 1000.0f );
 				 printf(", G: %d Ohms", data.gas_resistance);
@@ -338,8 +339,6 @@ int main(int argc, char *argv[] ) {
 	 else {
 			digitalWrite(heat_pin, LOW);
 		}
-
-	 printf("Web flag is %d \n", web_flag);
 
    /*
    * Send measurement to MYSQL database
