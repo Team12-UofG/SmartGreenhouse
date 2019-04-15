@@ -54,7 +54,8 @@ More information can be found [here.](https://github.com/Team12-UofG/SmartGreenh
 1. Plant the seeds/bulbs/sprouts in the planter.
 1. Position the sensors and response systems and feed the connection cables out of the greenhouse. 
 1. Connect the components to the RaspberryPi.
-1. Download the software files from GitHub.
+1. Download the binary software files from GitHub.
+1. Access the SmartGreenhouse webpage.
 1. Run the system.  
 
 A more detailed walkthrough can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/Build-and-Install-Guides/ "here.")
