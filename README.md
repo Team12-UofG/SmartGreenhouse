@@ -8,8 +8,9 @@ The **SmartGreenhouse** will enable users to monitor and manage their plant grow
 ![Alt text](https://github.com/Team12-UofG/SmartGreenhouse/blob/media/SYSTEM.jpg?raw=true) 
 
 ## Version 
-**SmartGreenhouse 1.0**  
-_Reads sensor data, uploads and displays on the SmartGreenhouse webpage._
+**SmartGreenhouse 1.1**  
+_Reads sensor data, uploads and displays on the SmartGreenhouse webpage._  
+_With include file path bug fix._
 
 ## File Information      
 
