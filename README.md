@@ -28,6 +28,7 @@ _With include file path bug fix._
 * Wire Kinetics stainless steel heat mat
 * Response system control circuits
     * STP36NF06L Nchannel MOSFET (x3)
+* Raspberry Pi header
 * Greenhouse & planter 
 * Soil and plant seeds/bulb/sprouts
 
@@ -53,7 +54,7 @@ More information can be found [here.](https://github.com/Team12-UofG/SmartGreenh
 1. Assemble the greenhouse structure.
 1. Plant the seeds/bulbs/sprouts in the planter.
 1. Position the sensors and response systems and feed the connection cables out of the greenhouse. 
-1. Connect the components to the RaspberryPi.
+1. Connect the components to the RaspberryPi using the Raspberry Pi header.
 1. Download the binary software files from GitHub.
 1. Search for and connect the Raspberry Pi and your access device to the hidden wifi network `rank510iot`, password: `raspberry`.
 1. Access the SmartGreenhouse webpage.
