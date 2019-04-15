@@ -1,7 +1,7 @@
 # SmartGreenhouse   [![Build Status](https://travis-ci.org/Team12-UofG/SmartGreenhouse.svg?branch=master)](https://travis-ci.org/Team12-UofG/SmartGreenhouse)
 
 ## Overview
-The aim of the project is to design and develop a modular smart greenhouse that is capable of detecting and responding to a number of changes in environmental conditions in real time. Sensors are used to measure soil moisture, humidity, temperature, UVI/light and air quality. The system will also incorporate LED light, heating and watering systems with automated and manual control. Moreover, the real-time measurements will be displayed on an online web portal enabling the user to view the real-time and historic growth of the plant.
+The aim of the project is to design and develop a modular smart greenhouse that is capable of detecting and responding to a number of changes in environmental conditions in real time. Sensors are used to measure soil moisture, humidity, temperature, UV light and air quality. The system will also incorporate LED lighting, heating and watering systems with automated and manual control. Moreover, the real-time measurements will be displayed on an online web portal enabling the user to view the real-time and historic growth of the plant.
 
 The **SmartGreenhouse** will enable users to monitor and manage their plant growth environment remotely, making this an ideal system for travelling professionals and students or those who live in unpredictable climates. 
 
