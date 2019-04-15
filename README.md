@@ -12,7 +12,11 @@ The **SmartGreenhouse** will enable users to monitor and manage their plant grow
 _Reads sensor data, uploads and displays on the SmartGreenhouse webpage._  
 _With include file path bug fix._
 
-## File Information      
+## File Information
+* The drivers for the BME680 environment sensor, VEML6075, and the MCP3426 ADC can be found in the include folder
+* The unit tests for the sensors and response sytem are given in the unit test folder
+* The example codes can be found in the preliminary test folder 
+* The "demo.cpp" file is used to run the entire SmartGreenhouse system
 
 ## Requirements
 ### Hardware 
