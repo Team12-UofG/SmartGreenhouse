@@ -69,7 +69,7 @@ A more detailed walkthrough can be found [here.](https://github.com/Team12-UofG/
 
 ## Documentation
 Documentation for all methods can be found [here.](https://team12-uofg.github.io/SmartGreenhouse/ "here.")  
-User Stories and State Diagram can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/User-Stories-and-State-Diagram "here.")
+User Stories and Activity Diagram can be found [here.](https://github.com/Team12-UofG/SmartGreenhouse/wiki/User-Stories-and-State-Diagram "here.")
 
 ## Contributing 
 This project is for the assessment of Real Time Embedded Programming 5 at University of Glasgow. Prior to course completion contributions will be welcome however, please draw your attention to our [license.](LICENSE "license.")
