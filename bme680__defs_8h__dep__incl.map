@@ -1,0 +1,8 @@
+<map id="Software/include/Environment_sensor/bme680_defs.h" name="Software/include/Environment_sensor/bme680_defs.h">
+<area shape="rect" id="node2" href="$bme680_8h.html" title="Sensor driver for BME680 sensor. " alt="" coords="478,97,673,138"/>
+<area shape="rect" id="node3" href="$demo_8cpp.html" title="Takes readings from all of the sensors every 500ms and updates the website with these values every 10..." alt="" coords="5,187,171,229"/>
+<area shape="rect" id="node4" href="$bme680_8cpp.html" title="Sensor driver for BME680 sensor &#45; non header file. " alt="" coords="195,187,415,229"/>
+<area shape="rect" id="node5" href="$readEnvironment_8cpp.html" title="Takes one reading of the environment sensor and prints the values. " alt="" coords="440,187,711,229"/>
+<area shape="rect" id="node6" href="$example_8cpp.html" title="Takes readings from the sensors and updates the website with the values. " alt="" coords="735,187,901,229"/>
+<area shape="rect" id="node7" href="$environment__sensor_8cpp.html" title="I2C communication with Bosch BME680 Temperature, Humidity and Air Quality Sensor. ..." alt="" coords="927,187,1095,229"/>
+</map>

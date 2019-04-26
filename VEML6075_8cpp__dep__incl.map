@@ -1,0 +1,8 @@
+<map id="Software/include/UV_sensor/VEML6075.cpp" name="Software/include/UV_sensor/VEML6075.cpp">
+<area shape="rect" id="node2" href="$demo_8cpp.html" title="Takes readings from all of the sensors every 500ms and updates the website with these values every 10..." alt="" coords="5,97,171,138"/>
+<area shape="rect" id="node3" href="$readEnvironment_8cpp.html" title="Takes one reading of the environment sensor and prints the values. " alt="" coords="195,97,465,138"/>
+<area shape="rect" id="node4" href="$example_8cpp.html" title="Takes readings from the sensors and updates the website with the values. " alt="" coords="490,97,656,138"/>
+<area shape="rect" id="node5" href="$printUVValues_8cpp.html" title="Prints the UVA, UVB and UVI reading from the VEML6075. " alt="" coords="681,97,884,138"/>
+<area shape="rect" id="node6" href="$UVcontrol__LEDs_8cpp.html" title="Calculates the UV Index from the VEML6075, if below the threshold of &#39;2&#39; then the LED growth matrix w..." alt="" coords="909,97,1128,138"/>
+<area shape="rect" id="node7" href="$uv__sensor_8cpp.html" title="Test for checking the VEML6075 class for the UV light sensor. " alt="" coords="1152,97,1277,138"/>
+</map>

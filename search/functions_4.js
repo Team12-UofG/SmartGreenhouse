@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['i2cclose',['i2cClose',['../demo_8cpp.html#a4014eb8ec190cb795b9fa30857ad2140',1,'i2cClose():&#160;demo.cpp'],['../readEnvironment_8cpp.html#a4014eb8ec190cb795b9fa30857ad2140',1,'i2cClose():&#160;readEnvironment.cpp'],['../example_8cpp.html#a4014eb8ec190cb795b9fa30857ad2140',1,'i2cClose():&#160;example.cpp'],['../environment__sensor_8cpp.html#a4014eb8ec190cb795b9fa30857ad2140',1,'i2cClose():&#160;environment_sensor.cpp']]],
+  ['i2copen',['i2cOpen',['../demo_8cpp.html#af965fe4a4ec97408a27f6e5c1838db83',1,'i2cOpen():&#160;demo.cpp'],['../readEnvironment_8cpp.html#af965fe4a4ec97408a27f6e5c1838db83',1,'i2cOpen():&#160;readEnvironment.cpp'],['../example_8cpp.html#af965fe4a4ec97408a27f6e5c1838db83',1,'i2cOpen():&#160;example.cpp'],['../environment__sensor_8cpp.html#af965fe4a4ec97408a27f6e5c1838db83',1,'i2cOpen():&#160;environment_sensor.cpp']]],
+  ['i2csetaddress',['i2cSetAddress',['../demo_8cpp.html#a82f5b3943ea8c6efe7ecc1458b89ec69',1,'i2cSetAddress(int address):&#160;demo.cpp'],['../readEnvironment_8cpp.html#a82f5b3943ea8c6efe7ecc1458b89ec69',1,'i2cSetAddress(int address):&#160;readEnvironment.cpp'],['../example_8cpp.html#a82f5b3943ea8c6efe7ecc1458b89ec69',1,'i2cSetAddress(int address):&#160;example.cpp'],['../environment__sensor_8cpp.html#a82f5b3943ea8c6efe7ecc1458b89ec69',1,'i2cSetAddress(int address):&#160;environment_sensor.cpp']]]
+];

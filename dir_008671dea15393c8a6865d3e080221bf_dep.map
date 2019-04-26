@@ -1,0 +1,11 @@
+<map id="Software/test/preliminary" name="Software/test/preliminary">
+<area shape="rect" id="node2" href="dir_2f6097ccd001b810ee7c92a51cbb3a84.html" title="Environment_sensor" alt="" coords="264,63,404,111"/>
+<area shape="rect" id="node5" href="dir_f4f3d56f568a461c2850ec23e3d95f2d.html" title="include" alt="" coords="159,159,231,207"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000007_000001.html" title="6" alt="" coords="245,148,253,163"/>
+<area shape="rect" id="node3" href="dir_d072b68540582f3545668baad5819411.html" title="Soil_sensor" alt="" coords="149,63,240,111"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000008_000001.html" title="6" alt="" coords="199,133,207,148"/>
+<area shape="rect" id="node4" href="dir_04c7f37267c89c90291a5429cb341589.html" title="UV_sensor" alt="" coords="38,63,124,111"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000009_000001.html" title="4" alt="" coords="154,133,162,148"/>
+<area shape="rect" id="clust2" href="dir_008671dea15393c8a6865d3e080221bf.html" alt="" coords="27,52,525,121"/>
+<area shape="rect" id="clust1" href="dir_64c3d34cff306c9ba59a437064d2f33f.html" title="test" alt="" coords="16,16,536,132"/>
+</map>

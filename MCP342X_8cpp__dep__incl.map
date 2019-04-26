@@ -1,0 +1,9 @@
+<map id="Software/include/Soil_sensor/MCP342X.cpp" name="Software/include/Soil_sensor/MCP342X.cpp">
+<area shape="rect" id="node2" href="$demo_8cpp.html" title="Takes readings from all of the sensors every 500ms and updates the website with these values every 10..." alt="" coords="5,97,171,138"/>
+<area shape="rect" id="node3" href="$readEnvironment_8cpp.html" title="Takes one reading of the environment sensor and prints the values. " alt="" coords="195,97,465,138"/>
+<area shape="rect" id="node4" href="$example_8cpp.html" title="Takes readings from the sensors and updates the website with the values. " alt="" coords="490,97,656,138"/>
+<area shape="rect" id="node5" href="$printSoilValues_8cpp.html" title="Prints output sensor readings. " alt="" coords="680,97,889,138"/>
+<area shape="rect" id="node6" href="$SensorPump_8cpp.html" title="Soil moisture sensor is read and water pump is controlled using GPIO pins. " alt="" coords="914,97,1112,138"/>
+<area shape="rect" id="node7" href="$Soiltest_8cpp.html" title="Takes one reading of the soil moisture sensor and prints the value. " alt="" coords="1137,97,1303,138"/>
+<area shape="rect" id="node8" href="$soil__sensor_8cpp.html" title="Test for checking the MCP3426 ADC class for the soil moisture sensor. " alt="" coords="1328,97,1453,138"/>
+</map>

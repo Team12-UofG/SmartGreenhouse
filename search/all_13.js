@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['uint16_5fc',['UINT16_C',['../group__BME680.html#ga1cb39a2cfaf899fd38730c7637807708',1,'bme680_defs.h']]],
+  ['uint32_5fc',['UINT32_C',['../group__BME680.html#ga2451a7ede7ebd810357f1503e9898ea6',1,'bme680_defs.h']]],
+  ['uint64_5fc',['UINT64_C',['../group__BME680.html#ga134ae84400d184ed2570e3270d5472c2',1,'bme680_defs.h']]],
+  ['uint8_5fc',['UINT8_C',['../group__BME680.html#gacd2aa09844a8a245cf7fdbb808e215e5',1,'bme680_defs.h']]],
+  ['user_5fdelay_5fms',['user_delay_ms',['../demo_8cpp.html#adc86d5995b888a6f4ef7dd5647b94f8f',1,'user_delay_ms(uint32_t period):&#160;demo.cpp'],['../readEnvironment_8cpp.html#adc86d5995b888a6f4ef7dd5647b94f8f',1,'user_delay_ms(uint32_t period):&#160;readEnvironment.cpp'],['../example_8cpp.html#adc86d5995b888a6f4ef7dd5647b94f8f',1,'user_delay_ms(uint32_t period):&#160;example.cpp'],['../environment__sensor_8cpp.html#adc86d5995b888a6f4ef7dd5647b94f8f',1,'user_delay_ms(uint32_t period):&#160;environment_sensor.cpp']]],
+  ['user_5fi2c_5fread',['user_i2c_read',['../demo_8cpp.html#a1c52ea79a1832a5f73afd49c7a106d17',1,'user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;demo.cpp'],['../readEnvironment_8cpp.html#a1c52ea79a1832a5f73afd49c7a106d17',1,'user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;readEnvironment.cpp'],['../example_8cpp.html#a1c52ea79a1832a5f73afd49c7a106d17',1,'user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;example.cpp'],['../environment__sensor_8cpp.html#a1c52ea79a1832a5f73afd49c7a106d17',1,'user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;environment_sensor.cpp']]],
+  ['user_5fi2c_5fwrite',['user_i2c_write',['../demo_8cpp.html#a8560c855d9900415d2f146fd0b0bbbb6',1,'user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;demo.cpp'],['../readEnvironment_8cpp.html#a8560c855d9900415d2f146fd0b0bbbb6',1,'user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;readEnvironment.cpp'],['../example_8cpp.html#a8560c855d9900415d2f146fd0b0bbbb6',1,'user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;example.cpp'],['../environment__sensor_8cpp.html#a8560c855d9900415d2f146fd0b0bbbb6',1,'user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len):&#160;environment_sensor.cpp']]],
+  ['uv_5fsensor',['UV_sensor',['../classUV__sensor.html',1,'UV_sensor'],['../classUV__sensor.html#abd4f6747211fb1204358cb251a70c0e8',1,'UV_sensor::UV_sensor()']]],
+  ['uv_5fsensor_2ecpp',['uv_sensor.cpp',['../uv__sensor_8cpp.html',1,'']]],
+  ['uv_5fthreshold',['UV_threshold',['../demo_8cpp.html#a66c7b5b446da93575cf3299aad6d8ce9',1,'UV_threshold():&#160;demo.cpp'],['../example_8cpp.html#a66c7b5b446da93575cf3299aad6d8ce9',1,'UV_threshold():&#160;example.cpp']]],
+  ['uvconfigure',['uvConfigure',['../classUV__sensor.html#ab020be9aa9f858e372e49c9ee44acd72',1,'UV_sensor']]],
+  ['uvcontrol_5fleds_2ecpp',['UVcontrol_LEDs.cpp',['../UVcontrol__LEDs_8cpp.html',1,'']]],
+  ['uvi_5fthreshold',['UVI_threshold',['../UVcontrol__LEDs_8cpp.html#a375f0fe46a14fe6ab8a0b23cbb7a72d9',1,'UVcontrol_LEDs.cpp']]]
+];

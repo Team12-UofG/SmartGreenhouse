@@ -1,0 +1,9 @@
+<map id="Software/include/UV_sensor/VEML6075.h" name="Software/include/UV_sensor/VEML6075.h">
+<area shape="rect" id="node2" href="$VEML6075_8cpp.html" title="Class for the operation of the Vishay VEML6075 UVA/UVB I2C sensor. " alt="" coords="597,97,757,138"/>
+<area shape="rect" id="node3" href="$demo_8cpp.html" title="Takes readings from all of the sensors every 500ms and updates the website with these values every 10..." alt="" coords="5,187,171,229"/>
+<area shape="rect" id="node4" href="$readEnvironment_8cpp.html" title="Takes one reading of the environment sensor and prints the values. " alt="" coords="195,187,465,229"/>
+<area shape="rect" id="node5" href="$example_8cpp.html" title="Takes readings from the sensors and updates the website with the values. " alt="" coords="490,187,656,229"/>
+<area shape="rect" id="node6" href="$printUVValues_8cpp.html" title="Prints the UVA, UVB and UVI reading from the VEML6075. " alt="" coords="681,187,884,229"/>
+<area shape="rect" id="node7" href="$UVcontrol__LEDs_8cpp.html" title="Calculates the UV Index from the VEML6075, if below the threshold of &#39;2&#39; then the LED growth matrix w..." alt="" coords="909,187,1128,229"/>
+<area shape="rect" id="node8" href="$uv__sensor_8cpp.html" title="Test for checking the VEML6075 class for the UV light sensor. " alt="" coords="1152,187,1277,229"/>
+</map>

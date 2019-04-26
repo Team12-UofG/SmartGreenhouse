@@ -1,0 +1,5 @@
+<map id="bme680_dev" name="bme680_dev">
+<area shape="rect" id="node2" href="$structbme680__tph__sett.html" title="BME680 sensor settings structure which comprises of ODR, over&#45;sampling and filter settings..." alt="" coords="5,57,128,178"/>
+<area shape="rect" id="node3" href="$structbme680__gas__sett.html" title="BME680 gas sensor; which comprises of gas settings and status parameters. " alt="" coords="152,49,277,185"/>
+<area shape="rect" id="node4" href="$structbme680__calib__data.html" title="Structure to hold the calibration data. " alt="" coords="302,5,436,229"/>
+</map>

@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['sensor_20api',['SENSOR API',['../group__BME680.html',1,'']]],
+  ['smartgreenhouse',['SmartGreenhouse',['../md_docs_index.html',1,'']]],
+  ['sa',['sa',['../classCppTimer.html#a692a200df6d2c43b72ff1db76458f09f',1,'CppTimer']]],
+  ['sensorpump_2ecpp',['SensorPump.cpp',['../SensorPump_8cpp.html',1,'']]],
+  ['set_5fgas_5fconfig',['set_gas_config',['../bme680_8cpp.html#aadb617afe7c21b652a32c316fba66b5a',1,'bme680.cpp']]],
+  ['set_5fmem_5fpage',['set_mem_page',['../bme680_8cpp.html#a25e8a0a8d3226f33a5d8f57ffb2fb3d2',1,'bme680.cpp']]],
+  ['setcoefficients',['setCoefficients',['../classUV__sensor.html#a47d23a3a7f492b0a3785aed868aef462',1,'UV_sensor']]],
+  ['setupi2c_5fmcp3426',['setupI2C_MCP3426',['../MCP342X_8cpp.html#a32077e0e011198f66981b73752042ba8',1,'MCP342X.cpp']]],
+  ['setupi2c_5fveml6075',['setupI2C_veml6075',['../VEML6075_8cpp.html#adc60d5342437605c174690bc88c935b3',1,'VEML6075.cpp']]],
+  ['sev',['sev',['../classCppTimer.html#a9860d3d723ad55982db50c9cde8d725a',1,'CppTimer']]],
+  ['sghd_2ephtml',['SGHD.phtml',['../SGHD_8phtml.html',1,'']]],
+  ['sgld_2ephtml',['SGLD.phtml',['../SGLD_8phtml.html',1,'']]],
+  ['sig',['SIG',['../CppTimer_8h.html#ad6f1d374549d22100d676d5fcac0a7e5',1,'CppTimer.h']]],
+  ['soil_5fconfigdata',['Soil_configData',['../demo_8cpp.html#a34e65251f3c02f032fcf618e98a456d5',1,'Soil_configData():&#160;demo.cpp'],['../readEnvironment_8cpp.html#a34e65251f3c02f032fcf618e98a456d5',1,'Soil_configData():&#160;readEnvironment.cpp'],['../example_8cpp.html#a34e65251f3c02f032fcf618e98a456d5',1,'Soil_configData():&#160;example.cpp']]],
+  ['soil_5fsensor',['soil_sensor',['../printSoilValues_8cpp.html#ab2f3b4a5474cb53cac097493997f94bb',1,'soil_sensor():&#160;printSoilValues.cpp'],['../SensorPump_8cpp.html#ab2f3b4a5474cb53cac097493997f94bb',1,'soil_sensor():&#160;SensorPump.cpp'],['../Soiltest_8cpp.html#ab2f3b4a5474cb53cac097493997f94bb',1,'soil_sensor():&#160;Soiltest.cpp']]],
+  ['soil_5fsensor_2ecpp',['soil_sensor.cpp',['../soil__sensor_8cpp.html',1,'']]],
+  ['soilsensor',['soilSensor',['../demo_8cpp.html#a61f5534e1743bbf7777691ca762e4f0f',1,'soilSensor():&#160;demo.cpp'],['../readEnvironment_8cpp.html#a61f5534e1743bbf7777691ca762e4f0f',1,'soilSensor():&#160;readEnvironment.cpp'],['../example_8cpp.html#a61f5534e1743bbf7777691ca762e4f0f',1,'soilSensor():&#160;example.cpp']]],
+  ['soiltest_2ecpp',['Soiltest.cpp',['../Soiltest_8cpp.html',1,'']]],
+  ['start',['start',['../classCppTimer.html#a1deb213d96f9bb10231241c93c1ef891',1,'CppTimer']]],
+  ['startconversion',['startConversion',['../classMCP342X.html#a9a4c53979669df6ccffc8d0332c6f417',1,'MCP342X']]],
+  ['status',['status',['../structbme680__field__data.html#af52b43f86807c1f1ef7526bbb9584c5b',1,'bme680_field_data']]],
+  ['status_2ephtml',['Status.phtml',['../Status_8phtml.html',1,'']]]
+];

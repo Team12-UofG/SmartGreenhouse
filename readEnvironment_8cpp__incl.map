@@ -1,0 +1,8 @@
+<map id="Software/test/preliminary/Environment_sensor/readEnvironment.cpp" name="Software/test/preliminary/Environment_sensor/readEnvironment.cpp">
+<area shape="rect" id="node14" href="$bme680_8h.html" title="Sensor driver for BME680 sensor. " alt="" coords="788,97,964,138"/>
+<area shape="rect" id="node18" href="$MCP342X_8h.html" title="This is a driver for the MCP472X series of Analog&#45;to&#45;Digital converters. " alt="" coords="1037,187,1179,229"/>
+<area shape="rect" id="node22" href="$MCP342X_8cpp.html" title="ADC MCP342X I2C device class. " alt="" coords="1039,97,1196,138"/>
+<area shape="rect" id="node23" href="$VEML6075_8h.html" title="Header for the Vishay VEML6075 UVA/UVB I2C sensor. " alt="" coords="680,187,827,229"/>
+<area shape="rect" id="node24" href="$VEML6075_8cpp.html" title="Class for the operation of the Vishay VEML6075 UVA/UVB I2C sensor. " alt="" coords="1221,97,1381,138"/>
+<area shape="rect" id="node15" href="$bme680__defs_8h.html" title="Sensor driver for BME680 sensor. " alt="" coords="902,195,1012,221"/>
+</map>
